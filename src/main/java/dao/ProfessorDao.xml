@@ -16,4 +16,9 @@
         select * from professors where name like concat('%', #{name}, '%')
     </select>
 
+    <insert id="insertProfessor" useGeneratedKeys="true" keyProperty="prof_id"  keyColumn="prof_id" parameterType="domain.Professor">
+        insert into professors(name, photo, courses, background, publication, area, introduction)
+        values(#{name}, #{photo}, #{courses}, #{background}, #{publication}, #{area}, #{introduction})
+    </insert>
+
 </mapper>

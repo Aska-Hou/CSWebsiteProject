@@ -15,5 +15,6 @@ public interface ProfessorService {
     //    管理员账户根据关键词搜索professor
     public List<Professor> searchProfessorList(Professor professor);
 
-
+    //    加入新的professor
+    public Professor addNewProfessor(Professor professor);
 }

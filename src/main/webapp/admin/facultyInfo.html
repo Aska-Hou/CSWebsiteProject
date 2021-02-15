@@ -94,57 +94,74 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="professor/addNewProfessor">
 
                     <div class="form-group">
-                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span
-                                style="font-size: 15px; color: red;">*</span></label>
-                        <div class="col-sm-10" style="width: 300px;">
-                            <select class="form-control" id="edit-marketActivityOwner">
-                                <option>zhangsan</option>
-                                <option>lisi</option>
-                                <option>wangwu</option>
-                            </select>
-                        </div>
+<!--                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span-->
+<!--                                style="font-size: 15px; color: red;">*</span></label>-->
+<!--                        <div class="col-sm-10" style="width: 300px;">-->
+<!--                            <span id="edit-marketActivityOwner" class="form-control">Automatically</span>-->
+<!--                            <select class="form-control" id="edit-marketActivityOwner">-->
+<!--                                <option>zhangsan</option>-->
+<!--                                <option>lisi</option>-->
+<!--                                <option>wangwu</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
                         <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span
                                 style="font-size: 15px; color: red;">*</span></label>
-                        <div class="col-sm-10" style="width: 400px;">
-                            <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="name" id="edit-marketActivityName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="edit-startTime" class="col-sm-2 control-label">Course</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" id="edit-startTime" value="Value">
+                            <input type="text" class="form-control" name="courses" id="edit-startTime">
                         </div>
                         <label for="edit-endTime" class="col-sm-2 control-label">Area</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" id="edit-endTime" value="Value">
+                            <input type="text" class="form-control" name="area" id="edit-endTime">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="edit-cost" class="col-sm-2 control-label">Background</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                            <textarea class="form-control" rows="3" name="background" id="edit-cost"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="edit-describe" class="col-sm-2 control-label">Publication</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                            <textarea class="form-control" rows="3" name="publication" id="edit-describe"></textarea>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="edit-Introduction" class="col-sm-2 control-label">Introduction</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="introduction" id="edit-Introduction"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-            </div>
+
         </div>
     </div>
 </div>

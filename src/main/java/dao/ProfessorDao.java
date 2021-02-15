@@ -14,4 +14,7 @@ public interface ProfessorDao {
 
     //    根据professor name查询professor
     public List<Professor> selectProfessorByName(Professor professor);
+
+    //    插入新professor
+    public Integer insertProfessor(Professor professor);
 }
