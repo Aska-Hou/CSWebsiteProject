@@ -17,4 +17,11 @@ public interface ProfessorDao {
 
     //    插入新professor
     public Integer insertProfessor(Professor professor);
+
+    //    根据professor id更新信息（不保存图片）
+    public Integer updatePartProfessorByID(Professor professor);
+
+    //    根据professor id更新信息（保存图片）
+    public Integer updateAllProfessorByID(Professor professor);
+
 }

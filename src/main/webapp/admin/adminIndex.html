@@ -32,9 +32,24 @@
 			$(this).children("a").css("color","white");
 		});
 
-		window.open("index.html","workareaFrame");
+		var link = getQueryString("link");
+		if (link != null){
+			window.open(link, "workareaFrame");
+		}
+		else {
+			window.open("index.html", "workareaFrame");
+		}
 
 	});
+
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]);
+		return null;
+	};
+
+
 
 </script>
 	<style>

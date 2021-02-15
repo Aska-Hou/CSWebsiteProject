@@ -1,127 +1,187 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-	<link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var prof_id = getQueryString("prof_id");
+            $.post("professor/getProfessorDetails", {prof_id: prof_id}, function (data) {
+                $("#prof_id").html("<b>" + data.prof_id + "</b>");
+                $("#edit_prof_id").val(data.prof_id);
+                $("#name").html("<b>" + data.name + "</b>");
+                $("#edit_name").val(data.name);
+                $("#courses").html("<b>" + data.courses + "</b>");
+                $("#edit-course").val(data.courses);
+                $("#area").html("<b>" + data.area + "</b>");
+                $("#edit-area").val(data.area);
+
+                $("#background").html("<b>" + data.background + "</b>");
+                $("#edit-background").val(data.background);
+
+                $("#publication").html("<b>" + data.publication + "</b>");
+                $("#edit-publication").val(data.publication);
+
+                $("#introduction").html("<b>" + data.introduction + "</b>");
+                $("#edit-introduction").val(data.introduction);
+                $("#photo").html("<img style=\"width: 400px\" src=\"/CSWebsite/" + data.photo + "\">")
+            });
+        })
+    </script>
 
 </head>
 <body>
-    <!-- 修改市场活动的模态窗口 -->
-    <div class="modal fade" id="editActivityModal" role="dialog">
-        <div class="modal-dialog" role="document" style="width: 85%;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Faculty Information</h4>
-                </div>
-                <div class="modal-body">
-
-                    <form class="form-horizontal" role="form">
-
-                        <div class="form-group">
-                            <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span style="font-size: 15px; color: red;">*</span></label>
-                            <div class="col-sm-10" style="width: 300px;">
-                                <select class="form-control" id="edit-marketActivityOwner">
-                                    <option>zhangsan</option>
-                                    <option>lisi</option>
-                                    <option>wangwu</option>
-                                </select>
-                            </div>
-                            <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span style="font-size: 15px; color: red;">*</span></label>
-                            <div class="col-sm-10" style="width: 400px;">
-                                <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="edit-startTime" class="col-sm-2 control-label">Course</label>
-                            <div class="col-sm-10" style="width: 300px;">
-                                <input type="text" class="form-control" id="edit-startTime" value="Value">
-                            </div>
-                            <label for="edit-endTime" class="col-sm-2 control-label">Area</label>
-                            <div class="col-sm-10" style="width: 300px;">
-                                <input type="text" class="form-control" id="edit-endTime" value="Value">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="edit-cost" class="col-sm-2 control-label">Background</label>
-                            <div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="edit-cost">value</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="edit-describe" class="col-sm-2 control-label">Publication</label>
-                            <div class="col-sm-10" style="width: 81%;">
-                                <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-                </div>
+<!-- 修改市场活动的模态窗口 -->
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Update Faculty Information</h4>
             </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="professor/editProfessor">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Faculty ID<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input readonly id="edit_prof_id" name="prof_id" class="form-control">
+                        </div>
+                        <label for="edit_name" class="col-sm-2 control-label">Name<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="name" id="edit_name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Change Photo: </label>
+                        <div class="col-sm-10" style="width: 800px;">
+                            <label for="edit-Photo">If you want to change photo,  Please choose: </label>
+                            <input type="file" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-course" class="col-sm-2 control-label">Course</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <textarea type="text" class="form-control" name="courses" id="edit-course">
+                            </textarea>
+                        </div>
+                        <label for="edit-area" class="col-sm-2 control-label">Area</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="area" id="edit-area">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-background" class="col-sm-2 control-label">Background</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="background" id="edit-background"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-publication" class="col-sm-2 control-label">Publication</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="publication" id="edit-publication"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-introduction" class="col-sm-2 control-label">Introduction</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="introduction"
+                                      id="edit-introduction"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+
         </div>
     </div>
+</div>
 
-	<!-- 返回按钮 -->
-	<div style="position: relative; top: 35px; left: 10px;">
-		<a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left" style="font-size: 20px; color: #DDDDDD"></span></a>
-	</div>
+<!-- 返回按钮 -->
+<div style="position: relative; top: 35px; left: 10px;">
+    <a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left"
+                                                                         style="font-size: 20px; color: #DDDDDD"></span></a>
+</div>
 
-	<!-- 大标题 -->
-	<div style="position: relative; left: 40px; top: -30px;">
-		<div class="page-header">
-			<h3>Edit Faculty Information </h3>
-		</div>
-		<div style="position: relative; height: 50px; width: 200px;  top: -72px; left: 1000px;">
-			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-edit"></span> Update</button>
-			<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> Delete</button>
-		</div>
-	</div>
+<!-- 大标题 -->
+<div style="position: relative; left: 40px; top: -30px;">
+    <div class="page-header">
+        <h3>Edit Faculty Information </h3>
+    </div>
+    <div style="position: relative; height: 50px; width: 200px;  top: -72px; left: 1000px;">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span
+                class="glyphicon glyphicon-edit"></span> Update
+        </button>
+        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> Delete</button>
+    </div>
+</div>
 
-	<!-- 详细信息 -->
-	<div style="position: relative; top: -70px;">
-		<div style="position: relative; left: 40px; height: 30px; ">
-			<div style="width: 300px; color: gray;">ID</div>
-			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>ID VALUE</b></div>
-			<div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Name</div>
-			<div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>Value</b></div>
-			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
-		</div>
+<!-- 详细信息 -->
+<div style="position: relative; top: -70px;">
+    <div style="float: right; margin-top: 150px; margin-right: 60px" id="photo">
+        <img style="width: 400px" src="/CSWebsite/ProfImg/photo1.png">
+    </div>
 
-		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-			<div style="width: 300px; color: gray;">Courses</div>
-			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
-			<div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Area</div>
-			<div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>Value</b></div>
-			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
-		</div>
-		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-			<div style="width: 600px; color: gray;">Background</div>
-			<div style="width: 600px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
-			<div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
-		</div>
-		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-			<div style="width: 600px; color: gray;">Publication</div>
-			<div style="width: 600px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
-			<div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
-		</div>
+    <div style="position: relative; left: 40px; height: 30px; ">
+        <div style="width: 300px; color: gray;">Faculty ID</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="prof_id"><b></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Name</div>
+        <div style="width: 300px;position: relative; left: 650px; top: -60px;" id="name"><b></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+    </div>
 
-	</div>
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 300px; color: gray;">Courses</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="courses"><b></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Area</div>
+        <div style="width: 300px;position: relative; left: 650px; top: -60px;" id="area"><b></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+    </div>
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 600px; color: gray;">Background</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="background"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
+    </div>
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 600px; color: gray;">Publication</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="publication"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
+    </div>
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 600px; color: gray;">Introduction</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="introduction"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
+    </div>
 
-	<div style="height: 200px;"></div>
+</div>
+
+<div style="height: 200px;"></div>
 </body>
 </html>

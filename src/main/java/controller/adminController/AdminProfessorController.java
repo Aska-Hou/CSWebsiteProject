@@ -46,18 +46,33 @@ public class AdminProfessorController {
     @RequestMapping(value = "/addNewProfessor")
     public ModelAndView addNewProfessor(@RequestParam(value = "img", required = true) MultipartFile img, Professor professor) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
-        String basePath = "D:\\WEB-IMG\\CSWebsite\\";
-        String uuid = UUID.randomUUID().toString();
-        professor.setPhoto("ProfImg/" + uuid + ".png");
-        img.transferTo(new File(basePath + professor.getPhoto()));
-        if (professor == null){
+        if (professor == null) {
             modelAndView.setViewName("/facultyInfo.html");
             return modelAndView;
-        }
-        else {
-            Professor newProfessor = professorService.addNewProfessor(professor);
-            modelAndView.setViewName("/facultyEdit.html?prof_id=" + newProfessor.getProf_id());
+        } else {
+            Professor newProfessor = professorService.addNewProfessor(img, professor);
+            modelAndView.setViewName("/facultyEdit.html?prof_id=" + newProfessor.getProf_id() + "&add=true");
             return modelAndView;
         }
     }
+
+    //    管理员： 查看指定professor的详细信息
+    @RequestMapping(value = "/getProfessorDetails")
+    @ResponseBody
+    public Professor getProfessorDetails(Professor professor) {
+        Professor detail = professorService.showProfessorDetail(professor);
+        return detail;
+    }
+
+    //    管理员： 更新professor信息
+    @RequestMapping(value = "/editProfessor")
+    public String editProfessor(@RequestParam(value = "img", required = false) MultipartFile img, Professor professor) {
+        boolean result = professorService.updateProfessor(img, professor);
+        if (result) {
+            return "redirect:/admin/facultyEdit.html?prof_id=" + professor.getProf_id() + "&update=true";
+        } else {
+            return "redirect:/admin/facultyEdit.html?prof_id=" + professor.getProf_id() + "&update=false";
+        }
+    }
+
 }

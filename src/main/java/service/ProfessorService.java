@@ -1,6 +1,7 @@
 package service;
 
 import domain.Professor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,5 +17,8 @@ public interface ProfessorService {
     public List<Professor> searchProfessorList(Professor professor);
 
     //    加入新的professor
-    public Professor addNewProfessor(Professor professor);
+    public Professor addNewProfessor(MultipartFile img, Professor professor);
+
+    //    更新professor信息
+    public boolean updateProfessor(MultipartFile img, Professor professor);
 }

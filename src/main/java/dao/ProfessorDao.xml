@@ -18,7 +18,18 @@
 
     <insert id="insertProfessor" useGeneratedKeys="true" keyProperty="prof_id"  keyColumn="prof_id" parameterType="domain.Professor">
         insert into professors(name, photo, courses, background, publication, area, introduction)
-        values(#{name}, #{photo}, #{courses}, #{background}, #{publication}, #{area}, #{introduction})
+            values(#{name}, #{photo}, #{courses}, #{background}, #{publication}, #{area}, #{introduction})
     </insert>
+
+    <update id="updatePartProfessorByID" parameterType="domain.Professor">
+        update professors set name = #{name}, courses = #{courses}, background = #{background}, publication = #{publication},
+            area = #{area}, introduction = #{introduction} where prof_id = #{prof_id}
+    </update>
+
+    <update id="updateAllProfessorByID" parameterType="domain.Professor">
+        update professors set name = #{name}, photo = #{photo}, courses = #{courses}, background = #{background},
+            publication = #{publication}, area = #{area}, introduction = #{introduction} where prof_id = #{prof_id}
+    </update>
+
 
 </mapper>
