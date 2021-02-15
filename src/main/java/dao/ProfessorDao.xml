@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ProfessorDao">
+
+    <select id="showAllProfessor" resultType="domain.Professor">
+        select * from professors
+    </select>
+
+    <select id="selectProfessorByID" parameterType="domain.Professor" resultType="domain.Professor">
+        select * from professors where prof_id =#{prof_id}
+    </select>
+
+    <select id="selectProfessorByName" parameterType="domain.Professor" resultType="domain.Professor">
+        select * from professors where name like concat('%', #{name}, '%')
+    </select>
+
+</mapper>

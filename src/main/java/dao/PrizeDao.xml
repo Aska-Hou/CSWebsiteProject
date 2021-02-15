@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PrizeDao">
+
+    <select id="showAllPrize" parameterType="domain.Page" resultType="domain.Prize">
+select * from prize order by date desc limit #{currentLine}, #{lineEachPage}
+    </select>
+
+
+    <select id="showNumberOfLine" resultType="java.lang.Integer">
+        select count(*) as totalPage from prize
+    </select>
+
+
+</mapper>

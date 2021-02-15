@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <style>
+
+        body {
+            background: url("Register.jpg") center;
+        }
+
+        /*最外层大框*/
+        .mainPart {
+            background: white;
+            border: 6px solid #EEEE;
+            width: 1100px;
+            height: 550px;
+            /*让div水平居中，用margin:auto*/
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        /*左半部分*/
+        .leftPart {
+            float: left;
+            margin: 20px;
+        }
+
+        /*中间部分*/
+        .middlePart {
+            float: left;
+            margin-left: 100px;
+            margin-top: 20px;
+        }
+
+        /*中间部分table*/
+        #MiddleTab {
+            border-spacing: 25px;
+        }
+
+        /*右半部分*/
+        .rightPart {
+            float: right;
+        }
+
+        /*控制左半部分字体*/
+        .leftPart p:first-child {
+            color: cadetblue;
+            font-size: 20px;
+        }
+
+        .leftPart p:last-child {
+            color: gray;
+            font-size: 20px;
+        }
+
+        /*控制输入input框*/
+        input[type='text'] {
+            width: 240px;
+            height: 30px;
+        }
+
+        input[type='password'] {
+            width: 240px;
+            height: 30px;
+        }
+
+        input[type='email'] {
+            width: 240px;
+            height: 30px;
+        }
+
+        input[type = 'button'] {
+            width: 80px;
+            height: 28px;
+            color: cornflowerblue;
+        }
+
+        #textCode {
+            width: 120px;
+            height: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="mainPart">
+    <div class="leftPart">
+        <p>新用户注册</p>
+        <p>User Register</p>
+    </div>
+
+    <div class="middlePart">
+        <form action="/DormitoryProject_war_exploded/LogIn" method="post">
+            <table id="MiddleTab">
+                <tr class="idLine">
+                    <td>Student ID:</td>
+                    <td><input type="text" id="id" name="id" placeholder="Please enter the student ID."></td>
+                </tr>
+
+                <tr class="emailLine">
+                    <td>Kean email:</td>
+                    <td><input type="email" id="email" name="email" placeholder="Please enter the Kean email."></td>
+                </tr>
+
+                <tr class="pwLine">
+                    <td>Password:</td>
+                    <td><input type="password" id="pw" name="pw" placeholder="Please enter the password."></td>
+                </tr>
+
+                <tr class="cpwLine">
+                    <td>Confirm Password:</td>
+                    <td><input type="password" id="con_pw" name="con_pw"
+                               placeholder="Please enter the password again.">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Please enter the Test Code:</td>
+                    <td><input type="text" name="textCode" id="textCode"><img src="TestCode" id="codeImg"></td>
+<!--                    <td><img src="TestCode" id="codeImg"></td>-->
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit" id="button"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="rightPart">
+        <table id="RightTab">
+            <tr>
+                <td>
+                    <img src="School.jpg" width="250px">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right">
+                    <p>已有wku账号？<a
+                            href="https://sso.wku.edu.cn:88/wkusso/login.jsp?contextType=external&username=string&password=sercure_string&challenge_url=https%3A%2F%2Fsso.wku.edu.cn%3A88%2Fwkusso%2Flogin.jsp&request_id=121787118601069018&authn_try_count=0&locale=zh_CN&resource_url=https%253A%252F%252Fsso.wku.edu.cn%252Fwkusso%252F">立即登录</a>
+                    </p>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+
+<script>
+    window.onload = function f() {
+        var imgID = document.getElementById("codeImg");
+        imgID.onclick = function () {
+            var date = new Date().getTime();
+            imgID.src = "TestCode?" + date;
+        }
+    }
+
+    // var pw = document.getElementById("pw");
+    // var cpw = document.getElementById("con_pw");
+    // var button = document.getElementById("button");
+    //
+    // button.onclick = function () {
+    //     if (pw.value != cpw.value) {
+    //         alert("The password is different. Please enter it again.");
+    //         //直接用pw.value清空值
+    //         pw.value = "";
+    //         cpw.value = "";
+    //     } else
+    //         alert("Log in successfully.")
+    // }
+</script>
+</body>
+</html>

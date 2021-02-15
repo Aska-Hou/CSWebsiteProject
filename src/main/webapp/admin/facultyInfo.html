@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Info</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var prof_id = getQueryString("id");
+            if (prof_id == null){
+                $.post("professor/showProfessorList", {prof_id: prof_id}, function (data) {
+                    $.each(data, function (index, object) {
+                        $("#facultyList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" id=\"${user.id}\" name=\"${user.id}\"></th>\n" +
+                        "                    <td>"+ object.prof_id +"</td>\n" +
+                        "                    <td>"+ object.name +"</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.courses +
+                        "                    </td>\n" +
+                        "                    <td>" + object.area + "</td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"facultyEdit.html?prof_id="+ object.prof_id +"\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+                });
+            }
+        });
+
+        function search() {
+            var prof_id = $("#prof_id").val();
+            if (prof_id == ''){
+                prof_id = 0;
+            }
+            var name = $("#name").val();
+            if (name == ''){
+                name = "null";
+            }
+            $("#facultyList").empty();
+            $.post("professor/searchProfessorList", {prof_id: prof_id, name: name}, function (data) {
+                $("#facultyList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\"></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Name</th>\n" +
+                    "                    <th>Courses</th>\n" +
+                    "                    <th>Area</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+                $.each(data, function (index, object) {
+                    $("#facultyList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" id=\"${user.id}\" name=\"${user.id}\"></th>\n" +
+                        "                    <td>"+ object.prof_id +"</td>\n" +
+                        "                    <td>"+ object.name +"</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.courses +
+                        "                    </td>\n" +
+                        "                    <td>" + object.area + "</td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"facultyEdit.html?prof_id="+ object.prof_id +"\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add Faculty Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <select class="form-control" id="edit-marketActivityOwner">
+                                <option>zhangsan</option>
+                                <option>lisi</option>
+                                <option>wangwu</option>
+                            </select>
+                        </div>
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 400px;">
+                            <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">Course</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-startTime" value="Value">
+                        </div>
+                        <label for="edit-endTime" class="col-sm-2 control-label">Area</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-endTime" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-cost" class="col-sm-2 control-label">Background</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-describe" class="col-sm-2 control-label">Publication</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="out">
+    <div class="adminLogoImgDiv">
+        <img src="../images/logo.png" class="adminLogoImg">
+    </div>
+    <div class="adminTitle">
+        <br/>
+        Faculty Information List
+    </div>
+    <div class="listPart">
+        <div style="float: left; margin-top: 100px; margin: 5px">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="prof_id">ID</label>
+                    <input type="text" class="form-control" id="prof_id" name="id"
+                           placeholder="Faculty ID">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           placeholder="Faculty Name">
+                </div>
+                <button type="button" onclick="search()" class="btn btn-default">Search</button>
+            </form>
+        </div>
+
+        <div style="float: right; margin: 5px">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Faculty
+            </button>
+            <button class="btn btn-primary" id="deleteSelected">Delete Selected Advisor</button>
+        </div>
+
+        <form action="">
+            <table border="1" id="facultyList" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th><input type="checkbox"></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Courses</th>
+                    <th>Area</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                <!--                <c:forEach items="${pb.list}" var="user" varStatus="s">-->
+
+<!--                <tr>-->
+<!--                    <th><input type="checkbox" id="${user.id}" name="${user.id}"></th>-->
+<!--                    <td>Content1</td>-->
+<!--                    <td>Content1</td>-->
+<!--                    <td class="courseLength">Content1 Content1 Content1 Content1 Content1 Content1-->
+<!--                        Content1 Content1 Content1 Content1 Content1-->
+<!--                    </td>-->
+<!--                    <td>Content1</td>-->
+<!--                    <td>-->
+<!--                        <a class="btn btn-default btn-sm"-->
+<!--                           href="facultyEdit.html">Edit</a></td>-->
+<!--                    <td>-->
+<!--                        <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">Delete</a>-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+                <!--                </c:forEach>-->
+
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+
+
+.adminLogoImgDiv {
+    float: right;
+    margin-right: 50px;
+}
+
+.adminLogoImg{
+    width: 400px;
+}
+.adminTitle{
+    float: top;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: 150px;
+}
+.listPart{
+    width: 90%;
+    margin-top: 100px;
+    margin-left: 80px;
+}
+
+.courseLength{
+    width: 300px;
+}

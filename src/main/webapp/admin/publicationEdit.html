@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+	<link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <!-- 修改市场活动的模态窗口 -->
+    <div class="modal fade" id="editActivityModal" role="dialog">
+        <div class="modal-dialog" role="document" style="width: 85%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Publication Information</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form">
+
+                        <div class="form-group">
+                            <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Publication ID<span style="font-size: 15px; color: red;">*</span></label>
+                            <div class="col-sm-10" style="width: 300px;">
+                                <select class="form-control" id="edit-marketActivityOwner">
+                                    <option>zhangsan</option>
+                                    <option>lisi</option>
+                                    <option>wangwu</option>
+                                </select>
+                            </div>
+                            <label for="edit-marketActivityName" class="col-sm-2 control-label">Title<span style="font-size: 15px; color: red;">*</span></label>
+                            <div class="col-sm-10" style="width: 400px;">
+                                <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-startTime" class="col-sm-2 control-label">Author</label>
+                            <div class="col-sm-10" style="width: 300px;">
+                                <input type="text" class="form-control" id="edit-startTime" value="Value">
+                            </div>
+                            <label for="edit-endTime" class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10" style="width: 300px;">
+                                <input type="text" class="form-control" id="edit-endTime" value="Value">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-cost" class="col-sm-2 control-label">Source</label>
+                            <div class="col-sm-10" style="width: 81%;">
+								<textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-describe" class="col-sm-2 control-label">Abstract</label>
+                            <div class="col-sm-10" style="width: 81%;">
+                                <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- 返回按钮 -->
+	<div style="position: relative; top: 35px; left: 10px;">
+		<a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left" style="font-size: 20px; color: #DDDDDD"></span></a>
+	</div>
+
+	<!-- 大标题 -->
+	<div style="position: relative; left: 40px; top: -30px;">
+		<div class="page-header">
+			<h3>Edit Publication Information </h3>
+		</div>
+		<div style="position: relative; height: 50px; width: 200px;  top: -72px; left: 1000px;">
+			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-edit"></span> Update</button>
+			<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> Delete</button>
+		</div>
+	</div>
+
+	<!-- 详细信息 -->
+	<div style="position: relative; top: -70px;">
+		<div style="position: relative; left: 40px; height: 30px; ">
+			<div style="width: 300px; color: gray;">Publication ID</div>
+			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>ID VALUE</b></div>
+			<div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Title</div>
+			<div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>Value</b></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+		</div>
+
+		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+			<div style="width: 300px; color: gray;">Author</div>
+			<div style="width: 300px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
+			<div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Date</div>
+			<div style="width: 300px;position: relative; left: 750px; top: -60px;"><b>Value</b></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+		</div>
+		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+			<div style="width: 600px; color: gray;">Source</div>
+			<div style="width: 600px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
+			<div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
+		</div>
+		<div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+			<div style="width: 600px; color: gray;">Abstract</div>
+			<div style="width: 600px;position: relative; left: 200px; top: -20px;"><b>Value</b></div>
+			<div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
+		</div>
+
+	</div>
+
+	<div style="height: 200px;"></div>
+</body>
+</html>

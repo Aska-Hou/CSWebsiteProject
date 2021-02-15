@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Log In</title>
+    <style>
+        body{
+            background: url(../images/cs3.jpg);
+            background-repeat: no-repeat;
+            background-size: 74%;
+            font-size: 18px;
+        }
+        .adminLoginLogo{
+            margin-left: 30px;
+            width: 80%;
+        }
+        .adminLogin{
+            float: right;
+            width: 360px;
+            background: #FFFFFF;
+            margin-top: 80px;
+            line-height: 80px;
+        }
+        .text{
+            height: 35px;
+            width: 180px;
+            margin-left: 15px;
+            font-size: 18px;
+        }
+        .checktext{
+            height: 35px;
+            width: 90px;
+            margin-left: 15px;
+            font-size: 19px;
+        }
+        .logIn{
+            height: 48px;
+            width: 90px;
+            float: right;
+            color: #FFFFFF;
+            background: #224e9c;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .logIn:active{
+            color: #FFFFFF;
+            background: #7f8186;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="adminLogin">
+    <img src="../School.jpg" class="adminLoginLogo">
+    <br/>
+    <table>
+        <tr>
+            <td>Admin ID: </td>
+            <td><input type="text" class="text"></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" class="text"></td>
+        </tr>
+        <tr>
+            <td>CheckCode: </td>
+            <td><input type="text" class="checktext" name="textCode" id="textCode"><img src="TestCode" id="codeImg"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input value="Log In"type="submit" class="logIn"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

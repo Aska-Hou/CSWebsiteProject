@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Edit Faculty Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <select class="form-control" id="edit-marketActivityOwner">
+                                <option>zhangsan</option>
+                                <option>lisi</option>
+                                <option>wangwu</option>
+                            </select>
+                        </div>
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 400px;">
+                            <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">Course</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-startTime" value="Value">
+                        </div>
+                        <label for="edit-endTime" class="col-sm-2 control-label">Area</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-endTime" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-cost" class="col-sm-2 control-label">Background</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-describe" class="col-sm-2 control-label">Publication</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
