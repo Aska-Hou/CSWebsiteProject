@@ -4,6 +4,7 @@ import domain.Professor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProfessorService {
 
@@ -21,4 +22,10 @@ public interface ProfessorService {
 
     //    更新professor信息
     public boolean updateProfessor(MultipartFile img, Professor professor);
+
+    //    删除所选professor
+    public boolean deleteSelectedProfessor(Map<String, String[]> paraMap);
+
+    //    删除单个professor
+    public boolean deleteOneProfessor(Professor professor);
 }

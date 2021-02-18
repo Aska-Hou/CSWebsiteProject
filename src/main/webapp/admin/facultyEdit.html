@@ -16,6 +16,16 @@
 
         $(function () {
             var prof_id = getQueryString("prof_id");
+            var addResult = getQueryString("add");
+            if (addResult == "true") {
+                alert("Faculty Add Successfully.");
+            }
+            var updateResult = getQueryString("update");
+            if (updateResult == "true") {
+                alert("Update Successfully.");
+            } else if (updateResult == "false") {
+                alert("Update Unsuccessfully.")
+            }
             $.post("professor/getProfessorDetails", {prof_id: prof_id}, function (data) {
                 $("#prof_id").html("<b>" + data.prof_id + "</b>");
                 $("#edit_prof_id").val(data.prof_id);
@@ -71,7 +81,7 @@
                     <div class="form-group">
                         <label for="edit-Photo" class="col-sm-2 control-label">Change Photo: </label>
                         <div class="col-sm-10" style="width: 800px;">
-                            <label for="edit-Photo">If you want to change photo,  Please choose: </label>
+                            <label for="edit-Photo">If you want to change photo, Please choose: </label>
                             <input type="file" name="img" id="edit-Photo">
                         </div>
                     </div>
@@ -143,8 +153,9 @@
 
 <!-- 详细信息 -->
 <div style="position: relative; top: -70px;">
+    <!--    教授照片显示-->
     <div style="float: right; margin-top: 150px; margin-right: 60px" id="photo">
-        <img style="width: 400px" src="/CSWebsite/ProfImg/photo1.png">
+
     </div>
 
     <div style="position: relative; left: 40px; height: 30px; ">

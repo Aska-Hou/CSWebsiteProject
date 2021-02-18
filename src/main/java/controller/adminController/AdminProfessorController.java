@@ -10,9 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import service.ProfessorService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -47,11 +50,11 @@ public class AdminProfessorController {
     public ModelAndView addNewProfessor(@RequestParam(value = "img", required = true) MultipartFile img, Professor professor) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         if (professor == null) {
-            modelAndView.setViewName("/facultyInfo.html");
+            modelAndView.setViewName("redirect:/admin/facultyInfo.html?add=false");
             return modelAndView;
         } else {
             Professor newProfessor = professorService.addNewProfessor(img, professor);
-            modelAndView.setViewName("/facultyEdit.html?prof_id=" + newProfessor.getProf_id() + "&add=true");
+            modelAndView.setViewName("redirect:/admin/facultyEdit.html?prof_id=" + newProfessor.getProf_id() + "&add=true");
             return modelAndView;
         }
     }
@@ -75,4 +78,26 @@ public class AdminProfessorController {
         }
     }
 
+    //    删除所选professor
+    @RequestMapping(value = "/deleteSelectedProfessor")
+    public String deleteSelectedProfessor(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        if (parameterMap.size() > 0) {
+            boolean result = professorService.deleteSelectedProfessor(parameterMap);
+            if (result) {
+                return "redirect:/admin/facultyInfo.html?delete=true";
+            } else return "redirect:/admin/facultyInfo.html?delete=false";
+        }
+        else return "redirect:/admin/facultyInfo.html?delete=false";
+    }
+
+    //    删除单个professor
+    @RequestMapping(value = "/deleteOneProfessor")
+    public String deleteOneProfessor(Professor professor) {
+        boolean result = professorService.deleteOneProfessor(professor);
+        if (result){
+            return "redirect:/admin/facultyInfo.html?delete=true";
+        }
+        else return "redirect:/admin/facultyInfo.html?delete=false";
+    }
 }

@@ -24,4 +24,7 @@ public interface ProfessorDao {
     //    根据professor id更新信息（保存图片）
     public Integer updateAllProfessorByID(Professor professor);
 
+    //    批量删除所选professor
+    public Integer deleteProfessorsByID(List<Professor> professors);
+
 }

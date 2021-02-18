@@ -18,41 +18,52 @@
 
         $(function () {
             var prof_id = getQueryString("id");
-            if (prof_id == null){
+            var deleteResult = getQueryString("delete");
+            var addFalse = getQueryString("add");
+            if (deleteResult == "true") {
+                alert("Delete Successfully.");
+            } else if (deleteResult == "false") {
+                alert("Delete Unsuccessfully.");
+            }
+            if (addFalse == "false") {
+                alert("Add Unsuccessfully.");
+            }
+            if (prof_id == null) {
                 $.post("professor/showProfessorList", {prof_id: prof_id}, function (data) {
                     $.each(data, function (index, object) {
                         $("#facultyList").append("<tr>\n" +
-                        "                    <th><input type=\"checkbox\" id=\"${user.id}\" name=\"${user.id}\"></th>\n" +
-                        "                    <td>"+ object.prof_id +"</td>\n" +
-                        "                    <td>"+ object.name +"</td>\n" +
-                        "                    <td class=\"courseLength\">" + object.courses +
-                        "                    </td>\n" +
-                        "                    <td>" + object.area + "</td>\n" +
-                        "                    <td>\n" +
-                        "                        <a class=\"btn btn-default btn-sm\"\n" +
-                        "                           href=\"facultyEdit.html?prof_id="+ object.prof_id +"\">Edit</a></td>\n" +
-                        "                    <td>\n" +
-                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
-                        "                    </td>\n" +
-                        "                </tr>");
+                            "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.prof_id + "\"></th>\n" +
+                            "                    <td>" + object.prof_id + "</td>\n" +
+                            "                    <td>" + object.name + "</td>\n" +
+                            "                    <td class=\"courseLength\">" + object.courses +
+                            "                    </td>\n" +
+                            "                    <td>" + object.area + "</td>\n" +
+                            "                    <td>\n" +
+                            "                        <a class=\"btn btn-default btn-sm\"\n" +
+                            "                           href=\"facultyEdit.html?prof_id=" + object.prof_id + "\">Edit</a></td>\n" +
+                            "                    <td>\n" +
+                            "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.name + "', " + object.prof_id + ")\">Delete</a>\n" +
+                            "                    </td>\n" +
+                            "                </tr>");
+                    });
                 });
-                });
+
             }
         });
 
         function search() {
             var prof_id = $("#prof_id").val();
-            if (prof_id == ''){
+            if (prof_id == '') {
                 prof_id = 0;
             }
             var name = $("#name").val();
-            if (name == ''){
+            if (name == '') {
                 name = "null";
             }
             $("#facultyList").empty();
             $.post("professor/searchProfessorList", {prof_id: prof_id, name: name}, function (data) {
                 $("#facultyList").append("<tr class=\"success\">\n" +
-                    "                    <th><input type=\"checkbox\"></th>\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
                     "                    <th>ID</th>\n" +
                     "                    <th>Name</th>\n" +
                     "                    <th>Courses</th>\n" +
@@ -62,21 +73,35 @@
                     "                </tr>");
                 $.each(data, function (index, object) {
                     $("#facultyList").append("<tr>\n" +
-                        "                    <th><input type=\"checkbox\" id=\"${user.id}\" name=\"${user.id}\"></th>\n" +
-                        "                    <td>"+ object.prof_id +"</td>\n" +
-                        "                    <td>"+ object.name +"</td>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.prof_id + "\"></th>\n" +
+                        "                    <td>" + object.prof_id + "</td>\n" +
+                        "                    <td>" + object.name + "</td>\n" +
                         "                    <td class=\"courseLength\">" + object.courses +
                         "                    </td>\n" +
                         "                    <td>" + object.area + "</td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\"\n" +
-                        "                           href=\"facultyEdit.html?prof_id="+ object.prof_id +"\">Edit</a></td>\n" +
+                        "                           href=\"facultyEdit.html?prof_id=" + object.prof_id + "\">Edit</a></td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
                         "                    </td>\n" +
                         "                </tr>");
                 });
             });
+        }
+
+        function deleteSelected() {
+            if (confirm("Do you want to delete the selected faculty? ")) {
+                $("#deleteTable").submit();
+            }
+        }
+
+        function deleteOne(name, prof_id) {
+            if (confirm("Do you want to delete the faculty " + name)) {
+                $.post("professor/deleteOneProfessor", {prof_id: prof_id}, function () {
+                    window.location.reload();
+                })
+            }
         }
 
     </script>
@@ -94,19 +119,20 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="professor/addNewProfessor">
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="professor/addNewProfessor">
 
                     <div class="form-group">
-<!--                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span-->
-<!--                                style="font-size: 15px; color: red;">*</span></label>-->
-<!--                        <div class="col-sm-10" style="width: 300px;">-->
-<!--                            <span id="edit-marketActivityOwner" class="form-control">Automatically</span>-->
-<!--                            <select class="form-control" id="edit-marketActivityOwner">-->
-<!--                                <option>zhangsan</option>-->
-<!--                                <option>lisi</option>-->
-<!--                                <option>wangwu</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
+                        <!--                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Faculty ID<span-->
+                        <!--                                style="font-size: 15px; color: red;">*</span></label>-->
+                        <!--                        <div class="col-sm-10" style="width: 300px;">-->
+                        <!--                            <span id="edit-marketActivityOwner" class="form-control">Automatically</span>-->
+                        <!--                            <select class="form-control" id="edit-marketActivityOwner">-->
+                        <!--                                <option>zhangsan</option>-->
+                        <!--                                <option>lisi</option>-->
+                        <!--                                <option>wangwu</option>-->
+                        <!--                            </select>-->
+                        <!--                        </div>-->
                         <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span
                                 style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 300px;">
@@ -150,7 +176,8 @@
                     <div class="form-group">
                         <label for="edit-Introduction" class="col-sm-2 control-label">Introduction</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" name="introduction" id="edit-Introduction"></textarea>
+                            <textarea class="form-control" rows="3" name="introduction"
+                                      id="edit-Introduction"></textarea>
                         </div>
                     </div>
 
@@ -194,13 +221,14 @@
         <div style="float: right; margin: 5px">
             <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Faculty
             </button>
-            <button class="btn btn-primary" id="deleteSelected">Delete Selected Advisor</button>
+            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected Advisor
+            </button>
         </div>
 
-        <form action="">
+        <form id="deleteTable" action="professor/deleteSelectedProfessor">
             <table border="1" id="facultyList" class="table table-bordered table-hover">
                 <tr class="success">
-                    <th><input type="checkbox"></th>
+                    <th><input onclick="selectAll()" id="check_all" type="checkbox"> <label for="check_all">Choice</label></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Courses</th>
@@ -208,26 +236,6 @@
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-
-                <!--                <c:forEach items="${pb.list}" var="user" varStatus="s">-->
-
-<!--                <tr>-->
-<!--                    <th><input type="checkbox" id="${user.id}" name="${user.id}"></th>-->
-<!--                    <td>Content1</td>-->
-<!--                    <td>Content1</td>-->
-<!--                    <td class="courseLength">Content1 Content1 Content1 Content1 Content1 Content1-->
-<!--                        Content1 Content1 Content1 Content1 Content1-->
-<!--                    </td>-->
-<!--                    <td>Content1</td>-->
-<!--                    <td>-->
-<!--                        <a class="btn btn-default btn-sm"-->
-<!--                           href="facultyEdit.html">Edit</a></td>-->
-<!--                    <td>-->
-<!--                        <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">Delete</a>-->
-<!--                    </td>-->
-<!--                </tr>-->
-
-                <!--                </c:forEach>-->
 
             </table>
         </form>

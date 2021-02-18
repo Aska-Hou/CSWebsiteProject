@@ -31,5 +31,12 @@
             publication = #{publication}, area = #{area}, introduction = #{introduction} where prof_id = #{prof_id}
     </update>
 
+    <delete id="deleteProfessorsByID" parameterType="list">
+        delete from professors where prof_id in 
+        <foreach collection="list" item="prof" index="index" open="(" close=")" separator=", ">
+            #{prof.prof_id}
+        </foreach>
+    </delete>
+
 
 </mapper>

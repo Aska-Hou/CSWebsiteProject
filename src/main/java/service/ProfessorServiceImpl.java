@@ -8,9 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -74,9 +72,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
+            professor = professorDao.selectProfessorByID(professor);
             String basePath = "D:\\WEB-IMG\\CSWebsite\\";
-            File originFile = new File(basePath + professor.getPhoto());
-            originFile.delete();
+            deleteProfessorPhoto(professor);
             String uuid = UUID.randomUUID().toString();
             professor.setPhoto("ProfImg/" + uuid + ".png");
             try {
@@ -93,8 +91,56 @@ public class ProfessorServiceImpl implements ProfessorService {
 
         if (result == 1) {
             return true;
-        }
-        else
+        } else
             return false;
+    }
+
+
+    //    删除所选professor
+    @Override
+    public boolean deleteSelectedProfessor(Map<String, String[]> paraMap) {
+        Set<String> keySet = paraMap.keySet();
+        List<Professor> professors = new ArrayList<>();
+        for (String key : keySet) {
+            String choice = paraMap.get(key)[0];
+            if ("on".equals(choice)) {
+                Professor professor = new Professor();
+                professor.setProf_id(Integer.parseInt(key));
+                professor = professorDao.selectProfessorByID(professor);
+                professors.add(professor);
+            }
+        }
+        Integer result = professorDao.deleteProfessorsByID(professors);
+        //        删除服务器图片文件
+        for (Professor professor : professors) {
+            deleteProfessorPhoto(professor);
+        }
+        if (result == professors.size()) {
+            System.out.println("Successfully! ");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    //    删除单个professor
+    @Override
+    public boolean deleteOneProfessor(Professor professor) {
+        List<Professor> professors = new ArrayList<>();
+        professors.add(professor);
+        deleteProfessorPhoto(professorDao.selectProfessorByID(professor));
+        Integer result = professorDao.deleteProfessorsByID(professors);
+        if (result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //    Method: 删除faculty照片文件
+    public void deleteProfessorPhoto(Professor professor) {
+        String basePath = "D:\\WEB-IMG\\CSWebsite\\";
+        new File(basePath + professor.getPhoto()).delete();
     }
 }
