@@ -5,12 +5,24 @@
 <mapper namespace="dao.PrizeDao">
 
     <select id="showAllPrize" parameterType="domain.Page" resultType="domain.Prize">
-select * from prize order by date desc limit #{currentLine}, #{lineEachPage}
+        select * from prize order by date desc limit #{currentLine}, #{lineEachPage}
     </select>
 
+    <select id="selectPrizeByID" parameterType="domain.Prize" resultType="domain.Prize">
+        select * from prize where prize_id = #{prize_id}
+    </select>
+
+    <select id="selectPrizeByName" resultType="domain.Prize">
+        select * from prize where name like concat('%', #{prize.name}, '%')
+            order by date desc limit #{page.currentLine}, #{page.lineEachPage}
+    </select>
 
     <select id="showNumberOfLine" resultType="java.lang.Integer">
         select count(*) as totalPage from prize
+    </select>
+
+    <select id="showNumberOfLineByName" parameterType="domain.Prize" resultType="java.lang.Integer">
+                select count(*) as totalPage from prize where name like concat('%', #{name}, '%')
     </select>
 
 

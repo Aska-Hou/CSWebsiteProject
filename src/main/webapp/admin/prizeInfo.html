@@ -2,76 +2,335 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Prize Info</title>
     <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
     <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+
+        var currentPage = 1;
+        var totalPage = 1;
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var prize_id = getQueryString("id");
+            var deleteResult = getQueryString("delete");
+            var addFalse = getQueryString("add");
+            if (deleteResult == "true") {
+                alert("Delete Successfully.");
+            } else if (deleteResult == "false") {
+                alert("Delete Unsuccessfully.");
+            }
+            if (addFalse == "false") {
+                alert("Add Unsuccessfully.");
+            }
+            if (prize_id == null) {
+               jumpToPage(1);
+               showPagesList();
+            }
+        });
+
+        function showPagesList() {
+
+            var prize_id = $("#prize_id").val();
+            if (prize_id == '') {
+                prize_id = 0;
+            }
+            var name = $("#name").val();
+            if (name == '') {
+                name = "null";
+            }
+
+            if (prize_id == 0 && name == "null") {
+                $.post("prize/showPagesList", {}, function (data) {
+
+                    var str = "";
+                    totalPage = data.totalPage;
+
+                    str += "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination\">\n";
+                    if (currentPage == 1) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='prev()' aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n";
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        if (currentPage == i) {
+                            str += "<li class='active'><a href=\"#\" onclick='jumpToPage("+ i +")'>" + i + "</a></li>\n";
+                        } else {
+                            str += "<li><a onclick='jumpToPage("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        }
+                    }
+
+                    if (currentPage == totalPage) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='next()' aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>";
+
+                    $("#page").empty();
+                    $("#page").append(str);
+                });
+            }
+            else {
+                $.post("prize/showPagesList", {prize_id: prize_id, name: name}, function (data) {
+                    var str = "";
+                    totalPage = data.totalPage;
+
+                    str += "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination\">\n";
+                    if (currentPage == 1) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='prev()' aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n";
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        if (currentPage == i) {
+                            str += "<li class='active'><a onclick='jumpToPageWithKeyword("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        } else {
+                            str += "<li><a onclick='jumpToPageWithKeyword("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        }
+                    }
+
+                    if (currentPage == totalPage) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='next()' aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>";
+
+                    $("#page").empty();
+                    $("#page").append(str);
+                });
+            }
+        }
+
+        function jumpToPage(page) {
+            currentPage = page;
+
+            $.post("prize/showPrizeList", {currentPage: page}, function (data) {
+                $("#prizeList").empty();
+
+                $("#prizeList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Name</th>\n" +
+                    "                    <th>Winner</th>\n" +
+                    "                    <th>Date</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+
+                $.each(data, function (index, object) {
+                    $("#prizeList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.prize_id + "\"></th>\n" +
+                        "                    <td>" + object.prize_id + "</td>\n" +
+                        "                    <td>" + object.name + "</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.winner +
+                        "                    </td>\n" +
+                        "                    <td>" + object.date + "</td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"prizeEdit.html?prize_id=" + object.prize_id + "\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.name + "', " + object.prize_id + ")\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+
+            showPagesList();
+        }
+
+        function jumpToPageWithKeyword(page) {
+            currentPage = page;
+
+            var prize_id = $("#prize_id").val();
+            if (prize_id == '') {
+                prize_id = 0;
+            }
+            var name = $("#name").val();
+            if (name == '') {
+                name = "null";
+            }
+            $("#prizeList").empty();
+            $.post("prize/searchPrizeList", {prize_id: prize_id, name: name, currentPage: page}, function (data) {
+                $("#prizeList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Name</th>\n" +
+                    "                    <th>Winner</th>\n" +
+                    "                    <th>Date</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+                $.each(data, function (index, object) {
+                    $("#prizeList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.prize_id + "\"></th>\n" +
+                        "                    <td>" + object.prize_id + "</td>\n" +
+                        "                    <td>" + object.name + "</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.winner +
+                        "                    </td>\n" +
+                        "                    <td>" + object.date + "</td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"prizeEdit.html?prize_id=" + object.prize_id + "\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+
+            showPagesList();
+        }
+
+        function search() {
+            currentPage = 1;
+            jumpToPageWithKeyword(1);
+            showPagesList();
+        }
+
+        function prev() {
+            var prize_id = $("#prize_id").val();
+
+            if (currentPage != 1){
+                if (prize_id == '' && name == '') {
+                    jumpToPage(currentPage - 1);
+                }
+                else {
+                    jumpToPageWithKeyword(currentPage - 1);
+                }
+            }
+        }
+
+
+        function next() {
+            var prize_id = $("#prize_id").val();
+
+            if (currentPage != totalPage){
+                if (prize_id == '' && name == '') {
+                    jumpToPage(currentPage + 1);
+                }
+                else {
+                    jumpToPageWithKeyword(currentPage + 1);
+                }
+            }
+        }
+
+        function deleteSelected() {
+            if (confirm("Do you want to delete the selected prizes? ")) {
+                $("#deleteTable").submit();
+            }
+        }
+
+        function deleteOne(name, prize_id) {
+            if (confirm("Do you want to delete the prize " + name)) {
+                $.post("prize/deleteOnePrize", {prize_id: prize_id}, function () {
+                    window.location.reload();
+                })
+            }
+        }
+
+    </script>
 </head>
 <body>
 
-<!-- 修改市场活动的模态窗口 -->
-<!--editActivityModal-->
-<div class="modal fade" id="addActivityModal" role="dialog">
+<div class="modal fade" id="editActivityModal" role="dialog">
     <div class="modal-dialog" role="document" style="width: 85%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Add Competition Prize Information</h4>
+                <h4 class="modal-title" id="myModalLabel">Add Prize Information</h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="prize/addNewPrize">
 
                     <div class="form-group">
-                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Prize ID<span style="font-size: 15px; color: red;">*</span></label>
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span
+                                style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <select class="form-control" id="edit-marketActivityOwner">
-                                <option>zhangsan</option>
-                                <option>lisi</option>
-                                <option>wangwu</option>
-                            </select>
+                            <input type="text" class="form-control" name="name" id="edit-marketActivityName">
                         </div>
-                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span style="font-size: 15px; color: red;">*</span></label>
-                        <div class="col-sm-10" style="width: 400px;">
-                            <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Prize Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="edit-startTime" class="col-sm-2 control-label">Winner</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" id="edit-startTime" value="Value">
+                            <input type="text" class="form-control" name="courses" id="edit-startTime">
                         </div>
                         <label for="edit-endTime" class="col-sm-2 control-label">Date</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" id="edit-endTime" value="Value">
+                            <input type="date" class="form-control" name="area" id="edit-endTime">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-cost" class="col-sm-2 control-label">Source</label>
-                        <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                        <label for="edit_relatedNews" class="col-sm-2 control-label">Related News</label>
+                        <div class="col-sm-10" style="width: 600px;">
+                            <select class="form-control" id="edit_relatedNews">
+                                <option class="form-control">Option 1</option>
+                                <option class="form-control">Option 2</option>
+                                <option class="form-control">Option 3</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-describe" class="col-sm-2 control-label">Description</label>
+                        <label for="edit-cost" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                            <textarea class="form-control" rows="3" name="background" id="edit-cost"></textarea>
                         </div>
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
-            </div>
+
         </div>
     </div>
 </div>
@@ -86,65 +345,46 @@
     </div>
     <div class="listPart">
         <div style="float: left; margin-top: 100px; margin: 5px">
-            <form class="form-inline" action="${pageContext.request.contextPath}/findPageServlet">
+            <form class="form-inline">
                 <div class="form-group">
-                    <label for="exampleInputName2">ID</label>
-                    <input type="text" class="form-control" id="exampleInputName1" name="id"
+                    <label for="prize_id">ID</label>
+                    <input type="text" class="form-control" id="prize_id" name="id"
                            placeholder="Prize ID">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputName2">Name</label>
-                    <input type="text" class="form-control" id="exampleInputName2" name="name"
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
                            placeholder="Prize Name">
                 </div>
-
-                <button type="submit" class="btn btn-default">Search</button>
+                <button type="button" onclick="search()" class="btn btn-default">Search</button>
             </form>
         </div>
 
         <div style="float: right; margin: 5px">
-            <button class="btn btn-primary"  data-toggle="modal" data-target="#addActivityModal">Add New Prize</button>
-            <button class="btn btn-primary" id="deleteSelected">Delete Selected Prize</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Prize
+            </button>
+            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected Prize
+            </button>
         </div>
 
-        <form action="" id="selectTable">
-            <table border="1" class="table table-bordered table-hover">
+        <form id="deleteTable" action="prize/deleteSelectedPrize">
+            <table border="1" id="prizeList" class="table table-bordered table-hover">
                 <tr class="success">
-                    <th><input type="checkbox"></th>
+                    <th><input onclick="selectAll()" id="check_all" type="checkbox"> <label
+                            for="check_all">Choice</label></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Winner</th>
                     <th>Date</th>
-                    <th>Source</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
 
-                <c:forEach items="${pb.list}" var="user" varStatus="s">
-
-                    <tr>
-                        <th><input type="checkbox" id="${user.id}" name="${user.id}"></th>
-                        <td>Content1</td>
-                        <td>Content1</td>
-                        <td>Content1</td>
-                        <td>Content1</td>
-                        <td class="courseLength">Content1 Content1 Content1 Content1 Content1 Content1
-                            Content1 Content1 Content1 Content1 Content1</td>
-                        <td>
-                            <a class="btn btn-default btn-sm"
-                               href="prizeEdit.html">Edit</a></td>
-<!--                               href="${pageContext.request.contextPath}/findServlet?id=${user.id}">Edit</a></td>-->
-
-
-                        <td>
-                            <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">Delete</a>
-                        </td>
-                    </tr>
-
-                </c:forEach>
-
             </table>
         </form>
+        <div style="margin-left: 35%" id="page">
+
+        </div>
     </div>
 </div>
 </body>

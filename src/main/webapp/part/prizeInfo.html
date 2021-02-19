@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- 修改市场活动的模态窗口 -->
+<!--editActivityModal-->
+<div class="modal fade" id="addActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add Competition Prize Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label for="edit-marketActivityOwner" class="col-sm-2 control-label">Prize ID<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <select class="form-control" id="edit-marketActivityOwner">
+                                <option>zhangsan</option>
+                                <option>lisi</option>
+                                <option>wangwu</option>
+                            </select>
+                        </div>
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Name<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 400px;">
+                            <input type="text" class="form-control" id="edit-marketActivityName" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">Winner</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-startTime" value="Value">
+                        </div>
+                        <label for="edit-endTime" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" id="edit-endTime" value="Value">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-cost" class="col-sm-2 control-label">Source</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-cost">value</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-describe" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" id="edit-describe">value</textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="out">
+    <div class="adminLogoImgDiv">
+        <img src="../images/logo.png" class="adminLogoImg">
+    </div>
+    <div class="adminTitle">
+        <br/>
+        Competition Prize Information List
+    </div>
+    <div class="listPart">
+        <div style="float: left; margin-top: 100px; margin: 5px">
+            <form class="form-inline" action="${pageContext.request.contextPath}/findPageServlet">
+                <div class="form-group">
+                    <label for="exampleInputName2">ID</label>
+                    <input type="text" class="form-control" id="exampleInputName1" name="id"
+                           placeholder="Prize ID">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName2">Name</label>
+                    <input type="text" class="form-control" id="exampleInputName2" name="name"
+                           placeholder="Prize Name">
+                </div>
+
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+        </div>
+
+        <div style="float: right; margin: 5px">
+            <button class="btn btn-primary"  data-toggle="modal" data-target="#addActivityModal">Add New Prize</button>
+            <button class="btn btn-primary" id="deleteSelected">Delete Selected Prize</button>
+        </div>
+
+        <form action="" id="selectTable">
+            <table border="1" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th><input type="checkbox"></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Winner</th>
+                    <th>Date</th>
+                    <th>Source</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                <c:forEach items="${pb.list}" var="user" varStatus="s">
+
+                    <tr>
+                        <th><input type="checkbox" id="${user.id}" name="${user.id}"></th>
+                        <td>Content1</td>
+                        <td>Content1</td>
+                        <td>Content1</td>
+                        <td>Content1</td>
+                        <td class="courseLength">Content1 Content1 Content1 Content1 Content1 Content1
+                            Content1 Content1 Content1 Content1 Content1</td>
+                        <td>
+                            <a class="btn btn-default btn-sm"
+                               href="prizeEdit.html">Edit</a></td>
+<!--                               href="${pageContext.request.contextPath}/findServlet?id=${user.id}">Edit</a></td>-->
+
+
+                        <td>
+                            <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">Delete</a>
+                        </td>
+                    </tr>
+
+                </c:forEach>
+
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
