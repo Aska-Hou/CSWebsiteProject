@@ -35,7 +35,29 @@
                jumpToPage(1);
                showPagesList();
             }
+            showNewsList();
         });
+
+        Date.prototype.format = function(fmt) {
+            var o = {
+                "M+" : this.getMonth()+1,                 //月份
+                "d+" : this.getDate(),                    //日
+                "h+" : this.getHours(),                   //小时
+                "m+" : this.getMinutes(),                 //分
+                "s+" : this.getSeconds(),                 //秒
+                "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                "S"  : this.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt)) {
+                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            }
+            for(var k in o) {
+                if(new RegExp("("+ k +")").test(fmt)){
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                }
+            }
+            return fmt;
+        }
 
         function showPagesList() {
 
@@ -156,7 +178,7 @@
                         "                    <td>" + object.name + "</td>\n" +
                         "                    <td class=\"courseLength\">" + object.winner +
                         "                    </td>\n" +
-                        "                    <td>" + object.date + "</td>\n" +
+                        "                    <td>" + new Date(object.date).format('yyyy-MM-dd') + "</td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\"\n" +
                         "                           href=\"prizeEdit.html?prize_id=" + object.prize_id + "\">Edit</a></td>\n" +
@@ -199,12 +221,12 @@
                         "                    <td>" + object.name + "</td>\n" +
                         "                    <td class=\"courseLength\">" + object.winner +
                         "                    </td>\n" +
-                        "                    <td>" + object.date + "</td>\n" +
+                        "                    <td>" + new Date(object.date).format('yyyy-MM-dd') + "</td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\"\n" +
                         "                           href=\"prizeEdit.html?prize_id=" + object.prize_id + "\">Edit</a></td>\n" +
                         "                    <td>\n" +
-                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteUser(${user.id})\">Delete</a>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick='deleteOne(\""+ object.name + "\", "+ object.prize_id +")'>Delete</a>\n" +
                         "                    </td>\n" +
                         "                </tr>");
                 });
@@ -231,7 +253,6 @@
                 }
             }
         }
-
 
         function next() {
             var prize_id = $("#prize_id").val();
@@ -260,6 +281,15 @@
             }
         }
 
+        function showNewsList() {
+            var newsList = $("#edit_relatedNews");
+            newsList.empty();
+            $.post("prize/showRecentNews", {}, function (data) {
+                $.each(data, function (index, object) {
+                    newsList.append("<option class=\"form-control\" value=\""+ object.news_id +"\">"+ object.title +"</option>");
+                })
+            })
+        }
     </script>
 </head>
 <body>
@@ -297,21 +327,19 @@
                     <div class="form-group">
                         <label for="edit-startTime" class="col-sm-2 control-label">Winner</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" name="courses" id="edit-startTime">
+                            <input type="text" class="form-control" name="winner" id="edit-startTime">
                         </div>
                         <label for="edit-endTime" class="col-sm-2 control-label">Date</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="date" class="form-control" name="area" id="edit-endTime">
+                            <input type="date" class="form-control" name="date" id="edit-endTime">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="edit_relatedNews" class="col-sm-2 control-label">Related News</label>
                         <div class="col-sm-10" style="width: 600px;">
-                            <select class="form-control" id="edit_relatedNews">
-                                <option class="form-control">Option 1</option>
-                                <option class="form-control">Option 2</option>
-                                <option class="form-control">Option 3</option>
+                            <select class="form-control" id="edit_relatedNews" name="news_id">
+
                             </select>
                         </div>
                     </div>
@@ -319,7 +347,7 @@
                     <div class="form-group">
                         <label for="edit-cost" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" name="background" id="edit-cost"></textarea>
+                            <textarea class="form-control" rows="3" name="description" id="edit-cost"></textarea>
                         </div>
                     </div>
 

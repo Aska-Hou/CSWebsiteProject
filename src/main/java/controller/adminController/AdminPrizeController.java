@@ -1,5 +1,6 @@
 package controller.adminController;
 
+import domain.News;
 import domain.Page;
 import domain.Prize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,10 @@ public class AdminPrizeController {
     //    管理员： prize列表页数展示
     @RequestMapping(value = "/showPagesList")
     @ResponseBody
-    public Page showPagesList(Prize prize){
-        if (prize.getPrize_id() == 0 && prize.getName() == null){
+    public Page showPagesList(Prize prize) {
+        if (prize.getPrize_id() == 0 && prize.getName() == null) {
             return prizeService.showPageList();
-        }
-        else {
+        } else {
             return prizeService.showPageList(prize);
         }
     }
@@ -55,17 +55,24 @@ public class AdminPrizeController {
         }
     }
 
-/*
+    //    Add prize 界面展示related news
+    @RequestMapping(value = "/showRecentNews")
+    @ResponseBody
+    public List<News> showRecentNews() {
+        return prizeService.showRecentNews();
+    }
+
     //    管理员： 加入新prize
     @RequestMapping(value = "/addNewPrize")
-    public ModelAndView addNewPrize(@RequestParam(value = "img", required = true) MultipartFile img, Prize prize) throws IOException {
+    public ModelAndView addNewPrize(@RequestParam(value = "img", required = true) MultipartFile img, @RequestParam(value = "news_id") String news_id, Prize prize) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
-        if (Prize == null) {
-            modelAndView.setViewName("redirect:/admin/facultyInfo.html?add=false");
+        if (prize == null) {
+            modelAndView.setViewName("redirect:/admin/prizeInfo.html?add=false");
             return modelAndView;
         } else {
-            Prize newPrize = PrizeService.addNewPrize(img, prize);
-            modelAndView.setViewName("redirect:/admin/facultyEdit.html?prof_id=" + newPrize.getProf_id() + "&add=true");
+            prize.setNews_id(Integer.parseInt(news_id));
+            Prize newPrize = prizeService.addNewPrize(img, prize);
+            modelAndView.setViewName("redirect:/admin/prizeEdit.html?prize_id=" + newPrize.getPrize_id() + "&add=true");
             return modelAndView;
         }
     }
@@ -74,18 +81,18 @@ public class AdminPrizeController {
     @RequestMapping(value = "/getPrizeDetails")
     @ResponseBody
     public Prize getPrizeDetails(Prize prize) {
-        Prize detail = PrizeService.showPrizeDetail(prize);
+        Prize detail = prizeService.showPrizeDetail(prize);
         return detail;
     }
 
     //    管理员： 更新prize信息
     @RequestMapping(value = "/editPrize")
-    public String editPrize(@RequestParam(value = "img", required = false) MultipartFile img, Prize Prize) {
-        boolean result = PrizeService.updatePrize(img, Prize);
+    public String editPrize(@RequestParam(value = "img", required = false) MultipartFile img, Prize prize) {
+        boolean result = prizeService.updatePrize(img, prize);
         if (result) {
-            return "redirect:/admin/facultyEdit.html?prof_id=" + Prize.getProf_id() + "&update=true";
+            return "redirect:/admin/prizeEdit.html?prize_id=" + prize.getPrize_id() + "&update=true";
         } else {
-            return "redirect:/admin/facultyEdit.html?prof_id=" + Prize.getProf_id() + "&update=false";
+            return "redirect:/admin/prizeEdit.html?prize_id=" + prize.getPrize_id() + "&update=false";
         }
     }
 
@@ -94,11 +101,11 @@ public class AdminPrizeController {
     public String deleteSelectedPrize(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         if (parameterMap.size() > 0) {
-            boolean result = PrizeService.deleteSelectedPrize(parameterMap);
+            boolean result = prizeService.deleteSelectedPrize(parameterMap);
             if (result) {
-                return "redirect:/admin/facultyInfo.html?delete=true";
-            } else return "redirect:/admin/facultyInfo.html?delete=false";
-        } else return "redirect:/admin/facultyInfo.html?delete=false";
+                return "redirect:/admin/prizeInfo.html?delete=true";
+            } else return "redirect:/admin/prizeInfo.html?delete=false";
+        } else return "redirect:/admin/prizeInfo.html?delete=false";
     }
 
     //    删除单个Prize
@@ -106,8 +113,8 @@ public class AdminPrizeController {
     public String deleteOnePrize(Prize Prize) {
         boolean result = prizeService.deleteOnePrize(Prize);
         if (result) {
-            return "redirect:/admin/facultyInfo.html?delete=true";
-        } else return "redirect:/admin/facultyInfo.html?delete=false";
+            return "redirect:/admin/prizeInfo.html?delete=true";
+        } else return "redirect:/admin/prizeInfo.html?delete=false";
     }
-    */
+
 }

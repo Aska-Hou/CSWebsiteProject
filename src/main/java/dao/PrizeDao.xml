@@ -22,8 +22,28 @@
     </select>
 
     <select id="showNumberOfLineByName" parameterType="domain.Prize" resultType="java.lang.Integer">
-                select count(*) as totalPage from prize where name like concat('%', #{name}, '%')
+        select count(*) as totalPage from prize where name like concat('%', #{name}, '%')
     </select>
 
+    <insert id="insertPrize" useGeneratedKeys="true" keyProperty="prize_id"  keyColumn="prize_id" parameterType="domain.Prize">
+        insert into prize(name, winner, date, news_id, description, photo)
+                values (#{name}, #{winner}, #{date}, #{news_id}, #{description}, #{photo})
+    </insert>
 
+    <delete id="deletePrizesByID" parameterType="list">
+        delete from prize where prize_id in
+        <foreach collection="list" item="prize" index="index" open="(" close=")" separator=", ">
+            #{prize.prize_id}
+        </foreach>
+    </delete>
+
+    <update id="updatePartPrizeByID" parameterType="domain.Prize">
+        update prize set name = #{name}, winner = #{winner}, date = #{date}, description = #{description},
+            news_id = #{news_id} where prize_id = #{prize_id}
+    </update>
+
+    <update id="updateAllPrizeByID" parameterType="domain.Prize">
+        update prize set name = #{name}, winner = #{winner}, date = #{date}, description = #{description},
+            news_id = #{news_id}, photo = #{photo} where prize_id = #{prize_id}
+    </update>
 </mapper>
