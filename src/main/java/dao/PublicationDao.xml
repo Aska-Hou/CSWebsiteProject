@@ -4,12 +4,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.PublicationDao">
 
-    <select id="selectAllPublication" parameterType="domain.Page" resultType="domain.Paper">
-select * from paper order by date desc limit #{currentLine}, #{lineEachPage}
+    <select id="showAllPublication" parameterType="domain.Page" resultType="domain.Publication">
+        select * from publication order by date desc limit #{currentLine}, #{lineEachPage}
+    </select>
+
+    <select id="selectPublicationByID" parameterType="domain.Publication" resultType="domain.Publication">
+        select publication_id, title, author, date, area, abstract as abstractContent, website from publication
+            where publication_id = #{publication_id}
+    </select>
+
+    <select id="selectPublicationByName" resultType="domain.Publication">
+        select * from publication where title like concat('%', #{publication.title}, '%')
+            order by date desc limit #{page.currentLine}, #{page.lineEachPage}
     </select>
 
     <select id="showNumberOfLine" resultType="java.lang.Integer">
-        select count(*) from paper
+        select count(*) as totalPage from publication
     </select>
+
+    <select id="showNumberOfLineByName" parameterType="domain.Publication" resultType="java.lang.Integer">
+        select count(*) as totalPage from publication where title like concat('%', #{title}, '%')
+    </select>
+
+    <insert id="insertPublication" useGeneratedKeys="true" keyProperty="publication_id"  keyColumn="publication_id" parameterType="domain.Publication">
+        insert into publication(title, author, date, area, abstract, website)
+                values (#{title}, #{author}, #{date}, #{area}, #{abstractContent}, #{website})
+    </insert>
+
+    <delete id="deletePublicationsByID" parameterType="list">
+        delete from publication where publication_id in
+        <foreach collection="list" item="publication" index="index" open="(" close=")" separator=", ">
+            #{publication.publication_id}
+        </foreach>
+    </delete>
+
+    <update id="updatePublicationByID" parameterType="domain.Publication">
+        update publication set title = #{title}, author = #{author}, date = #{date}, area = #{area},
+            abstract = #{abstractContent}, website = #{website} where publication_id = #{publication_id}
+    </update>
 
 </mapper>

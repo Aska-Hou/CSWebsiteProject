@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TutorDao">
+
+
+    <select id="showAllTutor" resultType="domain.Tutor">
+        select * from tutor
+    </select>
+
+    <select id="selectTutorByID" parameterType="domain.Tutor" resultType="domain.Tutor">
+        select * from tutor where tutor_id =#{tutor_id}
+    </select>
+
+    <select id="selectTutorByName" parameterType="domain.Tutor" resultType="domain.Tutor">
+        select * from tutor where name like concat('%', #{name}, '%')
+    </select>
+
+    <insert id="insertTutor" parameterType="domain.Tutor">
+        insert into tutor(tutor_id, name, photo, grade, experience)
+            values(#{tutor_id}, #{name}, #{photo}, #{grade}, #{experience})
+    </insert>
+
+    <update id="updatePartTutorByID" parameterType="domain.Tutor">
+        update tutor set name = #{name}, grade = #{grade}, experience = #{experience} where tutor_id = #{tutor_id}
+    </update>
+
+    <update id="updateAllTutorByID" parameterType="domain.Tutor">
+        update tutor set name = #{name}, grade = #{grade}, experience = #{experience}, photo = #{photo} where tutor_id = #{tutor_id}
+    </update>
+
+    <delete id="deleteTutorsByID" parameterType="list">
+        delete from tutor where tutor_id in
+        <foreach collection="list" item="tutor" index="index" open="(" close=")" separator=", ">
+            #{tutor.tutor_id}
+        </foreach>
+    </delete>
+
+
+</mapper>

@@ -1,11 +1,8 @@
 package domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
-
-public class Paper {
-    private int paper_id;
+public class Publication {
+    private int publication_id;
     private String title;
     private String author;
     private String date;
@@ -13,14 +10,24 @@ public class Paper {
     private String abstractContent;
     private String website;
 
-    public Paper(){
+    public Publication(){
 
+    }
+
+    public Publication(int publication_id, String title, String author, String date, String area, String abstractContent, String website) {
+        this.publication_id = publication_id;
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.area = area;
+        this.abstractContent = abstractContent;
+        this.website = website;
     }
 
     @Override
     public String toString() {
-        return "Paper{" +
-                "paper_id=" + paper_id +
+        return "Publication{" +
+                "publication_id=" + publication_id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", date='" + date + '\'' +
@@ -30,22 +37,12 @@ public class Paper {
                 '}';
     }
 
-    public Paper(int paper_id, String title, String author, String date, String area, String abstractContent, String website) {
-        this.paper_id = paper_id;
-        this.title = title;
-        this.author = author;
-        this.date = date;
-        this.area = area;
-        this.abstractContent = abstractContent;
-        this.website = website;
+    public int getPublication_id() {
+        return publication_id;
     }
 
-    public int getPaper_id() {
-        return paper_id;
-    }
-
-    public void setPaper_id(int paper_id) {
-        this.paper_id = paper_id;
+    public void setPublication_id(int publication_id) {
+        this.publication_id = publication_id;
     }
 
     public String getTitle() {

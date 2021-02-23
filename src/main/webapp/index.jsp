@@ -80,32 +80,20 @@
 
                 <!-- Slides-->
                 <li style="background:#224e9c;">
-                    <div><img class="indexImg" src="images/rollImage/image3.jpg"/>
-                        <div class="description flex-caption">
-                            <h1></h1>
-                            <p></p>
-                        </div>
+                    <div>
+                        <img class="indexImg" src="images/rollImage/image3.jpg"/>
                     </div>
                 </li>
 
                 <li style="background:#224e9c;">
                     <div>
                         <img class="indexImg" src="images/rollImage/image2.png"/>
-                        <div class="description flex-caption ">
-                            <div class="description" style="margin-top: 30px; width: 400px;">
-                                <h1></h1>
-                                <p></p>
-                            </div>
-                        </div>
                     </div>
                 </li>
 
                 <li style="background:#224e9c;">
-                    <div><img class="indexImg" src="images/rollImage/image1.jpg"/>
-                        <div class="description flex-caption" style="margin-top: 40px;">
-                            <h1></h1>
-                            <p></p>
-                        </div>
+                    <div>
+                        <img class="indexImg" src="images/rollImage/image1.jpg"/>
                     </div>
                 </li>
 

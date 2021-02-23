@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Publication Info</title>
+    <title>News Info</title>
     <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
     <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
@@ -20,7 +20,7 @@
         };
 
         $(function () {
-            var publication_id = getQueryString("id");
+            var news_id = getQueryString("id");
             var deleteResult = getQueryString("delete");
             var addFalse = getQueryString("add");
             if (deleteResult == "true") {
@@ -31,10 +31,11 @@
             if (addFalse == "false") {
                 alert("Add Unsuccessfully.");
             }
-            if (publication_id == null) {
+            if (news_id == null) {
                jumpToPage(1);
                showPagesList();
             }
+            showNewsList();
         });
 
         Date.prototype.format = function(fmt) {
@@ -60,17 +61,17 @@
 
         function showPagesList() {
 
-            var publication_id = $("#publication_id").val();
-            if (publication_id == '') {
-                publication_id = 0;
+            var news_id = $("#news_id").val();
+            if (news_id == '') {
+                news_id = 0;
             }
             var title = $("#title").val();
             if (title == '') {
                 title = "null";
             }
 
-            if (publication_id == 0 && title == "null") {
-                $.post("publication/showPagesList", {}, function (data) {
+            if (news_id == 0 && title == "null") {
+                $.post("news/showPagesList", {}, function (data) {
 
                     var str = "";
                     totalPage = data.totalPage;
@@ -112,7 +113,7 @@
                 });
             }
             else {
-                $.post("publication/showPagesList", {publication_id: publication_id, title: title}, function (data) {
+                $.post("news/showPagesList", {news_id: news_id, title: title}, function (data) {
                     var str = "";
                     totalPage = data.totalPage;
 
@@ -157,29 +158,32 @@
         function jumpToPage(page) {
             currentPage = page;
 
-            $.post("publication/showPublicationList", {currentPage: page}, function (data) {
-                $("#publicationList").empty();
+            $.post("news/showNewsList", {currentPage: page}, function (data) {
+                $("#newsList").empty();
 
-                $("#publicationList").append("<tr class=\"success\">\n" +
+                $("#newsList").append("<tr class=\"success\">\n" +
                     "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
                     "                    <th>ID</th>\n" +
-                    "                    <th>Title</th>\n" +
+                    "                    <th>Name</th>\n" +
+                    "                    <th>Winner</th>\n" +
                     "                    <th>Date</th>\n" +
                     "                    <th>Edit</th>\n" +
                     "                    <th>Delete</th>\n" +
                     "                </tr>");
 
                 $.each(data, function (index, object) {
-                    $("#publicationList").append("<tr>\n" +
-                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.publication_id + "\"></th>\n" +
-                        "                    <td>" + object.publication_id + "</td>\n" +
+                    $("#newsList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.news_id + "\"></th>\n" +
+                        "                    <td>" + object.news_id + "</td>\n" +
                         "                    <td>" + object.title + "</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.author +
+                        "                    </td>\n" +
                         "                    <td>" + new Date(object.date).format('yyyy-MM-dd') + "</td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\"\n" +
-                        "                           href=\"publicationEdit.html?publication_id=" + object.publication_id + "\">Edit</a></td>\n" +
+                        "                           href=\"newsEdit.html?news_id=" + object.news_id + "\">Edit</a></td>\n" +
                         "                    <td>\n" +
-                        "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.title + "', " + object.publication_id + ")\">Delete</a>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.title + "', " + object.news_id + ")\">Delete</a>\n" +
                         "                    </td>\n" +
                         "                </tr>");
                 });
@@ -191,35 +195,38 @@
         function jumpToPageWithKeyword(page) {
             currentPage = page;
 
-            var publication_id = $("#publication_id").val();
-            if (publication_id == '') {
-                publication_id = 0;
+            var news_id = $("#news_id").val();
+            if (news_id == '') {
+                news_id = 0;
             }
             var title = $("#title").val();
             if (title == '') {
                 title = "null";
             }
-            $("#publicationList").empty();
-            $.post("publication/searchPublicationList", {publication_id: publication_id, title: title, currentPage: page}, function (data) {
-                $("#publicationList").append("<tr class=\"success\">\n" +
+            $("#newsList").empty();
+            $.post("news/searchNewsList", {news_id: news_id, title: title, currentPage: page}, function (data) {
+                $("#newsList").append("<tr class=\"success\">\n" +
                     "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
                     "                    <th>ID</th>\n" +
                     "                    <th>Title</th>\n" +
+                    "                    <th>Author</th>\n" +
                     "                    <th>Date</th>\n" +
                     "                    <th>Edit</th>\n" +
                     "                    <th>Delete</th>\n" +
                     "                </tr>");
                 $.each(data, function (index, object) {
-                    $("#publicationList").append("<tr>\n" +
-                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.publication_id + "\"></th>\n" +
-                        "                    <td>" + object.publication_id + "</td>\n" +
+                    $("#newsList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.news_id + "\"></th>\n" +
+                        "                    <td>" + object.news_id + "</td>\n" +
                         "                    <td>" + object.title + "</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.author +
+                        "                    </td>\n" +
                         "                    <td>" + new Date(object.date).format('yyyy-MM-dd') + "</td>\n" +
                         "                    <td>\n" +
                         "                        <a class=\"btn btn-default btn-sm\"\n" +
-                        "                           href=\"publicationEdit.html?publication_id=" + object.publication_id + "\">Edit</a></td>\n" +
+                        "                           href=\"newsEdit.html?news_id=" + object.news_id + "\">Edit</a></td>\n" +
                         "                    <td>\n" +
-                        "                        <a class=\"btn btn-default btn-sm\" onclick='deleteOne(\""+ object.title + "\", "+ object.publication_id +")'>Delete</a>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick='deleteOne(\""+ object.title + "\", "+ object.news_id +")'>Delete</a>\n" +
                         "                    </td>\n" +
                         "                </tr>");
                 });
@@ -235,10 +242,10 @@
         }
 
         function prev() {
-            var publication_id = $("#publication_id").val();
+            var news_id = $("#news_id").val();
 
             if (currentPage != 1){
-                if (publication_id == '' && name == '') {
+                if (news_id == '' && title == '') {
                     jumpToPage(currentPage - 1);
                 }
                 else {
@@ -248,10 +255,10 @@
         }
 
         function next() {
-            var publication_id = $("#publication_id").val();
+            var news_id = $("#news_id").val();
 
             if (currentPage != totalPage){
-                if (publication_id == '' && name == '') {
+                if (news_id == '' && title == '') {
                     jumpToPage(currentPage + 1);
                 }
                 else {
@@ -261,17 +268,27 @@
         }
 
         function deleteSelected() {
-            if (confirm("Do you want to delete the selected publications? ")) {
+            if (confirm("Do you want to delete the selected news? ")) {
                 $("#deleteTable").submit();
             }
         }
 
-        function deleteOne(name, publication_id) {
-            if (confirm("Do you want to delete the publication " + name)) {
-                $.post("publication/deleteOnePublication", {publication_id: publication_id}, function () {
+        function deleteOne(title, news_id) {
+            if (confirm("Do you want to delete the news " + title)) {
+                $.post("news/deleteOneNews", {news_id: news_id}, function () {
                     window.location.reload();
                 })
             }
+        }
+
+        function showNewsList() {
+            var newsList = $("#edit_relatedNews");
+            newsList.empty();
+            $.post("news/showRecentNews", {}, function (data) {
+                $.each(data, function (index, object) {
+                    newsList.append("<option class=\"form-control\" value=\""+ object.news_id +"\">"+ object.title +"</option>");
+                })
+            })
         }
     </script>
 </head>
@@ -284,25 +301,33 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Add Publication Information</h4>
+                <h4 class="modal-title" id="myModalLabel">Add New News</h4>
             </div>
             <div class="modal-body">
 
                 <form class="form-horizontal" enctype="multipart/form-data" method="post"
-                      action="publication/addNewPublication">
+                      action="news/addNewNews">
 
                     <div class="form-group">
-                        <label for="edit-title" class="col-sm-2 control-label">Title<span
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Title<span
                                 style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" name="title" id="edit-title">
+                            <input type="text" class="form-control" name="title" id="edit-marketActivityName">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-author" class="col-sm-2 control-label">Author</label>
+                        <label for="edit-Photo" class="col-sm-2 control-label">News Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" name="author" id="edit-author">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">Author</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="author" id="edit-startTime">
                         </div>
                         <label for="edit-endTime" class="col-sm-2 control-label">Date</label>
                         <div class="col-sm-10" style="width: 300px;">
@@ -311,23 +336,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-area" class="col-sm-2 control-label">Area</label>
-                        <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" name="area" id="edit-area">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit-abstractContent" class="col-sm-2 control-label">Abstract</label>
+                        <label for="edit-abstract" class="col-sm-2 control-label">Abstract</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" name="abstractContent" id="edit-abstractContent"></textarea>
+                            <textarea class="form-control" rows="3" name="abstractContent" id="edit-abstract"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-website" class="col-sm-2 control-label">Website</label>
-                        <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control" name="website" id="edit-website">
+                        <label for="edit-content" class="col-sm-2 control-label">Content</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="content" id="edit-content"></textarea>
                         </div>
                     </div>
 
@@ -349,39 +367,40 @@
     </div>
     <div class="adminTitle">
         <br/>
-        Publication Information List
+        News Information List
     </div>
     <div class="listPart">
         <div style="float: left; margin-top: 100px; margin: 5px">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="publication_id">ID</label>
-                    <input type="text" class="form-control" id="publication_id" name="id"
-                           placeholder="Publication ID">
+                    <label for="news_id">ID</label>
+                    <input type="text" class="form-control" id="news_id" name="id"
+                           placeholder="News ID">
                 </div>
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" name="title"
-                           placeholder="Publication Name">
+                           placeholder="News Name">
                 </div>
                 <button type="button" onclick="search()" class="btn btn-default">Search</button>
             </form>
         </div>
 
         <div style="float: right; margin: 5px">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Publication
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New News
             </button>
-            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected Publication
+            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected News
             </button>
         </div>
 
-        <form id="deleteTable" action="publication/deleteSelectedPublication">
-            <table border="1" id="publicationList" class="table table-bordered table-hover">
+        <form id="deleteTable" action="news/deleteSelectedNews">
+            <table border="1" id="newsList" class="table table-bordered table-hover">
                 <tr class="success">
                     <th><input onclick="selectAll()" id="check_all" type="checkbox"> <label
                             for="check_all">Choice</label></th>
-                    <th>ID</th>
+                    <th>News ID</th>
                     <th>Title</th>
+                    <th>Author</th>
                     <th>Date</th>
                     <th>Edit</th>
                     <th>Delete</th>

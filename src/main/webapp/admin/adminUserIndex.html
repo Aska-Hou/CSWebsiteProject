@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin -- Index Info</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var addFalse = getQueryString("add");
+            if (addFalse == "false") {
+                alert("Add Unsuccessfully.");
+            }
+            else if(addFalse == "true"){
+                alert("Add Successfully.");
+            }
+
+            showNewsList();
+
+            $.post("index/showIndexList", {}, function (data) {
+                $.each(data, function (index, object) {
+
+
+
+                    $("#indexList").append("<tr>" +
+                        "<td>" + object.index_id + "</td>" +
+                        "<td><img style='width: 300px;margin-left: 20%' src=\"/CSWebsite/" + object.img + "\"></td>" +
+                        "<td>" + object.news_id + "</td>" +
+                        "<td><a onclick = deleteIndex("+ object.index_id + ") class=\"btn btn-default btn-sm\">Delete</a></tr>");
+                });
+            });
+
+
+        });
+
+        function showNewsList() {
+            var newsList = $("#edit_relatedNews");
+            $.post("prize/showRecentNews", {}, function (data) {
+                $.each(data, function (index, object) {
+                    newsList.append("<option class=\"form-control\" value=\"" + object.news_id + "\">" + object.title + "</option>");
+                })
+            })
+        }
+
+        function deleteIndex(index_id) {
+            if (confirm("Do you want to delete this index img? ")) {
+                $.post("index/deleteIndex", {index_id: index_id}, function (data) {
+                    if (data == "true"){
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+
+        function getNewsName(news_id) {
+            $.post("")
+        }
+    </script>
+</head>
+<body>
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Index</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="index/addNewIndex">
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_relatedNews" class="col-sm-2 control-label">Related News</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <select name="news_id" class="form-control" id="edit_relatedNews">
+                                <option selected="selected" value="">No Choice</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="out">
+    <div class="adminLogoImgDiv">
+        <img src="../images/logo.png" class="adminLogoImg">
+    </div>
+    <div class="adminTitle">
+        <br/>
+        Index Information Manage
+    </div>
+    <div class="listPart">
+
+        <div style="float: right; margin: 5px">
+            <button class="btn btn-primary" style="width: 300px; font-size: 18px" data-toggle="modal"
+                    data-target="#editActivityModal">Add New Index Img
+            </button>
+        </div>
+
+        <form id="deleteTable" action="">
+            <table border="1" id="indexList" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th>Index ID</th>
+                    <th>Photo</th>
+                    <th>Related News</th>
+                    <th>Delete</th>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

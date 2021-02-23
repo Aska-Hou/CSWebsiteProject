@@ -174,7 +174,7 @@ public class PrizeServiceImpl implements PrizeService {
             String basePath = "D:\\WEB-IMG\\CSWebsite\\";
             deletePrizePhoto(prize);
             String uuid = UUID.randomUUID().toString();
-            prize.setPhoto("ProfImg/" + uuid + ".png");
+            prize.setPhoto("PrizeImg/" + uuid + ".png");
             try {
                 img.transferTo(new File(basePath + prize.getPhoto()));
             } catch (IOException e) {

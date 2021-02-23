@@ -14,11 +14,25 @@
             return null;
         };
 
+        function showNewsList(selectedID) {
+            var newsList = $("#edit_relatedNews");
+            newsList.empty();
+            $.post("news/showRecentNews", {}, function (data) {
+                $.each(data, function (index, object) {
+                    if (object.news_id == selectedID) {
+                        newsList.append("<option class=\"form-control\" selected='selected' value=\"" + object.news_id + "\">" + object.title + "</option>");
+                    } else {
+                        newsList.append("<option class=\"form-control\" value=\"" + object.news_id + "\">" + object.title + "</option>");
+                    }
+                })
+            })
+        }
+
         $(function () {
-            var publication_id = getQueryString("publication_id");
+            var news_id = getQueryString("news_id");
             var addResult = getQueryString("add");
             if (addResult == "true") {
-                alert("Publication Add Successfully.");
+                alert("News Add Successfully.");
             }
             var updateResult = getQueryString("update");
             if (updateResult == "true") {
@@ -26,19 +40,23 @@
             } else if (updateResult == "false") {
                 alert("Update Unsuccessfully.")
             }
-            $.post("publication/getPublicationDetails", {publication_id: publication_id}, function (data) {
-                $("#publication_id").html("<b>" + data.publication_id + "</b>");
-                $("#edit_publication_id").val(data.publication_id);
+            $.post("news/getNewsDetails", {news_id: news_id}, function (data) {
+                $("#news_id").html("<b>" + data.news_id + "</b>");
+                $("#edit_news_id").val(data.news_id);
                 $("#author").html("<b>" + data.author + "</b>");
                 $("#title").html("<b>" + data.title + "</b>");
                 $("#edit_title").val(data.title);
                 $("#edit_author").val(data.author);
                 $("#edit_date").val(new Date(data.date).format("yyyy-MM-dd"));
                 $("#date").html("<b>" + new Date(data.date).format("yyyy-MM-dd") + "</b>");
-                $("#website").html("<b>" + data.website + "</b>");
-                $("#edit_website").val(data.website);
                 $("#abstractContent").html("<b>" + data.abstractContent + "</b>");
                 $("#edit-abstractContent").val(data.abstractContent);
+
+                $("#content").html("<b>" + data.content + "</b>");
+                $("#edit-content").val(data.content);
+
+                $("#photo").html("<img style=\"width: 400px\" src=\"/CSWebsite/" + data.photo + "\">");
+                showNewsList(data.news_id);
             });
 
 
@@ -65,11 +83,11 @@
             return fmt;
         };
 
-        function deletePublication() {
-            if (confirm("Do you want to delete this publication? ")) {
-                var publication_id = getQueryString("publication_id");
-                $.post("publication/deleteOnePublication", {publication_id: publication_id}, function (data) {
-                    window.location.href = "adminIndex.html?link=publicationInfo.html?delete=true";
+        function deleteNews() {
+            if (confirm("Do you want to delete this news? ")) {
+                var news_id = getQueryString("news_id");
+                $.post("news/deleteOneNews", {news_id: news_id}, function (data) {
+                    window.location.href = "adminIndex.html?link=newsInfo.html?delete=true";
                 });
             }
         }
@@ -86,26 +104,30 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Update Publication Information</h4>
+                <h4 class="modal-title" id="myModalLabel">Update News Information</h4>
             </div>
             <div class="modal-body">
 
                 <form class="form-horizontal" enctype="multipart/form-data" method="post"
-                      action="publication/editPublication">
+                      action="news/editNews">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Publication ID<span
+                        <label class="col-sm-2 control-label">News ID<span
                                 style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input readonly id="edit_publication_id" name="publication_id" class="form-control">
+                            <input readonly id="edit_news_id" name="news_id" class="form-control">
                         </div>
-
+                        <label for="edit_title" class="col-sm-2 control-label">Title<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="title" id="edit_title">
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit_title" class="col-sm-2 control-label">Title<span
-                                style="font-size: 15px; color: red;">*</span></label>
-                        <div class="col-sm-10" style="width: 775px;">
-                            <input type="text" class="form-control" name="title" id="edit_title">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Change Photo: </label>
+                        <div class="col-sm-10" style="width: 800px;">
+                            <label for="edit-Photo">If you want to change photo, Please choose: </label>
+                            <input type="file" name="img" id="edit-Photo">
                         </div>
                     </div>
 
@@ -122,16 +144,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="edit_author" class="col-sm-2 control-label">Website Link</label>
-                        <div class="col-sm-10" style="width: 775px;">
-                            <input type="text" class="form-control" name="website" id="edit_website">
+                        <label for="edit-abstractContent" class="col-sm-2 control-label">Abstract</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="abstractContent" id="edit-abstractContent"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-abstractContent" class="col-sm-2 control-label">Paper Abstract</label>
+                        <label for="edit-content" class="col-sm-2 control-label">Content</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" name="abstractContent" id="edit-abstractContent"></textarea>
+                            <textarea class="form-control" rows="3" name="content" id="edit-content"></textarea>
                         </div>
                     </div>
 
@@ -156,23 +178,35 @@
 <!-- 大标题 -->
 <div style="position: relative; left: 40px; top: -30px;">
     <div class="page-header">
-        <h3>Edit Publication Information </h3>
+        <h3>Edit News Information </h3>
     </div>
     <div style="position: relative; height: 50px; width: 200px;  top: -72px; left: 1000px;">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span
                 class="glyphicon glyphicon-edit"></span> Update
         </button>
-        <button type="button" class="btn btn-danger" onclick="deletePublication()"><span class="glyphicon glyphicon-minus"></span> Delete</button>
+        <button type="button" class="btn btn-danger" onclick="deleteNews()"><span class="glyphicon glyphicon-minus"></span> Delete</button>
     </div>
 </div>
 
 <!-- 详细信息 -->
 <div style="position: relative; top: -70px;">
+    <!--    教授照片显示-->
+    <div style="float: right; margin-top: 150px; margin-right: 60px" id="photo">
+
+    </div>
 
     <div style="position: relative; left: 40px; height: 30px; ">
-        <div style="width: 300px; color: gray;">Publication ID</div>
-        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="publication_id"><b></b></div>
+        <div style="width: 300px; color: gray;">News ID</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="news_id"><b></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Title</div>
+        <div style="width: 300px;position: relative; left: 650px; top: -60px;" id="title"><b></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+    </div>
 
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 300px; color: gray;">Author</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="author"><b></b></div>
         <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Date</div>
         <div style="width: 300px;position: relative; left: 650px; top: -60px;" id="date"><b></b></div>
         <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -180,26 +214,14 @@
     </div>
 
     <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-        <div style="width: 850px; color: gray;">Title</div>
-        <div style="width: 850px;position: relative; left: 100px; top: -20px;" id="title"><b></b></div>
-        <div style="height: 1px; width: 950px; background: #D5D5D5; position: relative; top: -20px;"></div>
-    </div>
-
-    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-        <div style="width: 300px; color: gray;">Author</div>
-        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="author"><b></b></div>
-
-        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
+        <div style="width: 600px; color: gray;">Abstract</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="abstractContent"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
     </div>
     <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-        <div style="width: 700px; color: gray;">Website Link</div>
-        <div style="width: 700px;position: relative; left: 100px; top: -20px;" id="website"><b></b></div>
-        <div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
-    </div>
-    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
-        <div style="width: 700px; color: gray;">Abstract</div>
-        <div style="width: 700px;position: relative; left: 100px; top: -20px;" id="abstractContent"><b></b></div>
-        <div style="height: 1px; width: 800px; background: #D5D5D5; position: relative; top: -20px;"></div>
+        <div style="width: 600px; color: gray;">Content</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="content"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
     </div>
 
 </div>

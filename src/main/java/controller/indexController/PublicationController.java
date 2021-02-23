@@ -1,7 +1,7 @@
 package controller.indexController;
 
 import domain.Page;
-import domain.Paper;
+import domain.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ public class PublicationController {
     //    展示所有的Publication
     @RequestMapping(value = "/showPublication")
     @ResponseBody
-    public List<Paper> showPaperList(Page page) {
-        return publicationService.showPaperList(page);
+    public List<Publication> showPaperList(Page page) {
+        return publicationService.showPublicationList(page);
     }
 
     //    展示页码
