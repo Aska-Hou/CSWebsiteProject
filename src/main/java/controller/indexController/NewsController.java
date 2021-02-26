@@ -36,4 +36,10 @@ public class NewsController {
     public News showNewsDetail(News news){
         return newsService.showNewsDetail(news);
     }
+
+    @RequestMapping(value = "/showRecentNews")
+    @ResponseBody
+    public List<News> showReceentNews(){
+        return newsService.showRecentNews();
+    }
 }

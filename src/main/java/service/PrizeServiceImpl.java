@@ -193,4 +193,10 @@ public class PrizeServiceImpl implements PrizeService {
             return false;
     }
 
+    @Override
+    public List<Prize> showIndexPrize() {
+        return prizeDao.selectRecentThreePrize();
+    }
+
+
 }

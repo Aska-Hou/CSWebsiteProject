@@ -36,13 +36,14 @@
                 $("#area").html("<b>" + data.area + "</b>");
                 $("#edit-area").val(data.area);
 
-                $("#background").html("<b>" + data.background + "</b>");
+                var background = data.background.replace(/\n/g,"<br/>");
+                $("#background").html("<b>" + background + "</b>");
                 $("#edit-background").val(data.background);
 
-                $("#publication").html("<b>" + data.publication + "</b>");
+                $("#publication").html("<b>" + data.publication.replace(/\n/g,"<br/>") + "</b>");
                 $("#edit-publication").val(data.publication);
 
-                $("#introduction").html("<b>" + data.introduction + "</b>");
+                $("#introduction").html("<b>" + data.introduction.replace(/\n/g,"<br/>") + "</b>");
                 $("#edit-introduction").val(data.introduction);
                 $("#photo").html("<img style=\"width: 400px\" src=\"/CSWebsite/" + data.photo + "\">")
             });
@@ -101,7 +102,7 @@
                     <div class="form-group">
                         <label for="edit-background" class="col-sm-2 control-label">Background</label>
                         <div class="col-sm-10" style="width: 81%;">
-                            <textarea class="form-control" rows="3" name="background" id="edit-background"></textarea>
+                            <textarea wrap="hard" class="form-control" rows="3" name="background" id="edit-background"></textarea>
                         </div>
                     </div>
 

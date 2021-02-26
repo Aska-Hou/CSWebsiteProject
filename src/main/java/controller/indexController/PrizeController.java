@@ -30,4 +30,11 @@ public class PrizeController {
     public Page showPageList() {
         return prizeService.showPageList();
     }
+
+    //    Index页面展示最近三条prize
+    @RequestMapping(value = "/showIndexPrize")
+    @ResponseBody
+    public List<Prize> showIndexPrize() {
+        return prizeService.showIndexPrize();
+    }
 }

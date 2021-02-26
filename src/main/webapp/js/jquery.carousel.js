@@ -160,7 +160,7 @@ if (typeof Object.create !== 'function') {
 
 $(document).ready(function() {
 			$('body').removeClass('no-js');
-		  
+
 		    $('#my-carousel-2').carousel({
 		    	itemsPerPage: 4,
 		    	itemsPerTransition: 2,

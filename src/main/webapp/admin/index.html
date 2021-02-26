@@ -19,13 +19,21 @@
             margin-top: 15px;
         }
     </style>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script>
+        $(function () {
+            $.post("getAdminInfo", {}, function (data) {
+                $("#name").append(data.name);
+            });
+        })
+    </script>
 </head>
 <body>
 <div class="out">
     <div class="adminLogoImg">
         <img src="../images/logo.png" class="adminLogoImg" style="width: 50%">
     </div>
-    <div class="title">Hello Mike, <br/> <br/>Welcome Back to Admin Account.</div>
+    <div class="title">Hello <span id="name"></span>, <br/> <br/>Welcome Back to Admin Account.</div>
 </div>
 </body>
 </html>

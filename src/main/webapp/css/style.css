@@ -110,10 +110,10 @@ p {
 
 /** The Magnificent Clearfix:Updated to prevent margin-collapsing on child elements.  mp/bestclearfix **/
 .clearfix:before, .clearfix:after {
-    content: "\0020";
-    display: block;
-    height: 0;
-    overflow: hidden
+    /*content: "\0020";*/
+    /*display: block;*/
+    /*height: 0;*/
+    /*overflow: hidden*/
 }
 
 .clearfix:after {
@@ -128,7 +128,7 @@ p {
 /*------------------------- SLIDER -------------------------*/
 #slider {
     height: 552px;
-    width: auto;
+    width: 100%;
     margin-bottom: 25px;
     overflow: hidden
 }
@@ -348,11 +348,24 @@ p {
 
 /*Logo Image Width and Length*/
 #logoImg{
-    height: 72px;
-    margin-left: 10px;
+    height: 77px;
+    margin-left: 0px;
+    /*width: 350px;*/
 }
 
-#cslogo{
+@media screen and (max-width: 1500px) {
+    #logoImg {
+        display: none;
+    }
+    #cslogo {
+        width: 400px;
+        height: 62px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
+
+#cslogo {
     height: 62px;
     margin-left: 10px;
 }
@@ -828,11 +841,11 @@ a#logo {
 
 /** WEB DESIGN **/
 .webdesign {
-    width: 30%;
+    width: 28%;
     float: left;
     padding: 0px;
     margin-right: 15px;
-    margin-left: 30px;
+    margin-left: 35px;
 }
 .webdesign p{
     font-size: 16px;
@@ -1025,7 +1038,7 @@ a.view-blog:hover {
 
 .footer-details {
     width: 21%;
-    margin-right: 30px;
+    margin-right: 10px;
     float: left;
     height: 190px;
     margin-left: 30px;
@@ -2450,10 +2463,11 @@ blockquote {
 }
 
 .profImg {
-    margin-left: 300px;
+    margin-left: 10%;
     margin-right: 200px;
     float: left;
     width: 300px;
+    max-height: 80%;
 }
 
 .profName{
@@ -2468,6 +2482,10 @@ blockquote {
     /*width: 300px;*/
 }
 
+.profBlock .text1{
+    width: 100%;
+}
+
 .profBlock .profDescription {
     font-size: 15px;
     margin-right: 50px;
@@ -2476,7 +2494,10 @@ blockquote {
 }
 
 .photo1 {
-    width: 300px;
+    max-width: 400px;
+    max-height: 350px;
+    min-width: 150px;
+    min-height: 200px;
 }
 
 /*Professor Details*/
@@ -2494,7 +2515,8 @@ blockquote {
 }
 
 .profDetail .detailImgBlock{
-    margin-right: 150px;
+    margin-right: 50px;
+    margin-left: 15px;
     float: right;
 }
 
@@ -2577,7 +2599,7 @@ blockquote {
 }
 
 .indexImg{
-    width: 1560px;
+    width: 100%;
 }
 .aboutImg{
     width: 150px;

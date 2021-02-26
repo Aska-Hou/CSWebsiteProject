@@ -49,8 +49,64 @@
 		return null;
 	};
 
+	function logOut() {
+		$.post("logOut", {}, function (data) {
+			if (data.logOutResult == "true"){
+				alert("Log Out Successfully.");
+				window.location.href = "adminLogin.html";
+			}
+		})
+	}
 
+	$(function () {
+		$.post("getAdminInfo", {}, function (data) {
+			var manager_id = data.manager_id;
+			var name = data.name;
+			$("#manager_id").append(manager_id);
+			$("#name").append(name);
+			$("#name1").append(name);
+		});
+	});
 
+	function changePassword() {
+		var password = $("#oldPwd").val();
+		var newPassword = $("#newPwd").val();
+		var confirmPassword = $("#confirmPwd").val();
+		if (newPassword != confirmPassword){
+			alert("New Password and Confirm Password is different. Please type again.")
+		}
+		else {
+			$.post("changePassword", {password: password, newPassword: newPassword}, function (data) {
+				if (data.logOutResult == "true"){
+					alert("Change Password Successfully.");
+					confirm("Your account status has expired. Please Log In again.");
+					window.location.href = "adminLogin.html";
+				}
+				else{
+					alert("Change Password Unsuccessfully. Please check your old and new Password.");
+				}
+			})
+		}
+	}
+
+	function addNewAccount() {
+		var manager_id = $("#new_manager_id").val();
+		var password = $("#new_password").val();
+		var confirm_password = $("#new_confirm_password").val();
+		var name = $("#new_name").val();
+		if (password == confirm_password){
+			$.post("addNewAccount", {manager_id: manager_id, password: password, name: name}, function (data) {
+				if (data.addResult == "idInvalid")
+					alert("This ID has been used. Please change the manager id. ");
+				if (data.addResult == "true"){
+					confirm("New Manager Account have been added successfully. ");
+				}
+				if (data.addResult == "false"){
+					alert("Some errors happen. Please try again. ");
+				}
+			})
+		}
+	}
 </script>
 	<style>
 		.leftLink {
@@ -67,28 +123,73 @@
 </head>
 <body>
 
+	<!-- 添加新管理员的模态窗口 -->
+	<div class="modal fade" id="addNewAccount" role="dialog">
+	<div class="modal-dialog" role="document" style="width: 70%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">x</span>
+				</button>
+				<h4 class="modal-title">Add New Manager Account</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="oldPwd" class="col-sm-2 control-label">New Manager ID:</label>
+						<div class="col-sm-10" style="width: 300px;">
+							<input type="text" class="form-control" id="new_manager_id" style="width: 200%;">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="new_name" class="col-sm-2 control-label">Manager Name</label>
+						<div class="col-sm-10" style="width: 300px;">
+							<input type="text" class="form-control" id="new_name" style="width: 200%;">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="newPwd" class="col-sm-2 control-label">New Password</label>
+						<div class="col-sm-10" style="width: 300px;">
+							<input type="password" class="form-control" id="new_password" style="width: 200%;">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="confirmPwd" class="col-sm-2 control-label">Confirm Password</label>
+						<div class="col-sm-10" style="width: 300px;">
+							<input type="password" class="form-control" id="new_confirm_password" style="width: 200%;">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addNewAccount()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 	<!-- 我的资料 -->
 	<div class="modal fade" id="myInformation" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 30%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">x</span>
 					</button>
-					<h4 class="modal-title">我的资料</h4>
+					<h4 class="modal-title">Personal Information</h4>
 				</div>
 				<div class="modal-body">
 					<div style="position: relative; left: 40px;">
-						姓名：<b>张三</b><br><br>
-						登录帐号：<b>zhangsan</b><br><br>
-						组织机构：<b>1005，市场部，二级部门</b><br><br>
-						邮箱：<b>zhangsan@bjpowernode.com</b><br><br>
-						失效时间：<b>2017-02-14 10:10:10</b><br><br>
-						允许访问IP：<b>127.0.0.1,192.168.100.2</b>
+						Manager ID:<b id="manager_id"> </b><br><br>
+						Name:<b id="name"> </b><br><br>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -100,37 +201,37 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">x</span>
 					</button>
-					<h4 class="modal-title">修改密码</h4>
+					<h4 class="modal-title">Change Password</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
 						<div class="form-group">
-							<label for="oldPwd" class="col-sm-2 control-label">原密码</label>
+							<label for="oldPwd" class="col-sm-2 control-label">Original Password</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="oldPwd" style="width: 200%;">
+								<input type="password" class="form-control" id="oldPwd" style="width: 200%;">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="newPwd" class="col-sm-2 control-label">新密码</label>
+							<label for="newPwd" class="col-sm-2 control-label">New Password</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="newPwd" style="width: 200%;">
+								<input type="password" class="form-control" id="newPwd" style="width: 200%;">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="confirmPwd" class="col-sm-2 control-label">确认密码</label>
+							<label for="confirmPwd" class="col-sm-2 control-label">Confirm Password</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="confirmPwd" style="width: 200%;">
+								<input type="password" class="form-control" id="confirmPwd" style="width: 200%;">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../login.html';">更新</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="changePassword()">Save</button>
 				</div>
 			</div>
 		</div>
@@ -142,16 +243,16 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">x</span>
 					</button>
-					<h4 class="modal-title">离开</h4>
+					<h4 class="modal-title">Log Out</h4>
 				</div>
 				<div class="modal-body">
-					<p>您确定要退出系统吗？</p>
+					<p>Do you want to log out the administration account? </p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../login.html';">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="logOut()">Log Out</button>
 				</div>
 			</div>
 		</div>
@@ -160,17 +261,17 @@
 	<!-- 顶部 -->
 	<div id="top" style="height: 70px; background-color: #3C3C3C; width: 100%;">
 		<div style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">WKU -- CS Department&nbsp;Admin</div>
-		<div style="position: absolute; top: 15px; right: 15px;">
+		<div style="position: absolute; top: 15px; right: 100px;">
 			<ul>
 				<li class="dropdown user-dropdown">
 					<a href="javascript:void(0)" style="text-decoration: none; color: white;" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span> zhangsan <span class="caret"></span>
+						<span class="glyphicon glyphicon-user"></span> <span id="name1"> </span> <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="../settings/index.html"><span class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> 我的资料</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
-						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#addNewAccount"><span class="glyphicon glyphicon-wrench"></span> Add New Account</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> Personal Information</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> Change Password</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span>  Log Out</a></li>
 					</ul>
 				</li>
 			</ul>

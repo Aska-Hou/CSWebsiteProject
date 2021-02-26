@@ -47,6 +47,68 @@
             background: #7f8186;
         }
     </style>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var hint = getQueryString("hintMessage");
+            if (hint == "true"){
+                alert("Please first log in.");
+                window.location.href = "adminLogin.html";
+            }
+
+            var logInMessage = getQueryString("logInMessage");
+            if (logInMessage == "true"){
+                alert("Log In Successfully");
+                window.location.href = "adminIndex.html";
+            }
+            else if(logInMessage == "false"){
+                alert("Manager_id or Password is incorrect. Please try again.");
+                window.location.reload();
+            }
+
+            var checkCodeMessage = getQueryString("checkCodeMessage");
+            if (checkCodeMessage == "false"){
+                alert("CheckCode is not correct. Please try again.");
+                window.location.reload();
+            }
+        });
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        function changeCheckCode(img) {
+            img.src="checkCode?"+new Date().getTime();
+        }
+
+        function logIn() {
+            var manager_id = $("#manager_id").val();
+            var password = $("#password").val();
+            var checkCode = $("#checkCode").val();
+            if (checkCode == null || checkCode == ""){
+                alert("CheckCode is not correct. Please try again.");
+                window.location.reload();
+            }
+            else if(manager_id == null || manager_id.length == 0 || password == null || password.length == 0){
+                alert("Manager_id or Password is not correct. Please try again.");
+                window.location.reload();
+            }
+            $.post("logIn", {manager_id: manager_id, password: password, checkCode: checkCode}, function (data) {
+                if (data.result == "true"){
+                    alert("Log In Successfully");
+                    window.location.href = "adminIndex.html";
+                }
+                else {
+                    alert("Log In Unsuccessfully; Please check your above information and try again");
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
 
 </head>
 
@@ -57,19 +119,20 @@
     <table>
         <tr>
             <td>Admin ID: </td>
-            <td><input type="text" class="text"></td>
+            <td><input type="text" name="manager_id" id="manager_id" class="text"></td>
         </tr>
         <tr>
             <td>Password: </td>
-            <td><input type="password" class="text"></td>
+            <td><input type="password" name="password" id="password" class="text"></td>
         </tr>
         <tr>
             <td>CheckCode: </td>
-            <td><input type="text" class="checktext" name="textCode" id="textCode"><img src="TestCode" id="codeImg"></td>
+            <td><div><input type="text" class="checktext" name="checkCode" id="checkCode">
+                <img style="height: 32px; margin-left: 10px;" src="checkCode" id="codeImgo" onclick="changeCheckCode(this)"></div></td>
         </tr>
         <tr>
             <td></td>
-            <td><input value="Log In"type="submit" class="logIn"></td>
+            <td><input value="Log In"type="submit" onclick="logIn()" class="logIn"></td>
         </tr>
     </table>
 </div>

@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Page;
+import domain.Prize;
 import domain.Publication;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,5 +33,7 @@ public interface PublicationDao {
     //    根据publication id更新信息
     public Integer updatePublicationByID(Publication publication);
 
+    //     查找最近三条publication
+    public List<Prize> selectRecentThreePublication();
 
 }

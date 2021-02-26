@@ -139,11 +139,11 @@
             <ul id="menu-primary-menu" class="sf-menu">
                 <li><a href="index.jsp"><span>Home</span></a></li>
 
-                <li><a href="#"><span>News</span></a></li>
+                <li><a href="news_list.jsp"><span>News</span></a></li>
 
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
-                        <li><a href="index_dark.html"><span>About Us</span></a></li>
+                        <li><a href="about.jsp"><span>About Us</span></a></li>
                         <li><a href="full-width.html"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
@@ -156,9 +156,9 @@
                     </ul>
                 </li>
 
-                <li><a href="#"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
 
-                <li><a href="#"><span>My CS</span></a></li>
+                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>

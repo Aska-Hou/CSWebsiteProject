@@ -44,5 +44,7 @@ public interface PrizeService {
     //    更新 Prize 信息
     public boolean updatePrize(MultipartFile img, Prize prize);
 
+    //    展示index prize信息
+    public List<Prize> showIndexPrize();
 
 }

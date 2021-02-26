@@ -2,6 +2,7 @@ package service;
 
 import domain.News;
 import domain.Page;
+import domain.Prize;
 import domain.Publication;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,6 @@ public interface PublicationService {
     //    Add 功能
     public Publication addNewPublication(Publication publication);
 
-
     //    查询publication详细信息
     public Publication showPublicationDetail(Publication publication);
 
@@ -40,5 +40,6 @@ public interface PublicationService {
     //    更新 Publication 信息
     public boolean updatePublication(Publication publication);
 
-
+    //    展示index publication信息
+    public List<Prize> showIndexPublication();
 }

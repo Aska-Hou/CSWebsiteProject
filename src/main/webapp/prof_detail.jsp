@@ -45,14 +45,13 @@
                         "    </div>\n" +
                         "    <br/>\n" +
                         "    <div class=\"detailCourse\">Academic Background:\n" +
-                        "        <div class=\"course\">"+ data.background +"</div>\n" +
+                        "        <div class=\"course\">"+ data.background.replace(/\n/g,"<br/>") +"</div>\n" +
                         "    </div>\n" +
                         "    <br/>\n" +
                         "    <div class=\"detailCourse\">Paper Publication:\n" +
-                        "        <div class=\"course\">"+ data.publication +"<a href=\"#\">Title 1</a> </div>\n" +
+                        "        <div class=\"course\">"+ data.publication.replace(/\n/g,"<br/>") +"</div>\n" +
                         "    </div>");
                 });
-
             });
 
         function getQueryString(name) {
@@ -69,6 +68,7 @@
 
 <body>
 
+
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
@@ -78,13 +78,13 @@
         <!-- Top Menu Start-->
         <div id="primary-nav">
             <ul id="menu-primary-menu" class="sf-menu">
-                <li><a href="#"><span>Home</span></a></li>
+                <li><a href="index.jsp"><span>Home</span></a></li>
 
-                <li><a href="#"><span>News</span></a></li>
+                <li><a href="news_list.jsp"><span>News</span></a></li>
 
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
-                        <li><a href="index_dark.html"><span>About Us</span></a></li>
+                        <li><a href="about.jsp"><span>About Us</span></a></li>
                         <li><a href="full-width.html"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
@@ -97,22 +97,18 @@
                     </ul>
                 </li>
 
-                <li><a href="#"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
 
-                <li><a href="#"><span>My CS</span></a></li>
+                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
     </div>
 </div>
-<br/>
-<h3 class="shortcode">Faculty Details:</h3>
 
 <div class="profDetail" id="profDetail">
 
 </div>
-
-<h3 class="shortcode">.</h3>
 
 <!-- Footer Part Start-->
 <div id="footer">

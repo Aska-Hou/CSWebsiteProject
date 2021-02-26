@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ManagerDao">
+
+    <select id="selectManagerByIDAndPW" resultType="domain.Manager" parameterType="domain.Manager">
+        select * from manager where manager_id = #{manager_id} and password = #{password}
+    </select>
+
+    <update id="updatePasswordByID" parameterType="domain.Manager">
+        update manager set password = #{password} where manager_id = #{manager_id}
+    </update>
+
+    <insert id="insertNewManager" parameterType="domain.Manager">
+        insert into manager values (#{manager_id}, #{password}, #{name})
+    </insert>
+
+    <select id="selectManagerByID" resultType="domain.Manager" parameterType="domain.Manager">
+        select * from manager where manager_id = #{manager_id}
+    </select>
+
+</mapper>

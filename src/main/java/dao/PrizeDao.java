@@ -36,5 +36,8 @@ public interface PrizeDao {
     //    根据prize id更新信息（保存图片）
     public Integer updateAllPrizeByID(Prize prize);
 
+    //     查找最近三条prize
+    public List<Prize> selectRecentThreePrize();
+
 
 }

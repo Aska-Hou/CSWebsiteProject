@@ -11,10 +11,54 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>WKU CS Department</title>
+
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <!--For images carousel-->
     <script src="https://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+    <%--    News 轮播加载--%>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "news/showRecentNews",
+                async: false,
+                method: "post",
+                success: function (data) {
+                    $("#news_list").empty();
+                    $.each(data, function (index, object) {
+                        $("#news_list").append("<li>\n" +
+                            "                    <a style='font-size: 12px;width: 320px; height: 263px' href=\"news_detail.jsp?news_id=" + object.news_id + "\">\n" +
+                            "                        <img style=\"width: 285px;height: 173px\" border=\"0\" src=\"/CSWebsite/" + object.photo + "\" alt=\"\"/>" + object.title +
+                            "                        <span>" + new Date(object.date).format("yyyy-MM-dd") + "</span>\n" +
+                            "                    </a>\n" +
+                            "                </li>");
+                    });
+                }
+            })
+        });
+
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
+            };
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                }
+            }
+            return fmt;
+        }
+
+    </script>
     <script type="text/javascript" src="js/jquery.carousel.js"></script>
     <!--For Slider-->
     <script type='text/javascript' src='js/superfish3d36.js?ver=3.3.1'></script>
@@ -31,6 +75,36 @@
     <!--For FlexSlider -->
     <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
     <script src="js/jquery.flexslider-min.js"></script>
+    <script>
+        $(function () {
+
+            $.post("prize/showIndexPrize", {}, function (data) {
+                $("#prize_list").empty();
+                $.each(data, function (index, object) {
+                    $("#prize_list").append("<div class=\"blogPost\">\n" +
+                        "                <div class=\"thumb-img\">\n" +
+                        "                    <a href=\"news_detail.jsp?news_id=" + object.news_id + "\"><img style='width: 59px; height: 59px' src=\"/CSWebsite/" + object.photo + "\" alt=\"\" border=\"0\"/></a>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"post-cont\">\n" +
+                        "                    <p>" + object.name + "</p>\n" +
+                        "                    <span class=\"date\">" + new Date(object.date).format("yyyy-MM-dd") + "</span>\n" +
+                        "                </div>\n" +
+                        "            </div>");
+                })
+            });
+
+            $.post("publication/showIndexPublication", {}, function (data) {
+                $("#publication_list").empty();
+                $.each(data, function (index, object) {
+                    $("#publication_list").append("<div class=\"tweet-box\">\n" +
+                        "                <p><a href=\""+ object.website +"\">"+ object.title +"</a> <span class=\"time\">"+ new Date(object.date).format("yyyy-MM-dd") + "  " + object.area + "</span></p>\n" +
+                        "            </div>");
+                })
+            })
+
+        })
+    </script>
+
 </head>
 
 
@@ -65,9 +139,9 @@
                     </ul>
                 </li>
 
-                <li><a href="#"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
 
-                <li><a href="#"><span>My CS</span></a></li>
+                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -80,19 +154,19 @@
 
                 <!-- Slides-->
                 <li style="background:#224e9c;">
-                    <div>
+                    <div style="width: 100%">
                         <img class="indexImg" src="images/rollImage/image3.jpg"/>
                     </div>
                 </li>
 
                 <li style="background:#224e9c;">
-                    <div>
+                    <div style="width: 100%">
                         <img class="indexImg" src="images/rollImage/image2.png"/>
                     </div>
                 </li>
 
                 <li style="background:#224e9c;">
-                    <div>
+                    <div style="width: 100%">
                         <img class="indexImg" src="images/rollImage/image1.jpg"/>
                     </div>
                 </li>
@@ -109,10 +183,12 @@
         <ul class="gallery clearfix" style="display:none">
         </ul>
         <div id="my-carousel-2" class="carousel module gallery clearfix">
-            <ul>
+            <ul id="news_list">
+                <%--                    285 * 173--%>
                 <li>
                     <a href="#">
-                        <img src="images/img1.jpg" alt="" border="0"/>
+                        <img style="width: 285px;height: 173px"
+                             src="/CSWebsite/IndexImg/c9385217-a622-4489-85ca-dd01a4192949.png" alt="" border="0"/>
                         News1
                         <span>Description 1</span>
                     </a>
@@ -150,21 +226,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="images/big-img.jpg">
-                        <img src="images/img1.jpg" alt="" border="0"/>
-                        News6
-                        <span>Description 6</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="images/big-img.jpg">
-                        <img src="images/img1.jpg" alt="" border="0"/>
-                        News7
-                        <span>Description 7</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -175,7 +236,7 @@
     <br/>
 
     <div class="webdesign">
-        <a href=""><h3>About WKU CS Department</h3></a>
+        <a href="about.jsp"><h3>About WKU CS Department</h3></a>
         <p>Fusce pharetra dolor quisa ipsume mosllis imperdiet orci ultrices. Nullam quis odio anele massa tempus
             tincidunt dolor quisa.</p>
     </div>
@@ -196,56 +257,30 @@
     <div class="divider1" style="margin-top: 70px"></div>
     <div class="Fblog">
         <h3 class="blue">Competition Prize</h3>
-        <div class="blogPost">
-            <div class="thumb-img">
-                <a href="blog_post.html"><img src="images/thumb.jpg" alt="" border="0"/></a>
+        <div id="prize_list">
+            <div class="blogPost">
+                <div class="thumb-img">
+                    <a href="blog_post.html"><img src="images/thumb.jpg" alt="" border="0"/></a>
+                </div>
+                <div class="post-cont">
+                    <p>Prize 1</p>
+                    <span class="date">Date 1</span>
+                </div>
             </div>
-            <div class="post-cont">
-                <p>Prize 1</p>
-                <span class="date">Date 1</span>
-            </div>
+
         </div>
 
-        <div class="blogPost">
-            <div class="thumb-img">
-                <a href="blog_post.html">
-                    <img src="images/thumb.jpg" alt="" border="0"/>
-                </a>
-            </div>
-            <div class="post-cont">
-                <p>Prize 2</p>
-                <span class="date">Date 2</span>
-            </div>
-        </div>
-
-        <div class="blogPost">
-            <div class="thumb-img">
-                <a href="blog_post.html">
-                    <img src="images/thumb.jpg" alt="" border="0"/>
-                </a>
-            </div>
-            <div class="post-cont">
-                <p>Prize 3</p>
-                <span class="date">Date 3</span>
-            </div>
-        </div>
-
-        <a href="blog.html" class="view-blog">View All Prize &rarr;</a></div>
-
+        <a href="prize_list.jsp" class="view-blog">View All Prize &rarr;</a></div>
 
     <div class="tweets">
         <h3>Academic Publications</h3>
-        <div class="tweet-box">
-            <p><a href="">Author 1</a> <span class="time">Time 1</span></p>
-        </div>
 
-        <div class="tweet-box">
-            <p><a href="">Author 2</a> Publication 2<span class="time">Time 2</span></p>
+        <div id="publication_list">
+            <div class="tweet-box">
+                <p><a href="">Author 1</a> <span class="time">Time 1</span></p>
+            </div>
         </div>
-        <div class="tweet-box">
-            <p><a href="">Author 3</a> Publication 3<span class="time">Time 3</span></p>
-        </div>
-        <a href="blog.html" class="view-blog">View All Publications</a></div>
+        <a href="publication_list.jsp" class="view-blog">View All Publications</a></div>
 </div>
 
 <div class="testimonial no-margin">
@@ -292,10 +327,10 @@
                 (0) 577 5587 0000
             </div>
             <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="#">wku@wku.edu.cn</a></div>
+                    href="#">wku@wku.edu.cn, cst@wku.edu.cn</a></div>
         </div>
         <div class="footer-details">
-            <h4>Photo Stream</h4>
+            <h4>Learn More</h4>
             <div class="Stream">
                 <a href="#"><img src="images/photo1.jpg" alt=""/></a>
                 <a href="#"><img src="images/photo1.jpg" alt=""/></a>

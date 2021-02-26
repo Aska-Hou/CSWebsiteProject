@@ -46,4 +46,8 @@
         update prize set name = #{name}, winner = #{winner}, date = #{date}, description = #{description},
             news_id = #{news_id}, photo = #{photo} where prize_id = #{prize_id}
     </update>
+
+    <select id="selectRecentThreePrize" resultType="domain.Prize">
+        select * from prize order by date desc limit 0, 3
+    </select>
 </mapper>

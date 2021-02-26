@@ -43,4 +43,8 @@
             abstract = #{abstractContent}, website = #{website} where publication_id = #{publication_id}
     </update>
 
+    <select id="selectRecentThreePublication" resultType="domain.Publication">
+        select * from publication order by date desc limit 0, 3
+    </select>
+
 </mapper>

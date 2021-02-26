@@ -28,4 +28,5 @@ public interface TutorService {
 
     //    删除单个tutor
     public boolean deleteOneTutor(Tutor tutor);
+
 }

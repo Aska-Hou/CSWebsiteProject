@@ -1,6 +1,7 @@
 package controller.indexController;
 
 import domain.Page;
+import domain.Prize;
 import domain.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,5 +30,12 @@ public class PublicationController {
     @ResponseBody
     public Page showPageList() {
         return publicationService.showPageList();
+    }
+
+    //    Index页面展示最近三条publication
+    @RequestMapping(value = "/showIndexPublication")
+    @ResponseBody
+    public List<Prize> showIndexPublication() {
+        return publicationService.showIndexPublication();
     }
 }

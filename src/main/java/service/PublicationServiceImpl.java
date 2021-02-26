@@ -3,6 +3,7 @@ package service;
 import dao.NewsDao;
 import dao.PublicationDao;
 import domain.Page;
+import domain.Prize;
 import domain.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -141,5 +142,10 @@ public class PublicationServiceImpl implements PublicationService {
             return true;
         } else
             return false;
+    }
+
+    @Override
+    public List<Prize> showIndexPublication() {
+        return publicationDao.selectRecentThreePublication();
     }
 }

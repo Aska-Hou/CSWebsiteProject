@@ -55,6 +55,7 @@
 
 <body>
 
+
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
@@ -83,9 +84,9 @@
                     </ul>
                 </li>
 
-                <li><a href="#"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
 
-                <li><a href="#"><span>My CS</span></a></li>
+                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
