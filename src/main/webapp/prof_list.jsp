@@ -57,7 +57,8 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -91,7 +92,7 @@
     </div>
 </div>
 
-<div style="font-size: 35px; margin-left: 45%" class="title">Professors Team</div>
+<div style="font-size: 35px; text-align: center" class="title">Professors Team</div>
 <h3 class="shortcode">.</h3>
 
 

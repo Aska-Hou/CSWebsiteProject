@@ -33,12 +33,12 @@
                 var detail = $("#detail");
                 detail.empty();
                 detail.append("<div class=\"news_title\">"+ data.title +"</div>\n" +
-                    "    <div class=\"news_img_block\"><img src=\"/CSWebsite/"+ data.photo +"\" class=\"news_img\" alt=\"\"/></div>\n" +
+                    "    <li><div class=\"news_img_block\"><img src=\"/CSWebsite/"+ data.photo +"\" class=\"news_img\" alt=\"\"/></div>\n" +
                     "    <div class=\"news_content\">\n" +
                     "        <img src=\"images/quote.png\" style=\"width: 40px\" alt=\"\"/>\n" +
-                    "        <span class=\"news_abstract\">Abstract:"+ data.abstractContent +"</span>\n" +
+                    "        <span class=\"news_abstract\">Abstract:"+ data.abstractContent +"</span></div></li>\n" +
                     "\n" +
-                    "        <p style='margin-top: 200px'><br/>"+ data.content +"</p>\n" +
+                    "        <div style='margin-top: 450px; font-size: 16px; line-height: 20px' <p style='margin-top: 200px'><br/>"+ data.content +"</p>\n" +
                     "    </div>")
             })
         });
@@ -59,7 +59,8 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -97,8 +98,6 @@
 <div class="newsMain" id="detail">
 
 </div>
-
-<h3 class="shortcode">.</h3>
 
 <!-- Footer Part Start-->
 <div id="footer">

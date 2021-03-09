@@ -56,18 +56,39 @@
             }
         }
 
+        Date.prototype.format = function(fmt) {
+            var o = {
+                "M+" : this.getMonth()+1,                 //月份
+                "d+" : this.getDate(),                    //日
+                "h+" : this.getHours(),                   //小时
+                "m+" : this.getMinutes(),                 //分
+                "s+" : this.getSeconds(),                 //秒
+                "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                "S"  : this.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt)) {
+                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            }
+            for(var k in o) {
+                if(new RegExp("("+ k +")").test(fmt)){
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                }
+            }
+            return fmt;
+        }
+
         function showData(currentPage) {
             var list = $("#prize_list");
             list.empty();
             $.post("prize/showPrizeList", {currentPage: currentPage}, function (data) {
                 $.each(data, function (index, object) {
-                    list.append("<ul class=\"profBlock\">\n" +
+                    list.append("<ul class=\"prizeBlock\">\n" +
                         "                <li class=\"prizeLine\">\n" +
                         "                    <div class=\"profImg\"><img src=\"/CSWebsite/"+ object.photo +"\" class=\"photo1\" alt=\"\"></div>\n" +
                         "                    <div class=\"text1\">\n" +
-                        "                        <p class=\"profName\">"+ object.name +"</p>\n" +
+                        "                        <p class=\"prizeName\">"+ object.name +"</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">Time: "+ object.date +"</p>\n" +
+                        "                        <p class=\"profDescription\">Time: "+ new Date(object.date).format('yyyy-MM-dd') +"</p>\n" +
                         "                        <br/>\n" +
                         "                        <p class=\"profDescription\">Winner: "+ object.winner +"</p>\n" +
                         "                        <br/>\n" +
@@ -135,7 +156,8 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->

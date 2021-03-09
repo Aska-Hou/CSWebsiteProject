@@ -55,7 +55,8 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -97,6 +98,7 @@
 
         <ul class="portfolio_list spacermin10">
             <li class="active"><span>&rarr;</span> <a href="#" class="all">All</a></li>
+            <li><span>&rarr;</span> <a href="#" class="Class2021">Class 2021</a></li>
             <li><span>&rarr;</span> <a href="#" class="Class2020">Class 2020</a></li>
             <li><span>&rarr;</span> <a href="#" class="Class2019">Class 2019</a></li>
             <li><span>&rarr;</span> <a href="#" class="Class2018">Class 2018</a></li>
@@ -109,7 +111,7 @@
     </div>
     <!-- Right Section Start-->
     <div class="portright">
-        <h3>Peer Tutor & Excellent Students & Alumni</h3>
+        <h3 style="margin-left: 0px">Peer Tutor & Excellent Students & Alumni</h3>
         <ul class="portfolio_contain gallery" id="tutor_list">
 <%--            <li data-id="id-1" data-type="Class 2016" class="main">--%>
 <%--                <a href="images/big-img.jpg" rel="prettyPhoto[gallery2]">--%>

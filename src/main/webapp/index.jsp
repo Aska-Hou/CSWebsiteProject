@@ -113,7 +113,10 @@
 <!-- Header Start-->
 <div class="header-wrapper-light">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">
+            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/>
+        </a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -243,8 +246,7 @@
 
     <div class="webdesign">
         <a href=""><h3>Education Program</h3></a>
-        <p>Fusce ac dolor in erat elementum auctor ante. Suspendisse nibh leo, hendrerit quis sed dictum non, dictum ut
-            odio. Donec pulvinar, lectus quis tempus tempus. hendrerit quis.</p>
+        <p>The Department of Computer Science at Wenzhou-Kean University offers an undergraduate major leading to a B.S. degree.</p>
     </div>
 
     <div class="webdesign">
@@ -284,11 +286,10 @@
 </div>
 
 <div class="testimonial no-margin">
-    <h3>Testimonials</h3>
+    <h3>Department Chairman Wish: </h3>
     <div class="client-box">
         <div class="client-testimonial">
-            <p>Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                Introduction to CS Department Introduction to CS Department.</p>
+            <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is to get the knowledge instead of High GPA.</p>
         </div>
         <div class="client-bg"><span class="name">Dr Tiffany Tang</span>, Associate Professor of WKU</div>
     </div>
@@ -327,24 +328,24 @@
                 (0) 577 5587 0000
             </div>
             <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="#">wku@wku.edu.cn, cst@wku.edu.cn</a></div>
+                    href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn"> cst@wku.edu.cn</a> </div>
         </div>
         <div class="footer-details">
-            <h4>Learn More</h4>
+            <h4>Wechat Accounts</h4>
             <div class="Stream">
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
             </div>
         </div>
         <div class="footer-details no-margin">
-            <h4>Other Content</h4>
-            <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+            <h4>Learn More about WKU</h4>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean University, welcome to visit our official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska</a>, instructed by <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All rights reserved.
             </div>
         </div>
     </div>

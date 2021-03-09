@@ -28,7 +28,9 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn"><img src="images/logo2.jpg" id="logoImg" alt=""/></a>
+        <a href="http://www.wku.edu.cn">
+            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
+            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -73,56 +75,58 @@
         <h3>About WKU Computer Science Department</h3>
         <div class="detail">
             <div class="whowe"><img src="images/cs.jpg" style="width: 450px" alt=""/></div>
-            <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduction
-                to CS Department Introduction to CS Department Introduction to CS Departmentv Introduction to CS
-                Departmenttion to CS Department Introduction to CS Department Introduction to CS Department</p>
-            <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduction
-                to CS Department Introduction to CS Department Introduction to CS Departmentv Introduction to CS
-                Departmenttion to CS Department Introduction to CS Department Introduction to CS Department</p>
-            <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduction
-                to CS Department Introduction to CS Department Introduction to CS Departmentv Introduction to CS
-                Departmenttion to CS Department Introduction to CS Department Introduction to CS Department</p>
-            <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduction
-                to CS Department Introduction to CS Department Introduction to CS Departmentv Introduction to CS
-                Departmenttion to CS Department Introduction to CS Department Introduction to CS Department</p>
+            <div>
+                <p> The Department of Computer Science at Wenzhou-Kean University offers an undergraduate major leading
+                    to a
+                    B.S. degree. </p>
+                <br>
+
+                <p>It was established in 2012 and has produced more than 100 graduates since 2016. Our curriculum
+                    follows
+                    the one used at Kean University, accredited by ABET. Currently we have six full-time faculty to
+                    teach
+                    and supervise approximately 180 students. Since the majority of our students will pursue graduate
+                    studies following graduation, undergraduate research has become the hallmark of our department.
+
+                </p>
+                <br>
+                <p> Some
+                    of our alumni are pursuing graduate degrees at University of Pennsylvania, Columbia University,
+                    Northwestern University, University of Chicago, University of Michigan-Ann Arbor, University of
+                    Southern
+                    California, University of Maryland-College Park, University of Wisconsin-Madison, UCL (UK),
+                    University
+                    of Edinburgh (UK), University of Toronto (Canada), University of Melbourne (Australia), etc.</p>
+            </div>
         </div>
         <div class="team">
 
             <h3>Department Scenery</h3>
             <div class="member">
-                <div class="team-img"><img src="images/cs.jpg" class="aboutImg" alt=""/></div>
-                <strong>Photo 2 </strong> <span>text</span>
-                <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                    Introduction to CS Department Introduction to CS Department </p>
+                <div class="team-img"><a href="images/about1.png"> <img src="images/about1.png" class="aboutImg" alt=""/></a></div>
+                <strong>WKU Apple Lab </strong> <span>Apple Computer Lab</span>
+                <p> WKU Apple Laboratory is in General Education Hall, which provides the excellent devices for CS students to do any kind of experiment </p>
             </div>
             <div class="member">
-                <div class="team-img"><img src="images/cs.jpg" class="aboutImg" alt=""/></div>
-                <strong>Photo 1 </strong> <span>text</span>
-                <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                    Introduction to CS Department Introduction to CS Department </p>
+                <div class="team-img"><a href="images/about2.jpg"> <img src="images/about2.jpg" class="aboutImg" alt=""/></a></div>
+                <strong>General Education Hall </strong> <span>GEH CS Classroom</span>
+                <p> Currently, WKU Computer Science Department's location is in GEH including the CS lecture classroom and CS Laboratory </p>
             </div>
             <div class="member">
-                <div class="team-img"><img src="images/cs.jpg" class="aboutImg" alt=""/></div>
-                <strong>Photo 3 </strong> <span>text</span>
-                <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                    Introduction to CS Department Introduction to CS Department.</p>
+                <div class="team-img"><a href="prof_list.jsp"><img src="images/about3.jpg" class="aboutImg" alt=""/></a></div>
+                <strong>CS Professors </strong> <span>Tiffany, Pinatta, Sujatha</span>
+                <p> Rich Faculty resources bring the strong Research Energy to WKU Computer Science Department</p>
             </div>
             <div class="member">
-                <div class="team-img"><img src="images/cs.jpg" class="aboutImg" alt=""/></div>
-                <strong>Photo 4 </strong> <span>text</span>
-                <p> Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                    Introduction to CS Department Introduction to CS Department.</p>
+                <div class="team-img"><a href="images/about4.png"><img src="images/about4.png" class="aboutImg" alt=""/></a></div>
+                <strong>UAV Test</strong> <span>Unmanned Aerial Vehicle</span>
+                <p> Many clubs related to the Computer Science Department including the scientific and technical Club and mathematics modeling club is doing experiment</p>
             </div>
         </div>
 
         <div class="client-box1">
             <div class="client-testimonial1">
-                <p>  Introduction to CS Department Introduction to CS Department Introduction to CS Department Introduc
-                    Introduction to CS Department Introduction to CS Department .</p>
+                <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is to get the knowledge instead of High GPA.</p>
             </div>
             <div class="client-bg1">Dr Tiffany Tang</div>
         </div>
@@ -132,7 +136,8 @@
     <div class="rightsec">
         <h3>Contact Details</h3>
         <div class="contact">
-            <div class="cont-detail"><img src="images/address1.png" alt=""/> <strong>Address:</strong> 88 Daxue Rd, Ouhai, Wenzhou, Zhejiang Province, China.
+            <div class="cont-detail"><img src="images/address1.png" alt=""/> <strong>Address:</strong> 88 Daxue Rd,
+                Ouhai, Wenzhou, Zhejiang Province, China.
             </div>
             <div class="cont-detail"><img src="images/phone1.png" alt="" width="14" height="18"/>
                 <strong>Phone:</strong> +86 (0) 577 5587 0000
