@@ -31,7 +31,7 @@ public class IndexServiceImpl implements IndexService {
     public boolean addNewIndex(MultipartFile img, Index index) throws IOException {
         String uuid = UUID.randomUUID().toString();
         index.setImg("IndexImg/" + uuid + ".png");
-        img.transferTo(new File("D:\\WEB-IMG\\CSWebsite\\" + index.getImg()));
+        img.transferTo(new File("/CSWebsite/" + index.getImg()));
         Integer result = indexDao.insertNewIndex(index);
         if (result == 1){
             return true;
@@ -46,7 +46,7 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public boolean deleteIndex(Index index) {
-        new File("D:\\WEB-IMG\\CSWebsite\\" + indexDao.selectIndexByID(index).getImg()).delete();
+        new File("/CSWebsite/" + indexDao.selectIndexByID(index).getImg()).delete();
         Integer result = indexDao.deleteIndex(index);
         if (result == 1){
             return true;

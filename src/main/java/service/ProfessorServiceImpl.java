@@ -48,7 +48,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public Professor addNewProfessor(MultipartFile img, Professor professor) {
         //  保存照片
-        String basePath = "D:\\WEB-IMG\\CSWebsite\\";
+        String basePath = "/CSWebsite/";
         String uuid = UUID.randomUUID().toString();
         professor.setPhoto("ProfImg/" + uuid + ".png");
         try {
@@ -73,7 +73,7 @@ public class ProfessorServiceImpl implements ProfessorService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             professor = professorDao.selectProfessorByID(professor);
-            String basePath = "D:\\WEB-IMG\\CSWebsite\\";
+            String basePath = "/CSWebsite/";
             deleteProfessorPhoto(professor);
             String uuid = UUID.randomUUID().toString();
             professor.setPhoto("ProfImg/" + uuid + ".png");
@@ -140,7 +140,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     //    Method: 删除faculty照片文件
     public void deleteProfessorPhoto(Professor professor) {
-        String basePath = "D:\\WEB-IMG\\CSWebsite\\";
+        String basePath = "/CSWebsite/";
         new File(basePath + professor.getPhoto()).delete();
     }
 }
