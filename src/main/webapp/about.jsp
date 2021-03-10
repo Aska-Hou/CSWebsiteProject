@@ -120,7 +120,7 @@
             <div class="member">
                 <div class="team-img"><a href="images/about4.png"><img src="images/about4.png" class="aboutImg" alt=""/></a></div>
                 <strong>UAV Test</strong> <span>Unmanned Aerial Vehicle</span>
-                <p> Many clubs related to the Computer Science Department including the scientific and technical Club and mathematics modeling club is doing experiment</p>
+                <p> Many clubs related to the Computer Science Department including the scientific and technical Club is doing experiment</p>
             </div>
         </div>
 
@@ -146,7 +146,7 @@
                 <a href="#">wku@wku.edu.cn</a></div>
         </div>
         <h3 class="map">Google Maps</h3>
-        <div class="map"><img src="images/map.png" style="width: 400px" alt=""/></div>
+        <div class="map"><a href="images/map.png"> <img src="images/map.png" style="width: 100%" alt=""/></a></div>
 
         <h3>Keep In Touch</h3>
         <ul class="touch">

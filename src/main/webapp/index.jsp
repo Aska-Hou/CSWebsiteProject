@@ -253,7 +253,7 @@
         <h3 class="blue">Details - Education 4-year Plan</h3>
         <p>If you want to see more our education program, click the button below for downloading the CS 4-year plan.</p>
         <br/>
-        <div class="viewPro"><a href="#" class="btn">Download 4-year Plan</a></div>
+        <div class="viewPro"><a href="/www/server/tomcat/webapps/CSWebsite/Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
     </div>
 
     <div class="divider1" style="margin-top: 70px"></div>
@@ -333,19 +333,19 @@
         <div class="footer-details">
             <h4>Wechat Accounts</h4>
             <div class="Stream">
+                <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px" alt=""/></a>
                 <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
-                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
-                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px" alt=""/></a>
+                <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px" alt=""/></a>
             </div>
         </div>
         <div class="footer-details no-margin">
             <h4>Learn More about WKU</h4>
-            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean University, welcome to visit our official website</p></a>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska</a>, instructed by <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All rights reserved.
             </div>
         </div>
     </div>
