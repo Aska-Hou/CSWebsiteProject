@@ -46,8 +46,7 @@
                 var content = "";
                 if (page == 1) {
                     content += "<li class=\"disabled\">";
-                }
-                else {
+                } else {
                     content += "<li>\n";
                 }
                 content += "                        <a onclick='prevPage()' href=\"#\" aria-label=\"Previous\">\n" +
@@ -55,19 +54,17 @@
                     "                        </a>\n" +
                     "                    </li>";
 
-                for (var i = 1; i <= data.totalPage; i++){
+                for (var i = 1; i <= data.totalPage; i++) {
                     if (page == i) {
-                        content += "<li class=\"active\"><a href='#' onclick=\"jumpToPage("+ i +")\">"+ i +"</a></li>";
-                    }
-                    else {
-                        content += "<li><a href='#' onclick=\"jumpToPage("+ i +")\">"+ i +"</a></li>";
+                        content += "<li class=\"active\"><a href='#' onclick=\"jumpToPage(" + i + ")\">" + i + "</a></li>";
+                    } else {
+                        content += "<li><a href='#' onclick=\"jumpToPage(" + i + ")\">" + i + "</a></li>";
                     }
                 }
 
                 if (page == data.totalPage) {
                     content += "<li class='disabled'>";
-                }
-                else {
+                } else {
                     content += "<li>";
                 }
 
@@ -79,22 +76,22 @@
             });
         }
 
-        Date.prototype.format = function(fmt) {
+        Date.prototype.format = function (fmt) {
             var o = {
-                "M+" : this.getMonth()+1,                 //月份
-                "d+" : this.getDate(),                    //日
-                "h+" : this.getHours(),                   //小时
-                "m+" : this.getMinutes(),                 //分
-                "s+" : this.getSeconds(),                 //秒
-                "q+" : Math.floor((this.getMonth()+3)/3), //季度
-                "S"  : this.getMilliseconds()             //毫秒
+                "M+": this.getMonth() + 1,                 //月份
+                "d+": this.getDate(),                    //日
+                "h+": this.getHours(),                   //小时
+                "m+": this.getMinutes(),                 //分
+                "s+": this.getSeconds(),                 //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds()             //毫秒
             };
-            if(/(y+)/.test(fmt)) {
-                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
             }
-            for(var k in o) {
-                if(new RegExp("("+ k +")").test(fmt)){
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
                 }
             }
             return fmt;
@@ -108,15 +105,15 @@
                 $.each(data, function (index, object) {
                     list.append("<ul class=\"prizeBlock\">\n" +
                         "                <li class=\"prizeLine\">\n" +
-                        "                    <div class=\"profImg\" style='float: left'><img src=\"/CSWebsite/"+ object.photo +"\" class=\"photo1\" alt=\"\"></div>\n" +
+                        "                    <div class=\"profImg\" style='float: left'><img src=\"/CSWebsite/" + object.photo + "\" class=\"photo1\" alt=\"\"></div>\n" +
                         "                    <div class=\"text1\">\n" +
-                        "                        <p class=\"profName\">"+ object.title +"</p>\n" +
+                        "                        <p class=\"profName\">" + object.title + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">Time: "+ new Date(object.date).format('yyyy-MM-dd') +"</p>\n" +
+                        "                        <p class=\"profDescription\">Time: " + new Date(object.date).format('yyyy-MM-dd') + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">"+ object.abstractContent +"</p>\n" +
+                        "                        <p class=\"profDescription\">" + object.abstractContent + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <a class=\"profDescription\" href=\"news_detail.jsp?news_id="+ object.news_id +"\">--More Details--</a>\n" +
+                        "                        <a class=\"profDescription\" href=\"news_detail.jsp?news_id=" + object.news_id + "\">--More Details--</a>\n" +
                         "                    </div>\n" +
                         "                </li>\n" +
                         "            </ul>\n" +
@@ -153,8 +150,8 @@
 <div class="header-wrapper1">
     <div id="header">
         <a href="http://www.wku.edu.cn">
-            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
-            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
+            <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
+            <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -167,7 +164,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="full-width.html"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 
@@ -179,16 +176,15 @@
                     </ul>
                 </li>
 
-                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
     </div>
 </div>
 
-<div class="title">Department Recent News</div>
+<div class="title" style="font-size: 35px; text-align: center">Department Recent News</div>
 <h3 class="shortcode">'</h3>
 
 <div class="page_one">
@@ -246,32 +242,31 @@
         </div>
     </div>
 
-    <h3 class="shortcode">.</h3>
-
-    <!--Paging-->
-    <div class="bootstrap-iso" style="margin-left: 300px">
-        <div class="paging">
-            <nav aria-label="Page navigation">
-                <ul class="pagination pagination-lg" id="pageList">
-                    <li class="disabled">
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    <h3 class="shortcode"><!--Paging-->
+        <div class="bootstrap-iso" style="margin-left: 300px">
+            <div class="paging">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg" id="pageList">
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
+    </h3>
 
 
     <!-- Footer Part Start-->
@@ -294,28 +289,37 @@
                     <strong>Address:</strong>
                     88 Daxue Rd, Ouhai, Wenzhou, Zhejiang Province, China.
                 </div>
-                <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong> +86
+                <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong>
+                    +86
                     (0) 577 5587 0000
                 </div>
-                <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                        href="#">wku@wku.edu.cn</a></div>
+                <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong>
+                    <a
+                            href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn">
+                        cst@wku.edu.cn</a></div>
             </div>
             <div class="footer-details">
-                <h4>Photo Stream</h4>
+                <h4>Wechat Accounts</h4>
                 <div class="Stream">
-                    <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                    <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                    <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                    <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
+                    <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
+                    <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
                 </div>
             </div>
             <div class="footer-details no-margin">
-                <h4>Other Content</h4>
-                <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+                <h4>Learn More about WKU</h4>
+                <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about
+                    Wenzhou-Kean University, welcome to visit WKU official website</p></a>
             </div>
 
             <!-- Footer Info Part Start-->
             <div class="Finfo">
-                <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+                <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by
+                    <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                    rights reserved.
                 </div>
             </div>
         </div>

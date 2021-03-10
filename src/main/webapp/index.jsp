@@ -129,7 +129,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="full-width.html"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 
@@ -142,9 +142,9 @@
                     </ul>
                 </li>
 
-                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
+<%--                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>--%>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -253,7 +253,7 @@
         <h3 class="blue">Details - Education 4-year Plan</h3>
         <p>If you want to see more our education program, click the button below for downloading the CS 4-year plan.</p>
         <br/>
-        <div class="viewPro"><a href="/www/server/tomcat/webapps/CSWebsite/Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
+        <div class="viewPro"><a href="Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
     </div>
 
     <div class="divider1" style="margin-top: 70px"></div>
@@ -261,13 +261,6 @@
         <h3 class="blue">Competition Prize</h3>
         <div id="prize_list">
             <div class="blogPost">
-                <div class="thumb-img">
-                    <a href="blog_post.html"><img src="images/thumb.jpg" alt="" border="0"/></a>
-                </div>
-                <div class="post-cont">
-                    <p>Prize 1</p>
-                    <span class="date">Date 1</span>
-                </div>
             </div>
 
         </div>

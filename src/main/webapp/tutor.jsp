@@ -24,10 +24,10 @@
                 success: function (data) {
                     $("#tutor_list").empty();
                     $.each(data, function (index, object) {
-                        $("#tutor_list").append("<li data-id=\"id-1\" data-type=\""+ object.grade.replace(" ", "") +"\" class=\"main\">\n" +
+                        $("#tutor_list").append("<li data-id=\"id-1\" data-type=\"" + object.grade.replace(" ", "") + "\" class=\"main\">\n" +
                             "                <a href=\"images/big-img.jpg\">\n" +
-                            "                    <img src=\"/CSWebsite/"+ object.photo +"\" style=\"width: 210px;height: 130px\" alt=\"\"/>\n" + object.name +
-                            "  <span>"+ object.grade +"</span>                  <span>" + object.experience + "</span>\n" +
+                            "                    <img src=\"/CSWebsite/" + object.photo + "\" style=\"width: 210px;height: 130px\" alt=\"\"/>\n" + object.name +
+                            "  <span>" + object.grade + "</span>                  <span>" + object.experience + "</span>\n" +
                             "                </a>\n" +
                             "            </li>");
                     })
@@ -55,8 +55,9 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
-            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
+        <a href="http://www.wku.edu.cn">
+            <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
+            <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -69,7 +70,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="full-width.html"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 
@@ -81,9 +82,8 @@
                     </ul>
                 </li>
 
-                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -113,15 +113,6 @@
     <div class="portright">
         <h3 style="margin-left: 0px">Peer Tutor & Excellent Students & Alumni</h3>
         <ul class="portfolio_contain gallery" id="tutor_list">
-<%--            <li data-id="id-1" data-type="Class 2016" class="main">--%>
-<%--                <a href="images/big-img.jpg" rel="prettyPhoto[gallery2]">--%>
-<%--                    <img src="images/person.jpg" style="width: 210px;height: 130px" alt=""/>--%>
-<%--                    Person 1--%>
-<%--                    <span>Class 1</span>--%>
-<%--                    <span>Experience 1</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
-
         </ul>
     </div>
 </div>
@@ -152,24 +143,31 @@
             </div>
             <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong>
                 <a
-                        href="#">wku@wku.edu.cn</a></div>
+                        href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn">
+                    cst@wku.edu.cn</a></div>
         </div>
         <div class="footer-details">
-            <h4>Photo Stream</h4>
+            <h4>Wechat Accounts</h4>
             <div class="Stream">
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
             </div>
         </div>
         <div class="footer-details no-margin">
-            <h4>Other Content</h4>
-            <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+            <h4>Learn More about WKU</h4>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about
+                Wenzhou-Kean University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by
+                <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                rights reserved.
             </div>
         </div>
     </div>

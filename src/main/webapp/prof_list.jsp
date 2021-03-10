@@ -15,7 +15,7 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <!--For images carousel-->
     <script type="text/javascript" src="js/jquery.min.js"></script>
-<%--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>--%>
+    <%--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>--%>
     <!--For Portfolio-->
     <script src="js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -35,11 +35,11 @@
                 $.each(data, function (index, object) {
                     list.append("<ul class=\"profBlock\">\n" +
                         "                <li>\n" +
-                        "                    <div class=\"profImg\"><img src=\"/CSWebsite/"+ object.photo +"\" class=\"photo1\" alt=\"\"></div>\n" +
+                        "                    <div class=\"profImg\"><img src=\"/CSWebsite/" + object.photo + "\" class=\"photo1\" alt=\"\"></div>\n" +
                         "                    <div class=\"text1\">\n" +
-                        "                        <p class=\"profName\">"+ object.name +"</p>\n" +
+                        "                        <p class=\"profName\">" + object.name + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">"+ object.introduction.replace(/\n/g,"<br/>") +"</p>\n" +
+                        "                        <p class=\"profDescription\">" + object.introduction.replace(/\n/g, "<br/>") + "</p>\n" +
                         "                        <br/>\n" +
                         "                        <a class=\"profDescription\" href=\"prof_detail.jsp?prof_id=" + object.prof_id + "\">--More Details about " + object.name + "--</a>\n" +
                         "                    </div>\n" +
@@ -57,8 +57,9 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
-            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
+        <a href="http://www.wku.edu.cn">
+            <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
+            <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -71,7 +72,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="full-width.html"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 
@@ -83,9 +84,8 @@
                     </ul>
                 </li>
 
-                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <h3 class="shortcode">.</h3>
+<%--    <h3 class="shortcode">.</h3>--%>
 
     <!-- Footer Part Start-->
     <div id="footer">
@@ -143,28 +143,37 @@
                     <strong>Address:</strong>
                     88 Daxue Rd, Ouhai, Wenzhou, Zhejiang Province, China.
                 </div>
-                <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong> +86
+                <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong>
+                    +86
                     (0) 577 5587 0000
                 </div>
-                <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                        href="#">wku@wku.edu.cn</a></div>
+                <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong>
+                    <a
+                            href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn">
+                        cst@wku.edu.cn</a></div>
             </div>
             <div class="footer-details">
-                <h4>Photo Stream</h4>
+                <h4>Wechat Accounts</h4>
                 <div class="Stream">
-                    <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                    <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                    <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                    <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
+                    <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
+                    <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px"
+                                                       alt=""/></a>
                 </div>
             </div>
             <div class="footer-details no-margin">
-                <h4>Other Content</h4>
-                <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+                <h4>Learn More about WKU</h4>
+                <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about
+                    Wenzhou-Kean University, welcome to visit WKU official website</p></a>
             </div>
 
             <!-- Footer Info Part Start-->
             <div class="Finfo">
-                <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+                <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by
+                    <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                    rights reserved.
                 </div>
             </div>
         </div>

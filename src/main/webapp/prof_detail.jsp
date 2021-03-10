@@ -72,8 +72,9 @@
 <!-- Header Start-->
 <div class="header-wrapper1">
     <div id="header">
-        <a href="http://www.wku.edu.cn">            <img src="images/logo2.jpg" id="logoImg1" alt=""/>
-            <img src="images/logo3.jpg" id="logoImg2" alt=""/></a>
+        <a href="http://www.wku.edu.cn">
+            <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
+            <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/></a>
         <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
 
         <!-- Top Menu Start-->
@@ -86,7 +87,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="full-width.html"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 
@@ -98,9 +99,8 @@
                     </ul>
                 </li>
 
-                <li><a href="tutor.jsp"><span>Tutor</span></a></li>
+                <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>
             </ul>
             <!-- END #primary-nav -->
         </div>

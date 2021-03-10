@@ -1374,6 +1374,7 @@ p a:hover {
 .rightsec {
     float: left;
     width: 260px;
+    margin-left: 20px;
 }
 
 .contact, .map {
@@ -2494,6 +2495,7 @@ blockquote {
     font-size: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
+    line-height: 32px;
 }
 
 .prizeName{
