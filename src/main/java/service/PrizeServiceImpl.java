@@ -92,7 +92,7 @@ public class PrizeServiceImpl implements PrizeService {
     @Override
     public Prize addNewPrize(MultipartFile img, Prize prize) {
         //  保存照片
-        String basePath = "/CSWebsite/";
+        String basePath = "CSWebsite/";
         String uuid = UUID.randomUUID().toString();
         prize.setPhoto("PrizeImg/" + uuid + ".png");
         try {
@@ -159,7 +159,7 @@ public class PrizeServiceImpl implements PrizeService {
 
     //    Method: 删除faculty照片文件
     public void deletePrizePhoto(Prize prize) {
-        String basePath = "/CSWebsite/";
+        String basePath = "CSWebsite/";
         new File(basePath + prize.getPhoto()).delete();
     }
 
@@ -171,7 +171,7 @@ public class PrizeServiceImpl implements PrizeService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             prize.setPhoto(prizeDao.selectPrizeByID(prize).getPhoto());
-            String basePath = "/CSWebsite/";
+            String basePath = "CSWebsite/";
             deletePrizePhoto(prize);
             String uuid = UUID.randomUUID().toString();
             prize.setPhoto("PrizeImg/" + uuid + ".png");

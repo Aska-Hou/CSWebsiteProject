@@ -88,7 +88,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public News addNewNews(MultipartFile img, News news) {
         //  保存照片
-        String basePath = "/CSWebsite/";
+        String basePath = "CSWebsite/";
         String uuid = UUID.randomUUID().toString();
         news.setPhoto("NewsImg/" + uuid + ".png");
         try {
@@ -155,7 +155,7 @@ public class NewsServiceImpl implements NewsService {
 
     //    Method: 删除faculty照片文件
     public void deleteNewsPhoto(News news) {
-        String basePath = "/CSWebsite/";
+        String basePath = "CSWebsite/";
         new File(basePath + news.getPhoto()).delete();
     }
 
@@ -167,7 +167,7 @@ public class NewsServiceImpl implements NewsService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             news.setPhoto(newsDao.selectNewsByID(news).getPhoto());
-            String basePath = "/CSWebsite/";
+            String basePath = "CSWebsite/";
             deleteNewsPhoto(news);
             String uuid = UUID.randomUUID().toString();
             news.setPhoto("NewsImg/" + uuid + ".png");

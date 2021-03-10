@@ -361,7 +361,7 @@ p {
         width: 400px;
         height: 62px;
         margin-left: 10px;
-        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 
@@ -370,10 +370,10 @@ p {
         display: none;
     }
     #cslogo {
-        width: 400px;
+        width: 320px;
         height: 62px;
         margin-left: 10px;
-        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 
