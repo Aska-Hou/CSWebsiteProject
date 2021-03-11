@@ -105,7 +105,7 @@
                 $.each(data, function (index, object) {
                     list.append("<ul class=\"prizeBlock\">\n" +
                         "                <li class=\"prizeLine\">\n" +
-                        "                    <div class=\"profImg\" style='float: left'><img src=\"/CSWebsite/" + object.photo + "\" class=\"photo1\" alt=\"\"></div>\n" +
+                        "                    <div class=\"profImg\" style='float: left'><img src=\"/CSWebsite/" + object.photo + "\" class=\"photo1\" style='height: 75%' alt=\"\"></div>\n" +
                         "                    <div class=\"text1\">\n" +
                         "                        <p class=\"profName\">" + object.title + "</p>\n" +
                         "                        <br/>\n" +

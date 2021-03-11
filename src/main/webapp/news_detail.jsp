@@ -36,9 +36,9 @@
                     "    <li><div class=\"news_img_block\"><img src=\"/CSWebsite/"+ data.photo +"\" class=\"news_img\" alt=\"\"/></div>\n" +
                     "    <div class=\"news_content\">\n" +
                     "        <img src=\"images/quote.png\" style=\"width: 40px\" alt=\"\"/>\n" +
-                    "        <span class=\"news_abstract\">Abstract:"+ data.abstractContent +"</span></div></li>\n" +
+                    "        <span class=\"news_abstract\">Abstract:"+ data.abstractContent.replace(/\n/g,"<br/>") +"</span></div></li>\n" +
                     "\n" +
-                    "        <div style='margin-top: 450px; font-size: 16px; line-height: 20px' <p style='margin-top: 200px'><br/>"+ data.content +"</p>\n" +
+                    "        <div style='margin-top: 450px; font-size: 16px; line-height: 20px'> <p style='margin-top: 200px; font-size: 18px; line-height: 28px; margin-bottom: 100px'><br/>"+ data.content.replace(/\n/g,"<br/>") +"</p>\n" +
                     "    </div>")
             })
         });

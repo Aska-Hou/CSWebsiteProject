@@ -44,6 +44,10 @@
                         "        <div class=\"course\">"+ data.courses +"</div>\n" +
                         "    </div>\n" +
                         "    <br/>\n" +
+                        "    <div class=\"detailCourse\">Faculty Introduction:\n" +
+                        "        <div class=\"course\">"+ data.introduction.replace(/\n/g,"<br/>") +"</div>\n" +
+                        "    </div>\n" +
+                        "    <br/>\n" +
                         "    <div class=\"detailCourse\">Academic Background:\n" +
                         "        <div class=\"course\">"+ data.background.replace(/\n/g,"<br/>") +"</div>\n" +
                         "    </div>\n" +

@@ -253,7 +253,7 @@
         <h3 class="blue">Details - Education 4-year Plan</h3>
         <p>If you want to see more our education program, click the button below for downloading the CS 4-year plan.</p>
         <br/>
-        <div class="viewPro"><a href="Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
+        <div class="viewPro"><a href="Document/4-year-plan.pdf" download="Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
     </div>
 
     <div class="divider1" style="margin-top: 70px"></div>

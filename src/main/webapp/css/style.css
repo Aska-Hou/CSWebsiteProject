@@ -1326,7 +1326,7 @@ p a:hover {
     font-family: tahoma, arial;
     padding-bottom: 27px;
     margin-top: 10px;
-    margin-left: 400px;
+    margin-left: 20%;
 }
 
 .client-testimonial1 {
@@ -2573,10 +2573,11 @@ blockquote {
 }
 
 .profDetail .detailCourse .course{
-    font-size: 15px;
+    font-size: 16px;
     color: #7c7c7c;
     margin-top: 3px;
     margin-bottom: 3px;
+    line-height: 22px;
 }
 
 /*All the area keyword*/
@@ -2688,14 +2689,15 @@ blockquote {
 
 .news_img_block{
     float: left;
-    width: 650px;
+    width: 550px;
+    height: 400px;
+    margin-left: 50px;
 }
 
 .news_img{
+    height: 100%;
     width: 100%;
 }
-
-
 
 .news_abstract{
     font-size: 25px;
