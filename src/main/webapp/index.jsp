@@ -158,22 +158,15 @@
                 <!-- Slides-->
                 <li style="background:#224e9c;">
                     <div style="width: 100%">
-                        <img class="indexImg" src="images/rollImage/image3.jpg"/>
-                    </div>
-                </li>
-
-                <li style="background:#224e9c;">
-                    <div style="width: 100%">
                         <img class="indexImg" src="images/rollImage/image2.png"/>
                     </div>
                 </li>
 
                 <li style="background:#224e9c;">
                     <div style="width: 100%">
-                        <img class="indexImg" src="images/rollImage/image1.jpg"/>
+                        <img class="indexImg" src="images/rollImage/image3.jpg"/>
                     </div>
                 </li>
-
             </ul>
         </div>
     </div>

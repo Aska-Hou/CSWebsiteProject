@@ -119,28 +119,37 @@
                 <strong>Address:</strong>
                 88 Daxue Rd, Ouhai, Wenzhou, Zhejiang Province, China.
             </div>
-            <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong> +86
+            <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong>
+                +86
                 (0) 577 5587 0000
             </div>
-            <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="#">wku@wku.edu.cn</a></div>
+            <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong>
+                <a
+                        href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn">
+                    cst@wku.edu.cn</a></div>
         </div>
         <div class="footer-details">
-            <h4>Photo Stream</h4>
+            <h4>Wechat Accounts</h4>
             <div class="Stream">
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
             </div>
         </div>
         <div class="footer-details no-margin">
-            <h4>Other Content</h4>
-            <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+            <h4>Learn More about WKU</h4>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about
+                Wenzhou-Kean University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by
+                <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                rights reserved.
             </div>
         </div>
     </div>
