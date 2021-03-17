@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: Aska
-  Date: 2021/1/4
-  Time: 15:47
+  Date: 2021/1/31
+  Time: 13:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Professor Team</title>
+    <title>News Detail</title>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <!--For images carousel-->
@@ -27,36 +27,18 @@
     <script type='text/javascript' src='js/jquery-ui-1.8.5.custom.min.js'></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#accordion").accordion();
-        });
-    </script>
-    <script>
         $(function () {
-            var detail = $("#profDetail");
-            detail.empty();
-            var prof_id = getQueryString("prof_id");
-            $.post("professor/showProfessorDetail", {prof_id: prof_id}, function (data) {
-                    detail.append("<div class=\"detailImgBlock\"><img src=\"/CSWebsite/"+ data.photo +"\" class=\"detailImg\" alt=\"\"/></div>\n" +
-                        "    <div class=\"detailName\">"+ data.name +"</div>\n" +
-                        "    <br/>\n" +
-                        "    <div class=\"detailCourse\">Teaching Course:\n" +
-                        "        <div class=\"course\">"+ data.courses +"</div>\n" +
-                        "    </div>\n" +
-                        "    <br/>\n" +
-                        "    <div class=\"detailCourse\">Faculty Introduction:\n" +
-                        "        <div class=\"course\">"+ data.introduction.replace(/\n/g,"<br/>") +"</div>\n" +
-                        "    </div>\n" +
-                        "    <br/>\n" +
-                        "    <div class=\"detailCourse\">Academic Background:\n" +
-                        "        <div class=\"course\">"+ data.background.replace(/\n/g,"<br/>") +"</div>\n" +
-                        "    </div>\n" +
-                        "    <br/>\n" +
-                        "    <div class=\"detailCourse\">Paper Publication:\n" +
-                        "        <div class=\"course\">"+ data.publication.replace(/\n/g,"<br/>") +"</div>\n" +
-                        "    </div>");
-                });
-            });
+            var id = getQueryString("gallery_id");
+            $.post("gallery/showDetail", {gallery_id: id}, function (data) {
+                var detail = $("#detail");
+                detail.empty();
+                detail.append("<div class=\"news_title\">"+ data.title +"</div>\n" +
+                    "    <li><div class=\"gallery_img_block\"><img src=\"/CSWebsite/"+ data.photo +"\" class=\"news_img\" alt=\"\"/></div>\n" +
+                    "   </li>\n" +
+                    "        <div style='margin-top: 450px; font-size: 16px; line-height: 20px'> <p style='margin-top: 200px; font-size: 18px; line-height: 28px; margin-bottom: 100px'><br/>"+ data.content.replace(/\n/g,"<br/>") +"</p>\n" +
+                    "    </div>")
+            })
+        });
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -64,8 +46,6 @@
             if (r != null) return unescape(r[2]);
             return null;
         };
-
-
     </script>
 </head>
 
@@ -111,7 +91,8 @@
     </div>
 </div>
 
-<div class="profDetail" id="profDetail">
+<br/>
+<div class="newsMain" id="detail">
 
 </div>
 
@@ -135,31 +116,41 @@
                 <strong>Address:</strong>
                 88 Daxue Rd, Ouhai, Wenzhou, Zhejiang Province, China.
             </div>
-            <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong> +86
+            <div class="address"><img src="images/phone.png" alt="" width="14" height="18"/> <strong>Phone:</strong>
+                +86
                 (0) 577 5587 0000
             </div>
-            <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="#">wku@wku.edu.cn</a></div>
+            <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong>
+                <a
+                        href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn">
+                    cst@wku.edu.cn</a></div>
         </div>
         <div class="footer-details">
-            <h4>Photo Stream</h4>
+            <h4>Wechat Accounts</h4>
             <div class="Stream">
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt=""/></a>
-                <a href="#"><img src="images/photo1.jpg" alt="" class="no-margin"/></a>
+                <a href="images/footImg2.png"><img src="images/footImg2.png" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg1.jpg"><img src="images/footImg1.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
+                <a href="images/footImg3.jpg"><img src="images/footImg3.jpg" style="width: 65px; height: 65px"
+                                                   alt=""/></a>
             </div>
         </div>
         <div class="footer-details no-margin">
-            <h4>Other Content</h4>
-            <p>Other Content Other Content Other ContentOther Content Other Content Other Content Other Content</p>
+            <h4>Learn More about WKU</h4>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about
+                Wenzhou-Kean University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By Aska. Copyright &copy; 2020.Company name All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by
+                <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                rights reserved.
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

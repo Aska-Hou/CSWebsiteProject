@@ -34,6 +34,30 @@
                             "                </li>");
                     });
                 }
+            });
+
+            $.ajax({
+                url: "index/showIndexSliderImage",
+                async: false,
+                method: "post",
+                success: function (data) {
+                    $("#imgSlides").empty();
+                    $.each(data, function (index, object) {
+                        if (object.news_id == null) {
+                            $("#imgSlides").append("<li style=\"background:#224e9c;\">\n" +
+                                "                    <div style=\"width: 100%\">\n" +
+                                "<img class=\"indexImg\" src=\"/CSWebsite/" + object.img + "\"/>\n" +
+                                "                    </div>\n" +
+                                "                </li>");
+                        } else {
+                            $("#imgSlides").append("<li style=\"background:#224e9c;\">\n" +
+                                "                    <div style=\"width: 100%\">\n" +
+                                "                        <a href=\"news_detail.jsp?news_id=" + object.news_id + "\"> <img class=\"indexImg\" src=\"/CSWebsite/" + object.img + "\"/></a>\n" +
+                                "                    </div>\n" +
+                                "                </li>");
+                        }
+                    })
+                }
             })
         });
 
@@ -97,7 +121,7 @@
                 $("#publication_list").empty();
                 $.each(data, function (index, object) {
                     $("#publication_list").append("<div class=\"tweet-box\">\n" +
-                        "                <p><a href=\""+ object.website +"\">"+ object.title +"</a> <span class=\"time\">"+ new Date(object.date).format("yyyy-MM-dd") + "  " + object.area + "</span></p>\n" +
+                        "                <p><a href=\"" + object.website + "\">" + object.title + "</a> <span class=\"time\">" + new Date(object.date).format("yyyy-MM-dd") + "  " + object.area + "</span></p>\n" +
                         "            </div>");
                 })
             })
@@ -129,22 +153,24 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf" target="_blank"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
-
 
                 <li><a href="#" class="sf-with-ul">Academic</a>
                     <ul class="sub-menu">
                         <li><a href="prof_list.jsp"><span>Faculty Team</span></a></li>
                         <li><a href="publication_list.jsp"><span>Publication</span></a></li>
                         <li><a href="prize_list.jsp"><span>Prize</span></a></li>
+                        <li><a href="gallery_list.jsp"><span>Gallery</span></a></li>
+                        <li><a href="center_list.jsp"><span>Research Center</span></a></li>
+
                     </ul>
                 </li>
 
                 <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
 
-<%--                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>--%>
+                <%--                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>--%>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -153,7 +179,7 @@
     <!-- Slider Start-->
     <div id="slider">
         <div class="flexslider">
-            <ul class="slides">
+            <ul class="slides" id="imgSlides">
 
                 <!-- Slides-->
                 <li style="background:#224e9c;">
@@ -239,14 +265,16 @@
 
     <div class="webdesign">
         <a href=""><h3>Education Program</h3></a>
-        <p>The Department of Computer Science at Wenzhou-Kean University offers an undergraduate major leading to a B.S. degree.</p>
+        <p>The Department of Computer Science at Wenzhou-Kean University offers an undergraduate major leading to a B.S.
+            degree.</p>
     </div>
 
     <div class="webdesign">
         <h3 class="blue">Details - Education 4-year Plan</h3>
         <p>If you want to see more our education program, click the button below for downloading the CS 4-year plan.</p>
         <br/>
-        <div class="viewPro"><a href="Document/4-year-plan.pdf" download="Document/4-year-plan.pdf" class="btn">Download 4-year Plan</a></div>
+        <div class="viewPro"><a href="Document/4-year-plan.pdf" download="Document/4-year-plan.pdf" class="btn">Download
+            4-year Plan</a></div>
     </div>
 
     <div class="divider1" style="margin-top: 70px"></div>
@@ -275,7 +303,8 @@
     <h3>Department Chairman Wish: </h3>
     <div class="client-box">
         <div class="client-testimonial">
-            <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is to get the knowledge instead of High GPA.</p>
+            <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is to
+                get the knowledge instead of High GPA.</p>
         </div>
         <div class="client-bg"><span class="name">Dr Tiffany Tang</span>, Associate Professor of WKU</div>
     </div>
@@ -314,7 +343,8 @@
                 (0) 577 5587 0000
             </div>
             <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn"> cst@wku.edu.cn</a> </div>
+                    href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn"> cst@wku.edu.cn</a>
+            </div>
         </div>
         <div class="footer-details">
             <h4>Wechat Accounts</h4>
@@ -326,12 +356,15 @@
         </div>
         <div class="footer-details no-margin">
             <h4>Learn More about WKU</h4>
-            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean University, welcome to visit WKU official website</p></a>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean
+                University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by <a
+                    href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                rights reserved.
             </div>
         </div>
     </div>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.GalleryDao">
+    
+    <select id="showAllGallery" parameterType="domain.Page" resultType="domain.Gallery">
+        select * from gallery limit #{currentLine}, #{lineEachPage}
+    </select>
+
+    <select id="selectGalleryByID" parameterType="domain.Gallery" resultType="domain.Gallery">
+        select gallery_id, title, content, photo from gallery where gallery_id = #{gallery_id}
+    </select>
+
+    <select id="selectGalleryByTitle" resultType="domain.Gallery">
+        select * from galler where title like concat('%', #{gallery.title}, '%')
+            limit #{page.currentLine}, #{page.lineEachPage}
+    </select>
+
+    <select id="showNumberOfLine" resultType="java.lang.Integer">
+        select count(*) as totalPage from gallery
+    </select>
+
+    <select id="showNumberOfLineByTitle" parameterType="domain.Gallery" resultType="java.lang.Integer">
+        select count(*) as totalPage from gallery where title like concat('%', #{title}, '%')
+    </select>
+
+    <insert id="insertGallery" useGeneratedKeys="true" keyProperty="gallery_id"  keyColumn="gallery_id" parameterType="domain.Gallery">
+        insert into gallery(title, content, photo)
+                values (#{title}, #{content}, #{photo})
+    </insert>
+
+    <delete id="deleteGalleryByID" parameterType="list">
+        delete from gallery where gallery_id in
+        <foreach collection="list" item="gallery" index="index" open="(" close=")" separator=", ">
+            #{gallery.gallery_id}
+        </foreach>
+    </delete>
+
+    <update id="updatePartGalleryByID" parameterType="domain.Gallery">
+        update gallery set title = #{title}, content = #{content} where gallery_id = #{gallery_id}
+    </update>
+
+    <update id="updateAllGalleryByID" parameterType="domain.Gallery">
+        update gallery set title = #{title}, content = #{content}, photo = #{photo} where gallery_id = #{gallery_id}
+    </update>
+
+</mapper>

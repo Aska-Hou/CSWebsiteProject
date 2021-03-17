@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ResearchCenterDao">
+
+    <select id="showAllResearchCenter" resultType="domain.ResearchCenter">
+        select * from researchcenter
+    </select>
+
+    <select id="selectResearchCenterByID" parameterType="domain.ResearchCenter" resultType="domain.ResearchCenter">
+        select * from researchcenter where center_id =#{center_id}
+    </select>
+
+    <select id="selectResearchCenterByName" parameterType="domain.ResearchCenter" resultType="domain.ResearchCenter">
+        select * from researchcenter where title like concat('%', #{title}, '%')
+    </select>
+
+    <insert id="insertResearchCenter" useGeneratedKeys="true" keyProperty="prof_id" keyColumn="prof_id"
+            parameterType="domain.ResearchCenter">
+        insert into researchcenter(title, photo, leader, description)
+            values(#{title}, #{photo}, #{leader}, #{description})
+    </insert>
+
+    <update id="updatePartResearchCenterByID" parameterType="domain.ResearchCenter">
+        update researchcenter set title = #{title}, leader = #{leader}, description = #{description} where center_id = #{center_id}
+    </update>
+
+    <update id="updateAllResearchCenterByID" parameterType="domain.ResearchCenter">
+        update researchcenter set title = #{title}, leader = #{leader}, description = #{description}, photo = #{photo} where center_id = #{center_id}
+    </update>
+
+    <delete id="deleteResearchCentersByID" parameterType="list">
+        delete from researchcenter where center_id in
+        <foreach collection="list" item="center" index="index" open="(" close=")" separator=", ">
+            #{center.center_id}
+        </foreach>
+    </delete>
+
+
+</mapper>

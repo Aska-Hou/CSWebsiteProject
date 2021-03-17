@@ -10,7 +10,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Recent News</title>
+    <title>Gallery</title>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet"
@@ -40,7 +40,7 @@
         function showPage(page) {
             var pageList = $("#pageList");
             pageList.empty();
-            $.post("news/showPageList", null, function (data) {
+            $.post("gallery/showPageList", null, function (data) {
                 lastPage = data.totalPage;
 
                 var content = "";
@@ -101,7 +101,7 @@
         function showData(page) {
             var list = $("#list");
             list.empty();
-            $.post("news/showNewsList", {currentPage: page}, function (data) {
+            $.post("gallery/showGalleryList", {currentPage: page}, function (data) {
                 $.each(data, function (index, object) {
                     list.append("<ul class=\"prizeBlock\">\n" +
                         "                <li class=\"prizeLine\">\n" +
@@ -109,11 +109,7 @@
                         "                    <div class=\"text1\">\n" +
                         "                        <p class=\"profName\">" + object.title + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">Time: " + new Date(object.date).format('yyyy-MM-dd') + "</p>\n" +
-                        "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">" + object.abstractContent + "</p>\n" +
-                        "                        <br/>\n" +
-                        "                        <a class=\"profDescription\" href=\"news_detail.jsp?news_id=" + object.news_id + "\">--More Details--</a>\n" +
+                        "                        <a class=\"profDescription\" href=\"gallery_detail.jsp?gallery_id=" + object.gallery_id + "\">--More Details--</a>\n" +
                         "                    </div>\n" +
                         "                </li>\n" +
                         "            </ul>\n" +
@@ -184,7 +180,7 @@
     </div>
 </div>
 
-<div class="title" style="font-size: 35px; text-align: center">Department Recent News</div>
+<div class="title" style="font-size: 35px; text-align: center">Gallery</div>
 <h3 class="shortcode">'</h3>
 
 <div class="page_one">

@@ -146,7 +146,7 @@
                 <li><a href="#" class="sf-with-ul">About Us</a>
                     <ul class="sub-menu">
                         <li><a href="about.jsp"><span>About Us</span></a></li>
-                        <li><a href="Document/4-year-plan.pdf"><span>Education Plan</span></a></li>
+                        <li><a href="Document/4-year-plan.pdf" target="_blank"><span>Education Plan</span></a></li>
                     </ul>
                 </li>
 

@@ -2694,6 +2694,13 @@ blockquote {
     margin-left: 50px;
 }
 
+.gallery_img_block{
+    float: top;
+    width: 70%;
+    height: 80%;
+    margin-left: 150px;
+}
+
 .news_img{
     height: 100%;
     width: 100%;

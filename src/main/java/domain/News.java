@@ -15,6 +15,10 @@ public class News {
 
     }
 
+    public News(int news_id){
+        this.news_id = news_id;
+    }
+
     public News(int news_id, String title, String content, Date date, String author, String abstractContent, String photo) {
         this.news_id = news_id;
         this.title = title;

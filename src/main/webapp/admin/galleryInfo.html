@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery Info</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+
+        var currentPage = 1;
+        var totalPage = 1;
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var gallery_id = getQueryString("id");
+            var deleteResult = getQueryString("delete");
+            var addFalse = getQueryString("add");
+            if (deleteResult == "true") {
+                alert("Delete Successfully.");
+            } else if (deleteResult == "false") {
+                alert("Delete Unsuccessfully.");
+            }
+            if (addFalse == "false") {
+                alert("Add Unsuccessfully.");
+            }
+            if (gallery_id == null) {
+               jumpToPage(1);
+               showPagesList();
+            }
+            showGalleryList();
+        });
+
+        Date.prototype.format = function(fmt) {
+            var o = {
+                "M+" : this.getMonth()+1,                 //月份
+                "d+" : this.getDate(),                    //日
+                "h+" : this.getHours(),                   //小时
+                "m+" : this.getMinutes(),                 //分
+                "s+" : this.getSeconds(),                 //秒
+                "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                "S"  : this.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt)) {
+                fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            }
+            for(var k in o) {
+                if(new RegExp("("+ k +")").test(fmt)){
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                }
+            }
+            return fmt;
+        }
+
+        function showPagesList() {
+
+            var gallery_id = $("#gallery_id").val();
+            if (gallery_id == '') {
+                gallery_id = 0;
+            }
+            var title = $("#title").val();
+            if (title == '') {
+                title = "null";
+            }
+
+            if (gallery_id == 0 && title == "null") {
+                $.post("gallery/showPagesList", {}, function (data) {
+
+                    var str = "";
+                    totalPage = data.totalPage;
+
+                    str += "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination\">\n";
+                    if (currentPage == 1) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='prev()' aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n";
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        if (currentPage == i) {
+                            str += "<li class='active'><a href=\"#\" onclick='jumpToPage("+ i +")'>" + i + "</a></li>\n";
+                        } else {
+                            str += "<li><a onclick='jumpToPage("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        }
+                    }
+
+                    if (currentPage == totalPage) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='next()' aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>";
+
+                    $("#page").empty();
+                    $("#page").append(str);
+                });
+            }
+            else {
+                $.post("gallery/showPagesList", {gallery_id: gallery_id, title: title}, function (data) {
+                    var str = "";
+                    totalPage = data.totalPage;
+
+                    str += "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination\">\n";
+                    if (currentPage == 1) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='prev()' aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n";
+
+                    for (var i = 1; i <= data.totalPage; i++) {
+                        if (currentPage == i) {
+                            str += "<li class='active'><a onclick='jumpToPageWithKeyword("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        } else {
+                            str += "<li><a onclick='jumpToPageWithKeyword("+ i +")' href=\"#\">" + i + "</a></li>\n";
+                        }
+                    }
+
+                    if (currentPage == totalPage) {
+                        str += "    <li class='disabled'>\n";
+                    } else {
+                        str += "    <li>\n";
+                    }
+                    str += "      <a href=\"#\" onclick='next()' aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>";
+
+                    $("#page").empty();
+                    $("#page").append(str);
+                });
+            }
+        }
+
+        function jumpToPage(page) {
+            currentPage = page;
+
+            $.post("gallery/showGalleryList", {currentPage: page}, function (data) {
+                $("#galleryList").empty();
+
+                $("#galleryList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Title</th>\n" +
+                    "                    <th>Photo</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+
+                $.each(data, function (index, object) {
+                    $("#galleryList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.gallery_id + "\"></th>\n" +
+                        "                    <td>" + object.gallery_id + "</td>\n" +
+                        "                    <td>" + object.title + "</td>\n" +
+                        "<td><img style='width: 300px;margin-left: 4%' src=\"/CSWebsite/" + object.photo + "\"></td>" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"galleryEdit.html?gallery_id=" + object.gallery_id + "\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.title + "', " + object.gallery_id + ")\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+
+            showPagesList();
+        }
+
+        function jumpToPageWithKeyword(page) {
+            currentPage = page;
+
+            var gallery_id = $("#gallery_id").val();
+            if (gallery_id == '') {
+                gallery_id = 0;
+            }
+            var title = $("#title").val();
+            if (title == '') {
+                title = "null";
+            }
+            $("#galleryList").empty();
+            $.post("gallery/searchGalleryList", {gallery_id: gallery_id, title: title, currentPage: page}, function (data) {
+                $("#galleryList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Title</th>\n" +
+                    "                    <th>Photo</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+                $.each(data, function (index, object) {
+                    $("#galleryList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.gallery_id + "\"></th>\n" +
+                        "                    <td>" + object.gallery_id + "</td>\n" +
+                        "                    <td>" + object.title + "</td>\n" +
+                        "<td><img style='width: 300px;margin-left: 20%' src=\"/CSWebsite/" + object.photo + "\"></td>" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"galleryEdit.html?gallery_id=" + object.gallery_id + "\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" onclick='deleteOne(\""+ object.title + "\", "+ object.gallery_id +")'>Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+
+            showPagesList();
+        }
+
+        function search() {
+            currentPage = 1;
+            jumpToPageWithKeyword(1);
+            showPagesList();
+        }
+
+        function prev() {
+            var gallery_id = $("#gallery_id").val();
+
+            if (currentPage != 1){
+                if (gallery_id == '' && title == '') {
+                    jumpToPage(currentPage - 1);
+                }
+                else {
+                    jumpToPageWithKeyword(currentPage - 1);
+                }
+            }
+        }
+
+        function next() {
+            var gallery_id = $("#gallery_id").val();
+
+            if (currentPage != totalPage){
+                if (gallery_id == '' && title == '') {
+                    jumpToPage(currentPage + 1);
+                }
+                else {
+                    jumpToPageWithKeyword(currentPage + 1);
+                }
+            }
+        }
+
+        function deleteSelected() {
+            if (confirm("Do you want to delete the selected gallery? ")) {
+                $("#deleteTable").submit();
+            }
+        }
+
+        function deleteOne(title, gallery_id) {
+            if (confirm("Do you want to delete the gallery " + title)) {
+                $.post("gallery/deleteOneGallery", {gallery_id: gallery_id}, function () {
+                    window.location.reload();
+                })
+            }
+        }
+
+        function showGalleryList() {
+            var galleryList = $("#edit_relatedGallery");
+            galleryList.empty();
+            $.post("gallery/showRecentGallery", {}, function (data) {
+                $.each(data, function (index, object) {
+                    galleryList.append("<option class=\"form-control\" value=\""+ object.gallery_id +"\">"+ object.title +"</option>");
+                })
+            })
+        }
+    </script>
+</head>
+<body>
+
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Gallery</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="gallery/addNewGallery">
+
+                    <div class="form-group">
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Title<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="title" id="edit-marketActivityName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Gallery Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-content" class="col-sm-2 control-label">Content</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="content" id="edit-content"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="out">
+    <div class="adminLogoImgDiv">
+        <img src="../images/logo.png" class="adminLogoImg">
+    </div>
+    <div class="adminTitle">
+        <br/>
+        Gallery Information List
+    </div>
+    <div class="listPart">
+        <div style="float: left; margin-top: 100px; margin: 5px">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="gallery_id">ID</label>
+                    <input type="text" class="form-control" id="gallery_id" name="gallery_id"
+                           placeholder="Gallery ID">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                           placeholder="Gallery Name">
+                </div>
+                <button type="button" onclick="search()" class="btn btn-default">Search</button>
+            </form>
+        </div>
+
+        <div style="float: right; margin: 5px">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Gallery
+            </button>
+            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected Gallery
+            </button>
+        </div>
+
+        <form id="deleteTable" action="gallery/deleteSelectedGallery">
+            <table border="1" id="galleryList" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th><input onclick="selectAll()" id="check_all" type="checkbox"> <label
+                            for="check_all">Choice</label></th>
+                    <th>Gallery ID</th>
+                    <th>Title</th>
+                    <th>Photo</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+            </table>
+        </form>
+        <div style="margin-left: 35%" id="page">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

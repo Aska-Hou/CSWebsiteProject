@@ -10,7 +10,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Professor Team</title>
+    <title>Research Center</title>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <!--For images carousel-->
@@ -29,24 +29,25 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script>
         $(function () {
-            var list = $("#prof_list");
+            var list = $("#center_list");
             list.empty();
-            $.post("professor/showProfessorList", null, function (data) {
+            $.post("center/showCenterList", null, function (data) {
                 $.each(data, function (index, object) {
                     list.append("<ul class=\"profBlock\">\n" +
                         "                <li>\n" +
                         "                    <div class=\"profImg\"><img src=\"/CSWebsite/" + object.photo + "\" class=\"photo1\" alt=\"\"></div>\n" +
                         "                    <div class=\"text1\">\n" +
-                        "                        <p class=\"profName\">" + object.name + "</p>\n" +
+                        "                        <p class=\"profName\">" + object.title + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <p class=\"profDescription\">" + object.introduction.replace(/\n/g, "<br/>") + "</p>\n" +
+                        "                        <p class=\"profName\">" + object.leader + "</p>\n" +
+                        "                        <br/>\n" +
+                        "                        <p class=\"profDescription\">" + object.description.replace(/\n/g, "<br/>") + "</p>\n" +
                         "                        <br/>\n" +
                         "                        <a class=\"profDescription\" href=\"prof_detail.jsp?prof_id=" + object.prof_id + "\">--More Details about " + object.name + "--</a>\n" +
                         "                    </div>\n" +
                         "                </li>\n" +
                         "            </ul><hr/>");
                 });
-
             })
         })
     </script>
@@ -92,13 +93,13 @@
     </div>
 </div>
 
-<div style="font-size: 35px; text-align: center" class="title">Professors Team</div>
+<div style="font-size: 35px; text-align: center" class="title">Research Center</div>
 <h3 class="shortcode">.</h3>
 
 
 <div class="page_one">
     <div class="contant">
-        <div class="left" id="prof_list">
+        <div class="left" id="center_list">
             <ul class="profBlock">
                 <li>
                     <div class="profImg"><img src="images/photo1.png" class="photo1" alt=""></div>
