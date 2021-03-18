@@ -8,6 +8,7 @@ import domain.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import utils.ImageStorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public News addNewNews(MultipartFile img, News news) {
         //  保存照片
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         String uuid = UUID.randomUUID().toString();
         news.setPhoto("NewsImg/" + uuid + ".png");
         try {
@@ -132,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
             deleteNewsPhoto(news);
         }
         if (result == newss.size()) {
-            System.out.println("Delete Newss Successfully! ");
+            System.out.println("Delete News Successfully! ");
             return true;
         } else {
             return false;
@@ -155,7 +156,7 @@ public class NewsServiceImpl implements NewsService {
 
     //    Method: 删除faculty照片文件
     public void deleteNewsPhoto(News news) {
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         new File(basePath + news.getPhoto()).delete();
     }
 
@@ -167,7 +168,7 @@ public class NewsServiceImpl implements NewsService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             news.setPhoto(newsDao.selectNewsByID(news).getPhoto());
-            String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+            String basePath = ImageStorageUtil.getStoreImage();
             deleteNewsPhoto(news);
             String uuid = UUID.randomUUID().toString();
             news.setPhoto("NewsImg/" + uuid + ".png");

@@ -5,6 +5,7 @@ import domain.Tutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import utils.ImageStorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class TutorServiceImpl implements TutorService {
     @Override
     public Tutor addNewTutor(MultipartFile img, Tutor tutor) {
         //  保存照片
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         String uuid = UUID.randomUUID().toString();
         tutor.setPhoto("TutorImg/" + uuid + ".png");
         try {
@@ -73,7 +74,7 @@ public class TutorServiceImpl implements TutorService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             tutor.setPhoto(tutorDao.selectTutorByID(tutor).getPhoto());
-            String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+            String basePath = ImageStorageUtil.getStoreImage();
             deleteTutorPhoto(tutor);
             String uuid = UUID.randomUUID().toString();
             tutor.setPhoto("TutorImg/" + uuid + ".png");
@@ -140,7 +141,7 @@ public class TutorServiceImpl implements TutorService {
 
     //    Method: 删除tutor照片文件
     public void deleteTutorPhoto(Tutor tutor) {
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         new File(basePath + tutor.getPhoto()).delete();
     }
 }

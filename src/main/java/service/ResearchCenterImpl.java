@@ -5,6 +5,7 @@ import domain.ResearchCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import utils.ImageStorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public class ResearchCenterImpl implements ResearchCenterService {
     @Override
     public ResearchCenter addNewResearchCenter(MultipartFile img, ResearchCenter center) {
         //  保存照片
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         String uuid = UUID.randomUUID().toString();
-        center.setPhoto("ProfImg/" + uuid + ".png");
+        center.setPhoto("ResearchCenterImg/" + uuid + ".png");
         try {
             img.transferTo(new File(basePath + center.getPhoto()));
         } catch (IOException e) {
@@ -73,10 +74,10 @@ public class ResearchCenterImpl implements ResearchCenterService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             center = centerDao.selectResearchCenterByID(center);
-            String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+            String basePath = ImageStorageUtil.getStoreImage();
             deleteResearchCenterPhoto(center);
             String uuid = UUID.randomUUID().toString();
-            center.setPhoto("ProfImg/" + uuid + ".png");
+            center.setPhoto("ResearchCenterImg/" + uuid + ".png");
             try {
                 img.transferTo(new File(basePath + center.getPhoto()));
             } catch (IOException e) {
@@ -140,7 +141,7 @@ public class ResearchCenterImpl implements ResearchCenterService {
 
     //    Method: 删除faculty照片文件
     public void deleteResearchCenterPhoto(ResearchCenter center) {
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         new File(basePath + center.getPhoto()).delete();
     }
 }

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var center_id = getQueryString("center_id");
+            var addResult = getQueryString("add");
+            if (addResult == "true") {
+                alert("Research Center Add Successfully.");
+            }
+            var updateResult = getQueryString("update");
+            if (updateResult == "true") {
+                alert("Update Successfully.");
+            } else if (updateResult == "false") {
+                alert("Update Unsuccessfully.")
+            }
+            $.post("center/getCenterDetails", {center_id: center_id}, function (data) {
+                $("#center_id").html("<b>" + data.center_id + "</b>");
+                $("#edit_center_id").val(data.center_id);
+                $("#title").html("<b>" + data.title + "</b>");
+                $("#edit_title").val(data.title);
+                $("#leader").html("<b>" + data.leader + "</b>");
+                $("#edit-leader").val(data.leader);
+
+                $("#description").html("<b>" + data.description.replace(/\n/g,"<br/>") + "</b>");
+                $("#edit-description").val(data.description);
+                $("#photo").html("<img style=\"width: 400px\" src=\"/CSWebsite/" + data.photo + "\">")
+            });
+        })
+    </script>
+
+</head>
+<body>
+<!-- 修改市场活动的模态窗口 -->
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Update Research Center Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="center/editCenter">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Research Center ID<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input readonly id="edit_center_id" name="center_id" class="form-control">
+                        </div>
+                        <label for="edit_title" class="col-sm-2 control-label">Title<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="title" id="edit_title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Change Photo: </label>
+                        <div class="col-sm-10" style="width: 800px;">
+                            <label for="edit-Photo">If you want to change photo, Please choose: </label>
+                            <input type="file" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-leader" class="col-sm-2 control-label">Leader</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <textarea type="text" class="form-control" name="leader" id="edit-leader">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-description" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="description"
+                                      id="edit-description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 返回按钮 -->
+<div style="position: relative; top: 35px; left: 10px;">
+    <a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left"
+                                                                         style="font-size: 20px; color: #DDDDDD"></span></a>
+</div>
+
+<!-- 大标题 -->
+<div style="position: relative; left: 40px; top: -30px;">
+    <div class="page-header">
+        <h3>Edit Research Center Information </h3>
+    </div>
+    <div style="position: relative; height: 50px; width: 200px;  top: -72px; left: 1000px;">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span
+                class="glyphicon glyphicon-edit"></span> Update
+        </button>
+        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> Delete</button>
+    </div>
+</div>
+
+<!-- 详细信息 -->
+<div style="position: relative; top: -70px;">
+    <!--    教授照片显示-->
+    <div style="float: right; margin-top: 150px; margin-right: 60px" id="photo">
+
+    </div>
+
+    <div style="position: relative; left: 40px; height: 30px; ">
+        <div style="width: 300px; color: gray;">Center ID</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="center_id"><b></b></div>
+        <div style="width: 300px;position: relative; left: 550px; top: -40px; color: gray;">Title</div>
+        <div style="width: 300px;position: relative; left: 650px; top: -60px;" id="title"><b></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 550px;"></div>
+    </div>
+
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 300px; color: gray;">Leader</div>
+        <div style="width: 300px;position: relative; left: 100px; top: -20px;" id="leader"><b></b></div>
+        <div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
+    </div>
+
+    <div style="position: relative; left: 40px; height: auto; margin-top: 20px;">
+        <div style="width: 600px; color: gray;">Description</div>
+        <div style="width: 600px;position: relative; left: 100px; top: -20px;" id="description"><b></b></div>
+        <div style="height: 1px; width: 700px; background: #D5D5D5; position: relative; top: -20px;"></div>
+    </div>
+
+</div>
+
+<div style="height: 200px;"></div>
+</body>
+</html>

@@ -14,17 +14,17 @@ import java.util.List;
 public class ResearchCenterController {
 
     @Autowired
-    ResearchCenterService professorService;
+    ResearchCenterService researchCenterService;
 
     @RequestMapping(value = "/showCenterList")
     @ResponseBody
     public List<ResearchCenter> showResearchCenterList(){
-        return professorService.showResearchCenterList();
+        return researchCenterService.showResearchCenterList();
     }
 
     @RequestMapping(value = "/showCenterDetail")
     @ResponseBody
     public ResearchCenter showResearchCenterDetail(ResearchCenter professor){
-        return professorService.showResearchCenterDetail(professor);
+        return researchCenterService.showResearchCenterDetail(professor);
     }
 }

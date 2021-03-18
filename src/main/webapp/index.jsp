@@ -141,7 +141,7 @@
             <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
             <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/>
         </a>
-        <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
+        <a href="index.jsp"><img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/></a>
 
         <!-- Top Menu Start-->
         <div id="primary-nav">

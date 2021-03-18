@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Research Center Info</title>
+    <link href="../css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        };
+
+        $(function () {
+            var center_id = getQueryString("id");
+            var deleteResult = getQueryString("delete");
+            var addFalse = getQueryString("add");
+            if (deleteResult == "true") {
+                alert("Delete Successfully.");
+            } else if (deleteResult == "false") {
+                alert("Delete Unsuccessfully.");
+            }
+            if (addFalse == "false") {
+                alert("Add Unsuccessfully.");
+            }
+            if (center_id == null) {
+                $.post("center/showCenterList", {center_id: center_id}, function (data) {
+                    $.each(data, function (index, object) {
+                        $("#centerList").append("<tr>\n" +
+                            "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.center_id + "\"></th>\n" +
+                            "                    <td>" + object.center_id + "</td>\n" +
+                            "                    <td>" + object.title + "</td>\n" +
+                            "                    <td class=\"courseLength\">" + object.leader +
+                            "                    </td>\n" +
+                            "                    <td>\n" +
+                            "                        <a class=\"btn btn-default btn-sm\"\n" +
+                            "                           href=\"researchCenterEdit.html?center_id=" + object.center_id + "\">Edit</a></td>\n" +
+                            "                    <td>\n" +
+                            "                        <a class=\"btn btn-default btn-sm\" onclick=\"deleteOne('" + object.title + "', " + object.center_id + ")\">Delete</a>\n" +
+                            "                    </td>\n" +
+                            "                </tr>");
+                    });
+                });
+
+            }
+        });
+
+        function search() {
+            var center_id = $("#center_id").val();
+            if (center_id == '') {
+                center_id = 0;
+            }
+            var name = $("#title").val();
+            if (name == '') {
+                name = "null";
+            }
+            $("#centerList").empty();
+            $.post("center/searchCenterList", {center_id: center_id, title: name}, function (data) {
+                $("#centerList").append("<tr class=\"success\">\n" +
+                    "                    <th><input type=\"checkbox\" id='check_main'></th>\n" +
+                    "                    <th>ID</th>\n" +
+                    "                    <th>Title</th>\n" +
+                    "                    <th>Leader</th>\n" +
+                    "                    <th>Edit</th>\n" +
+                    "                    <th>Delete</th>\n" +
+                    "                </tr>");
+                $.each(data, function (index, object) {
+                    $("#centerList").append("<tr>\n" +
+                        "                    <th><input type=\"checkbox\" class='check_one' name=\"" + object.center_id + "\"></th>\n" +
+                        "                    <td>" + object.center_id + "</td>\n" +
+                        "                    <td>" + object.title + "</td>\n" +
+                        "                    <td class=\"courseLength\">" + object.leader +
+                        "                    </td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\"\n" +
+                        "                           href=\"researchCenterEdit.html?center_id=" + object.center_id + "\">Edit</a></td>\n" +
+                        "                    <td>\n" +
+                        "                        <a class=\"btn btn-default btn-sm\" href=\"javascript:deleteOne('"+ object.title + "', "+ object.center_id +")\">Delete</a>\n" +
+                        "                    </td>\n" +
+                        "                </tr>");
+                });
+            });
+        }
+
+        function deleteSelected() {
+            if (confirm("Do you want to delete the selected center? ")) {
+                $("#deleteTable").submit();
+            }
+        }
+
+        function deleteOne(name, center_id) {
+            if (confirm("Do you want to delete the research center " + name + " ?")) {
+                $.post("center/deleteOneCenter", {center_id: center_id}, function () {
+                    window.location.reload();
+                })
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="modal fade" id="editActivityModal" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add Research Center Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                      action="center/addNewCenter">
+
+                    <div class="form-group">
+
+                        <label for="edit-marketActivityName" class="col-sm-2 control-label">Title<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="title" id="edit-marketActivityName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Photo" class="col-sm-2 control-label">Photo<span
+                                style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="file" class="form-control" name="img" id="edit-Photo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-startTime" class="col-sm-2 control-label">Leader</label>
+                        <div class="col-sm-10" style="width: 300px;">
+                            <input type="text" class="form-control" name="leader" id="edit-startTime">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-Introduction" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10" style="width: 81%;">
+                            <textarea class="form-control" rows="3" name="description"
+                                      id="edit-Introduction"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="out">
+    <div class="adminLogoImgDiv">
+        <img src="../images/logo.png" class="adminLogoImg">
+    </div>
+    <div class="adminTitle">
+        <br/>
+        Research Center Information List
+    </div>
+    <div class="listPart">
+        <div style="float: left; margin-top: 100px; margin: 5px">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="center_id">ID</label>
+                    <input type="text" class="form-control" id="center_id" name="id"
+                           placeholder="Research Center ID">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                           placeholder="Research Center Name">
+                </div>
+                <button type="button" onclick="search()" class="btn btn-default">Search</button>
+            </form>
+        </div>
+
+        <div style="float: right; margin: 5px">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editActivityModal">Add New Research Center
+            </button>
+            <button class="btn btn-primary" onclick="deleteSelected()" id="deleteSelected">Delete Selected Advisor
+            </button>
+        </div>
+
+        <form id="deleteTable" action="center/deleteSelectedCenter">
+            <table border="1" id="centerList" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th><input onclick="selectAll()" id="check_all" type="checkbox"> <label for="check_all">Choice</label></th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Leader</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

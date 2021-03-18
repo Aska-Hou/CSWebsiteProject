@@ -72,11 +72,15 @@ public class AdminLogInController {
     @RequestMapping(value = "/changePassword")
     public void changePassword(Manager manager, String newPassword, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
+        PrintWriter writer = response.getWriter();
         Manager sessionManager = (Manager)session.getAttribute("manager");
+        if (sessionManager.getPassword() != manager.getPassword()) {
+            writer.write("{\"updateResult\":\"false\"}");
+            return;
+        }
         manager.setManager_id(sessionManager.getManager_id());
         boolean result = adminService.changePassword(manager, newPassword);
         response.setContentType("application/json;charset=utf-8");
-        PrintWriter writer = response.getWriter();
         if (result){
             logOut(manager, request, response);
         }

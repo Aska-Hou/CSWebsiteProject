@@ -7,6 +7,7 @@ import domain.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import utils.ImageStorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class IndexServiceImpl implements IndexService {
     public boolean addNewIndex(MultipartFile img, Index index) throws IOException {
         String uuid = UUID.randomUUID().toString();
         index.setImg("IndexImg/" + uuid + ".png");
-        img.transferTo(new File("/CSWebsite/" + index.getImg()));
+        img.transferTo(new File(ImageStorageUtil.getStoreImage() + index.getImg()));
         Integer result = indexDao.insertNewIndex(index);
         if (result == 1){
             return true;

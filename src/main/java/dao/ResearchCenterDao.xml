@@ -16,7 +16,7 @@
         select * from researchcenter where title like concat('%', #{title}, '%')
     </select>
 
-    <insert id="insertResearchCenter" useGeneratedKeys="true" keyProperty="prof_id" keyColumn="prof_id"
+    <insert id="insertResearchCenter" useGeneratedKeys="true" keyProperty="center_id" keyColumn="center_id"
             parameterType="domain.ResearchCenter">
         insert into researchcenter(title, photo, leader, description)
             values(#{title}, #{photo}, #{leader}, #{description})

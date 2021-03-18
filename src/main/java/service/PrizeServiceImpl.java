@@ -9,6 +9,7 @@ import domain.Professor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import utils.ImageStorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,7 +93,7 @@ public class PrizeServiceImpl implements PrizeService {
     @Override
     public Prize addNewPrize(MultipartFile img, Prize prize) {
         //  保存照片
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         String uuid = UUID.randomUUID().toString();
         prize.setPhoto("PrizeImg/" + uuid + ".png");
         try {
@@ -159,7 +160,7 @@ public class PrizeServiceImpl implements PrizeService {
 
     //    Method: 删除faculty照片文件
     public void deletePrizePhoto(Prize prize) {
-        String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+        String basePath = ImageStorageUtil.getStoreImage();
         new File(basePath + prize.getPhoto()).delete();
     }
 
@@ -171,7 +172,7 @@ public class PrizeServiceImpl implements PrizeService {
         //  如果图片不为空，保存照片且删除之前的照片
         if (img.getSize() != 0) {
             prize.setPhoto(prizeDao.selectPrizeByID(prize).getPhoto());
-            String basePath = "/www/server/tomcat/webapps/CSWebsite/";
+            String basePath = ImageStorageUtil.getStoreImage();
             deletePrizePhoto(prize);
             String uuid = UUID.randomUUID().toString();
             prize.setPhoto("PrizeImg/" + uuid + ".png");

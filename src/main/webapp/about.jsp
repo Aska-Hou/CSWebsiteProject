@@ -31,7 +31,7 @@
         <a href="http://www.wku.edu.cn">
             <img src="images/logo2.jpg" style="height: 77px" id="logoImg1" alt=""/>
             <img src="images/logoImg3.png" style="height: 77px" id="logoImg2" alt=""/></a>
-        <img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/>
+        <a href="index.jsp"><img src="images/CSDepartmentLogo.png" id="cslogo" alt=""/></a>
 
         <!-- Top Menu Start-->
         <div id="primary-nav">
@@ -52,6 +52,8 @@
                         <li><a href="prof_list.jsp"><span>Faculty Team</span></a></li>
                         <li><a href="publication_list.jsp"><span>Publication</span></a></li>
                         <li><a href="prize_list.jsp"><span>Prize</span></a></li>
+                        <li><a href="gallery_list.jsp"><span>Gallery</span></a></li>
+                        <li><a href="center_list.jsp"><span>Research Center</span></a></li>
                     </ul>
                 </li>
 
