@@ -21,7 +21,7 @@ public class LogInInterceptor implements HandlerInterceptor {
             HttpSession session = request.getSession();
             Manager manager = (Manager) session.getAttribute("manager");
             if (manager == null) {
-                response.sendRedirect("/CSWebsiteProject_war_exploded/admin/adminLogin.html?hintMessage=true");
+                response.sendRedirect("/WKU_Computer_Science_Department/admin/adminLogin.html?hintMessage=true");
                 return false;
             }
             for (Cookie cookie : cookies) {

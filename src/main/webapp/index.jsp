@@ -210,7 +210,7 @@
                 <li>
                     <a href="#">
                         <img style="width: 285px;height: 173px"
-                             src="/CSWebsite/IndexImg/c9385217-a622-4489-85ca-dd01a4192949.png" alt="" border="0"/>
+                             src="images/img1.jpg" alt="" border="0"/>
                         News1
                         <span>Description 1</span>
                     </a>

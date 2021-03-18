@@ -215,7 +215,7 @@ ul.slides li div {
     width: 13px;
     height: 13px;
     display: block;
-    background: url(theme/bg_control_nav.html) no-repeat;
+    /*background: url(theme/bg_control_nav.html) no-repeat;*/
     cursor: pointer;
     text-indent: -999em;
 }

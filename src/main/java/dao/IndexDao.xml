@@ -5,18 +5,18 @@
 <mapper namespace="dao.IndexDao">
 
     <insert id="insertNewIndex" parameterType="domain.Index">
-        insert into indexImg(photo, news_id) values(#{img}, #{news_id})
+        insert into indeximg(photo, news_id) values(#{img}, #{news_id})
     </insert>
 
     <select id="selectAllIndex" resultType="domain.Index">
-        select index_id, photo as img, news_id from indexImg
+        select index_id, photo as img, news_id from indeximg
     </select>
 
     <delete id="deleteIndex" parameterType="domain.Index">
-        delete from indexImg where index_id = ${index_id}
+        delete from indeximg where index_id = ${index_id}
     </delete>
 
     <select id="selectIndexByID" parameterType="domain.Index" resultType="domain.Index">
-        select index_id, photo as img, news_id from indexImg where index_id = #{index_id}
+        select index_id, photo as img, news_id from indeximg where index_id = #{index_id}
     </select>
 </mapper>
