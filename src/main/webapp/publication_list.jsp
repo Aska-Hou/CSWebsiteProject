@@ -168,7 +168,7 @@
     </div>
 </div>
 
-<div class="title">Paper and Publication</div>
+<div style="font-size: 35px; text-align: center"  class="title">Paper and Publication</div>
 <h3 class="shortcode">'</h3>
 
 <div class="paperPage">
