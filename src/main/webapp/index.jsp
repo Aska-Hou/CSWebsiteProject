@@ -44,13 +44,13 @@
                     $("#imgSlides").empty();
                     $.each(data, function (index, object) {
                         if (object.news_id == null) {
-                            $("#imgSlides").append("<li style=\"background:#224e9c;\">\n" +
+                            $("#imgSlides").append("<li style=\"background:#f9f9f9;\">\n" +
                                 "                    <div style=\"width: 100%\">\n" +
                                 "<img class=\"indexImg\" src=\"/CSWebsite/" + object.img + "\"/>\n" +
                                 "                    </div>\n" +
                                 "                </li>");
                         } else {
-                            $("#imgSlides").append("<li style=\"background:#224e9c;\">\n" +
+                            $("#imgSlides").append("<li style=\"background:#f9f9f9;\">\n" +
                                 "                    <div style=\"width: 100%\">\n" +
                                 "                        <a href=\"news_detail.jsp?news_id=" + object.news_id + "\"> <img class=\"indexImg\" src=\"/CSWebsite/" + object.img + "\"/></a>\n" +
                                 "                    </div>\n" +
@@ -259,8 +259,7 @@
 
     <div class="webdesign">
         <a href="about.jsp"><h3>About WKU CS Department</h3></a>
-        <p>Fusce pharetra dolor quisa ipsume mosllis imperdiet orci ultrices. Nullam quis odio anele massa tempus
-            tincidunt dolor quisa.</p>
+        <p>Wenzhou-Kean University Computer Science Department belongs to WKU College of Science and Technology. There are 11 faculties and more than 200 students currently in our department.</p>
     </div>
 
     <div class="webdesign">
