@@ -87,11 +87,6 @@
     <!--For Slider-->
     <script type='text/javascript' src='js/superfish3d36.js?ver=3.3.1'></script>
     <script type='text/javascript' src='js/jquery.custom5152.js?ver=1.0'></script>
-    <%--    <!--For prettyPhoto-->--%>
-    <%--    <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen"--%>
-    <%--          title="prettyPhoto main stylesheet"/>--%>
-    <%--    <script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>--%>
-
     <!--For Asyncslider-->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
@@ -128,9 +123,7 @@
 
         })
     </script>
-
 </head>
-
 
 <body>
 
@@ -167,10 +160,7 @@
 
                     </ul>
                 </li>
-
                 <li><a href="tutor.jsp"><span>Student & Alumni</span></a></li>
-
-                <%--                <li><a onclick="alert('Waiting for Development')" href="#"><span>My CS</span></a></li>--%>
             </ul>
             <!-- END #primary-nav -->
         </div>
@@ -259,13 +249,12 @@
 
     <div class="webdesign">
         <a href="about.jsp"><h3>About WKU CS Department</h3></a>
-        <p>Wenzhou-Kean University Computer Science Department belongs to WKU College of Science and Technology. There are 11 faculties and more than 200 students currently in our department.</p>
+        <p>Wenzhou-Kean University Computer Science Department belongs to WKU College of Science and Technology and we offers an undergraduate major leading to a B.S. degree.. There are 11 faculties and more than 200 students currently in our department.</p>
     </div>
 
     <div class="webdesign">
-        <a href=""><h3>Education Program</h3></a>
-        <p>The Department of Computer Science at Wenzhou-Kean University offers an undergraduate major leading to a B.S.
-            degree.</p>
+        <a href="https://wku.edu.cn/wp-content/uploads/2018/09/2018-2019-Undergraduate-Catalog-of-Wenzhou-Kean-University-as-of-2019.4.4.pdf" target="_blank"><h3>Education Program</h3></a>
+        <p>WKU Computer science and technology majors train students to master a solid theoretical foundation, attach importance to the combination of theory and practice, highlight students' practical ability, and encourage students to participate in various studies that combine interest and academics.</p>
     </div>
 
     <div class="webdesign">

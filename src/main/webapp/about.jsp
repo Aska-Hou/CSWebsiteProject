@@ -88,7 +88,6 @@
                     teach
                     and supervise approximately 180 students. Since the majority of our students will pursue graduate
                     studies following graduation, undergraduate research has become the hallmark of our department.
-
                 </p>
                 <br>
                 <p> Some
@@ -98,36 +97,63 @@
                     California, University of Maryland-College Park, University of Wisconsin-Madison, UCL (UK),
                     University
                     of Edinburgh (UK), University of Toronto (Canada), University of Melbourne (Australia), etc.</p>
+                <br>
+                <p>
+                    The computer science and technology major of Wenzhou-Kean University has close ties with Kean
+                    University in the United States. This will provide students with a large number of opportunities for
+                    study, research and internship in Wenzhou and New Jersey, enabling students to work in business,
+                    education, government or graduate The field of study becomes a talent with leadership and management
+                    abilities.
+                </p>
+                <p>
+                    Do you know? New Jersey is home to more than 500 research and development companies.
+                </p>
+                <br>
+                <p>
+                    Do you know? New Jersey hosts 10% of research and development in the United States.
+                </p>
+                <br>
+                <p>
+                    In the next 10 years, 70% of New Jersey’s industries will provide employment opportunities for students majoring in computer and information systems.
+                </p>
             </div>
         </div>
         <div class="team">
 
             <h3>Department Scenery</h3>
             <div class="member">
-                <div class="team-img"><a href="images/about1.png"> <img src="images/about1.png" class="aboutImg" alt=""/></a></div>
+                <div class="team-img"><a href="images/about1.png"> <img src="images/about1.png" class="aboutImg"
+                                                                        alt=""/></a></div>
                 <strong>WKU Apple Lab </strong> <span>Apple Computer Lab</span>
-                <p> WKU Apple Laboratory is in General Education Hall, which provides the excellent devices for CS students to do any kind of experiment </p>
+                <p> WKU Apple Laboratory is in General Education Hall, which provides the excellent devices for CS
+                    students to do any kind of experiment </p>
             </div>
             <div class="member">
-                <div class="team-img"><a href="images/about2.jpg"> <img src="images/about2.jpg" class="aboutImg" alt=""/></a></div>
+                <div class="team-img"><a href="images/about2.jpg"> <img src="images/about2.jpg" class="aboutImg"
+                                                                        alt=""/></a></div>
                 <strong>General Education Hall </strong> <span>GEH CS Classroom</span>
-                <p> Currently, WKU Computer Science Department's location is in GEH including the CS lecture classroom and CS Laboratory </p>
+                <p> Currently, WKU Computer Science Department's location is in GEH including the CS lecture classroom
+                    and CS Laboratory </p>
             </div>
             <div class="member">
-                <div class="team-img"><a href="prof_list.jsp"><img src="images/about3.jpg" class="aboutImg" alt=""/></a></div>
+                <div class="team-img"><a href="prof_list.jsp"><img src="images/about3.jpg" class="aboutImg" alt=""/></a>
+                </div>
                 <strong>CS Professors </strong> <span>Tiffany, Pinatta, Sujatha</span>
                 <p> Rich Faculty resources bring the strong Research Energy to WKU Computer Science Department</p>
             </div>
             <div class="member">
-                <div class="team-img"><a href="images/about4.png"><img src="images/about4.png" class="aboutImg" alt=""/></a></div>
+                <div class="team-img"><a href="images/about4.png"><img src="images/about4.png" class="aboutImg" alt=""/></a>
+                </div>
                 <strong>UAV Test</strong> <span>Unmanned Aerial Vehicle</span>
-                <p> Many clubs related to the Computer Science Department including the scientific and technical Club is doing experiment</p>
+                <p> Many clubs related to the Computer Science Department including the scientific and technical Club is
+                    doing experiment</p>
             </div>
         </div>
 
         <div class="client-box1">
             <div class="client-testimonial1">
-                <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is to get the knowledge instead of High GPA.</p>
+                <p> To All WKU CS Student: Don't pay too much attention to your GPA. The aim of going to university is
+                    to get the knowledge instead of High GPA.</p>
             </div>
             <div class="client-bg1">Dr Tiffany Tang</div>
         </div>
@@ -181,7 +207,8 @@
                 (0) 577 5587 0000
             </div>
             <div class="address"><img src="images/mail.png" alt="" width="15" height="12"/> <strong>Email:</strong> <a
-                    href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn"> cst@wku.edu.cn</a> </div>
+                    href="mailto:wku@wku.edu.cn">wku@wku.edu.cn</a>, <a href="mailto:cst@wku.edu.cn"> cst@wku.edu.cn</a>
+            </div>
         </div>
         <div class="footer-details">
             <h4>Wechat Accounts</h4>
@@ -193,12 +220,15 @@
         </div>
         <div class="footer-details no-margin">
             <h4>Learn More about WKU</h4>
-            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean University, welcome to visit WKU official website</p></a>
+            <a href="http://www.wku.edu.cn" style="color: whitesmoke"><p>If you want to learn more about Wenzhou-Kean
+                University, welcome to visit WKU official website</p></a>
         </div>
 
         <!-- Footer Info Part Start-->
         <div class="Finfo">
-            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by <a href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All rights reserved.
+            <div class="copyright">&copy; Designed By <a href="tutor.jsp">Aska Hou (Class 2018)</a>, instructed by <a
+                    href="prof_detail.jsp?prof_id=18"> Dr.Hemn Barzan Abdalla </a>. Copyright &copy; 2021.WKU CST All
+                rights reserved.
             </div>
         </div>
     </div>

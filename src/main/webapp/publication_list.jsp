@@ -112,13 +112,13 @@
                         "                <br/>\n" +
                         "                <li><span class=\"paperTitle\"> Title: </span> <span class=\"paperTitle\">"+ object.title +"</span>\n" +
                         "                </li>\n" +
-                        "                <li><span class=\"paperTitle\"> Author: </span> <span class=\"paper_subTitle\"><a href=\"#\">"+ object.author +"</a> </span>\n" +
+                        "                <li><span class=\"paperTitle\"> Author: </span> <span class=\"paper_subTitle\"><a href=\"prof_list.jsp\">"+ object.author +"</a> </span>\n" +
                         "                </li>\n" +
                         "                <li><span class=\"paperTitle\"> Publication Date: </span> <span class=\"paper_subTitle\">"+ object.date +"</span>\n" +
                         "                </li>\n" +
                         "                <li><span class=\"paperTitle\"> Area:  </span> <span class=\"area\">"+ object.area +"</span></li>\n" +
                         "                <li><span class=\"paperTitle\"><a\n" +
-                        "                        href=\""+ object.website +"\" class=\"paper_subTitle\"> Publish Website & More Details </a></span></li>\n" +
+                        "                        href=\""+ object.website +"\" class=\"paper_subTitle\" style='text-decoration: underline'> Publish Website & More Details </a></span></li>\n" +
                         "            </ul>\n" +
                         "            <img src=\"images/divider.png\" style=\"width: 100%\"/>\n")
                 });
