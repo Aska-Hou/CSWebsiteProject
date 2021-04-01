@@ -43,7 +43,6 @@
                         "                        <br/>\n" +
                         "                        <p class=\"profDescription\">" + object.description.replace(/\n/g, "<br/>") + "</p>\n" +
                         "                        <br/>\n" +
-                        "                        <a class=\"profDescription\" href=\"prof_detail.jsp?prof_id=" + object.prof_id + "\">--More Details about " + object.name + "--</a>\n" +
                         "                    </div>\n" +
                         "                </li>\n" +
                         "            </ul><hr/>");
