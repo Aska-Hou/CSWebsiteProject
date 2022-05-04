@@ -20,26 +20,9 @@
     <script>
         $(function () {
             $.ajax({
-                url: "news/showRecentNews",
-                async: false,
-                method: "post",
-                success: function (data) {
-                    $("#news_list").empty();
-                    $.each(data, function (index, object) {
-                        $("#news_list").append("<li>\n" +
-                            "                    <a style='font-size: 12px;width: 320px; height: 263px' href=\"news_detail.jsp?news_id=" + object.news_id + "\">\n" +
-                            "                        <img style=\"width: 285px;height: 173px\" border=\"0\" src=\"/CSWebsite/" + object.photo + "\" alt=\"\"/>" + object.title +
-                            "                        <span>" + new Date(object.date).format("yyyy-MM-dd") + "</span>\n" +
-                            "                    </a>\n" +
-                            "                </li>");
-                    });
-                }
-            });
-
-            $.ajax({
                 url: "index/showIndexSliderImage",
                 async: false,
-                method: "post",
+                method: "get",
                 success: function (data) {
                     $("#imgSlides").empty();
                     $.each(data, function (index, object) {
@@ -59,6 +42,23 @@
                     })
                 }
             })
+
+            $.ajax({
+                url: "news/showRecentNews",
+                async: false,
+                method: "post",
+                success: function (data) {
+                    $("#news_list").empty();
+                    $.each(data, function (index, object) {
+                        $("#news_list").append("<li>\n" +
+                            "                    <a style='font-size: 12px;width: 320px; height: 263px' href=\"news_detail.jsp?news_id=" + object.news_id + "\">\n" +
+                            "                        <img style=\"width: 285px;height: 173px\" border=\"0\" src=\"/CSWebsite/" + object.photo + "\" alt=\"\"/>" + object.title +
+                            "                        <span>" + new Date(object.date).format("yyyy-MM-dd") + "</span>\n" +
+                            "                    </a>\n" +
+                            "                </li>");
+                    });
+                }
+            });
         });
 
         Date.prototype.format = function (fmt) {
